@@ -173,8 +173,6 @@ GO
 -- Sample stored procedure in SQL Server. May or may not decide to use stored procedures for database functions in final application.
 CREATE PROCEDURE [dbo].[InsertUser]
 (
-    @UserRoleID int = 1,
-    @OrganizationID int = 1, 
     @Email nvarchar(100) = 'none',
     @FirstName nvarchar(100) = NULL,
     @LastName nvarchar(100) = NULL,
