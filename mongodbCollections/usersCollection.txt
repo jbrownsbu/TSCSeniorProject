@@ -1,0 +1,39 @@
+These are the users in my collection in MongoDB --- Sean Bates
+{
+	"_id": "5a7d038b52f35f25884db4af",
+	"name": "John Doe",
+	"email": "jdoe@gmail.com",
+	"address": "111 W Wolf Ridge Drive, Swansea, IL",
+	"phone number": "555-555-1346"
+}
+{
+	"_id": "5a7d03b752f35f25884db4b0",
+	"name": "Jimmy Jones",
+	"email": "jjones@gmail.com",
+	"address": "409 N Van Buren Road, Trenton, IL",
+	"phone number": "555-555-7894"
+}{
+	"_id": "5a7d048552f35f25884db4b1",
+	"name": "Sally Smith",
+	"email": "sallysmallssmith@theoneandonly.com",
+	"address": "9075 E Peeples Street, Lincoln, MO",
+	"phoneNumber": "555-555-1234"
+}{
+	"_id": "5a82507dc9616b10447eeaed",
+	"name": "Jordan Brown",
+	"email": "jbrown@sbuniv.edu",
+	"address": "123 Main Street, Bolivar, MO",
+	"phone number": "555-555-5555"
+}{
+	"_id": "5a825196c9616b10447eeaee",
+	"name": "Sean Bates",
+	"email": "sbates@sbuniv.edu",
+	"address": "1235 S Lillian Avenue, Bolivar, MO",
+	"phone number": "555-555-4561"
+}{
+	"_id": "5a8251bec9616b10447eeaef",
+	"name": "Jaime Whitehill",
+	"email": "jwhitehill@sbuniv.edu",
+	"address": "The apartment under the cuboards, Privet Lane",
+	"phone number": "555-555-7845"
+}
