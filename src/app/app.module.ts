@@ -9,7 +9,6 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserService } from './user.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProjectsComponent } from './projects/projects.component';
 
 
 @NgModule({
@@ -18,8 +17,7 @@ import { ProjectsComponent } from './projects/projects.component';
     UsersComponent,
     UserSearchComponent,
     UserDetailComponent,
-    DashboardComponent,
-    ProjectsComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
