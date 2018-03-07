@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>Consultant List</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let consultant of consultants">
+      <td>{{ consultant.firstName }}</td>
+      <td>{{ consultant.lastName }}</td>
+      <td>{{ consultant.phone }}</td>
+      <td>{{ consultant.email }}</td>
+      <td><a [routerLink]="['/consultant-details', consultant._id]"> Show Details</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,30 +1,54 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { AppComponent } from './app.component';
-import { UsersComponent } from './users/users.component';
-import { UserSearchComponent } from './user-search/user-search.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-import { UserService } from './user.service';
-import { AppRoutingModule } from './/app-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
+import { RouterModule, Routes } from '@angular/router';
+import { ConsultantComponent } from './consultant/consultant.component';
+import { ConsultantDetailComponent } from './consultant-detail/consultant-detail.component';
+import { ConsultantEditComponent } from './consultant-edit/consultant-edit.component';
+
+const appRoutes: Routes = [
+  {
+  path: 'consultants',
+  component: ConsultantComponent,
+  data: { title: 'Consultant List' }
+  },
+  { path: '',
+    redirectTo: '/consultants',
+    pathMatch: 'full'
+  },
+  {
+    path: 'consultant-details/:id',
+    component: ConsultantDetailComponent,
+    data: { title: 'Consultant Details'}
+  },
+  {
+    path: 'consultant-edit/:id',
+    component: ConsultantEditComponent,
+    data: { title: 'Edit Book' }
+  }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent,
-    UserSearchComponent,
-    UserDetailComponent,
-    DashboardComponent
+    ConsultantComponent,
+    ConsultantDetailComponent,
+    ConsultantEditComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
-  providers: [UserService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

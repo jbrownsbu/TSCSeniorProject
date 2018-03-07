@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>{{ consultant.firstName }} {{consultant.lastName }}</h1>
+  <dl class="list">
+    <dt>Phone</dt>
+    <dd>{{ consultant.phone }}</dd>
+    <dt>Email</dt>
+    <dd>{{ consultant.email }}</dd>
+    <dt>Address</dt>
+    <dd>{{ consultant.address }}</dd>
+    <dt>Biography</dt>
+    <dd>{{ consultant.biography }}</dd>
+    <dt>Supervisor Name</dt>
+    <dd>{{ consultant.supervisorFirstName }} {{consultant.supervisorLastName }}</dd>
+    <dt>Supervisor Email</dt>
+    <dd>{{ consultant.email}}</dd>
+    <dt>Supervisor Phone</dt>
+    <dd>{{consultant.phone}}</dd>
+    <dt>Company Name</dt>
+    <dd>{{consultant.companyName}}</dd>
+    <dt>isActive</dt>
+    <dd>{{consultant.isActive}}</dd>
+    <dt>Update Date</dt>
+    <dd>{{ consultant.updated_at }}</dd>
+  </dl>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <a [routerLink]="['/consultant-edit', consultant._id]" class="btn btn-success">EDIT</a>
+  </div>
+</div>
