@@ -1,32 +1,7 @@
-<!--
-<div class="container">
-  <h1>Consultant List</h1>
-  <table class="table">
-    <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let consultant of consultants  | orderBy: order | filter: searchTerms">
-      <td>{{ consultant.firstName }}</td>
-      <td>{{ consultant.lastName }}</td>
-      <td>{{ consultant.phone }}</td>
-      <td>{{ consultant.email }}</td>
-      <td><a [routerLink]="['/consultant-details', consultant._id]"> Show Details</a></td>
-    </tr>
-    </tbody>
-  </table>
-</div>
--->
 <div class="container">
   <h1>Consultant List</h1>
   <div>
-    <input type="text" placeholder="Search" [(ngModel)]="searchTerms">
+    <h5>Search: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTerms"></h5>
   </div>
     <table class="table">
       <thead>
@@ -38,14 +13,15 @@
         </th>
         <th>Phone</th>
         <th>Email</th>
+        <th>Address</th>
       </thead>
       <tbody>
-      <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'| filter: search">
+      <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'| filter: searchTerms">
         <td>{{ consultant.firstName }}</td>
         <td>{{ consultant.lastName }}</td>
         <td>{{ consultant.phone }}</td>
         <td>{{ consultant.email}}</td>
-        <!--<td><a [routerLink]="['/consultant-details', consultant._id]"> Show Details</a></td>-->
+        <td>{{ consultant.address}}</td>
         <td> <button [routerLink]="['/consultant-details', consultant._id]" type="button">Show Details</button></td>
       </tr>
       </tbody>

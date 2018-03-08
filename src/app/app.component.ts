@@ -11,10 +11,7 @@ import { OrderPipe } from './order-pipe/ngx-order.pipe';
 })
 export class AppComponent {
   title = 'app';
-  // @param {OrderPipe} orderPipe
 
-  constructor(private orderPipe: OrderPipe,
-              filterPipe: FilterPipe) {
-    // console.log(this.orderPipe.transform(this.collection, this.order));
+  constructor() {
   }
 }
