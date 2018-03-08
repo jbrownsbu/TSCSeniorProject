@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { OrderPipe} from 'ngx-order-pipe';
 
-
 @Component({
   selector: 'app-consultant',
   templateUrl: './consultant.component.html',
@@ -11,6 +10,7 @@ import { OrderPipe} from 'ngx-order-pipe';
 export class ConsultantComponent implements OnInit {
 
   consultants: any;
+  searchTerms: string;
 
   order: string = 'info.name';
   reverse: boolean = false;

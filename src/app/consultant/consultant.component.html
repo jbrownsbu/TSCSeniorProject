@@ -1,3 +1,7 @@
+<div>
+  <input type="text" placeholder="Search" [(ngModel)]="searchTerms">
+</div>
+
 <!--
 <div class="container">
   <h1>Consultant List</h1>
@@ -12,7 +16,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let consultant of consultants | orderBy: order">
+    <tr *ngFor="let consultant of consultants  | orderBy: order | filter: searchTerms">
       <td>{{ consultant.firstName }}</td>
       <td>{{ consultant.lastName }}</td>
       <td>{{ consultant.phone }}</td>
@@ -37,7 +41,7 @@
         <th>Email</th>
       </thead>
       <tbody>
-      <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'">
+      <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'| filter: search">
         <td>{{ consultant.firstName }}</td>
         <td>{{ consultant.lastName }}</td>
         <td>{{ consultant.phone }}</td>
