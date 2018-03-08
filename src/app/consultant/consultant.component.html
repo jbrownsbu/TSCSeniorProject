@@ -1,3 +1,4 @@
+<!--
 <div class="container">
   <h1>Consultant List</h1>
   <table class="table">
@@ -11,7 +12,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let consultant of consultants">
+    <tr *ngFor="let consultant of consultants | orderBy: order">
       <td>{{ consultant.firstName }}</td>
       <td>{{ consultant.lastName }}</td>
       <td>{{ consultant.phone }}</td>
@@ -20,4 +21,30 @@
     </tr>
     </tbody>
   </table>
+</div>
+-->
+<div class="container">
+  <h1>Consultant List</h1>
+    <table class="table">
+      <thead>
+      <th>First Name</th>
+        <th [class.active]="order === 'lastName'"
+            (click)="setOrder('lastName')"
+            class="mdl-data-table__cell--non-numeric">
+          Last Name <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+        </th>
+        <th>Phone</th>
+        <th>Email</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'">
+        <td>{{ consultant.firstName }}</td>
+        <td>{{ consultant.lastName }}</td>
+        <td>{{ consultant.phone }}</td>
+        <td>{{ consultant.email}}</td>
+        <!--<td><a [routerLink]="['/consultant-details', consultant._id]"> Show Details</a></td>-->
+        <td> <button [routerLink]="['/consultant-details', consultant._id]" type="button">Show Details</button></td>
+      </tr>
+      </tbody>
+    </table>
 </div>

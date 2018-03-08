@@ -19,25 +19,9 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
-/* SAVE CONSULTANT */
-router.post('/', function(req, res, next) {
-  Consultant.create(req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
-});
-
 /* UPDATE CONSULTANT */
 router.put('/:id', function(req, res, next) {
   Consultant.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
-});
-
-/* DELETE CONSULTANT */
-router.delete('/:id', function(req, res, next) {
-  Consultant.findByIdAndRemove(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
