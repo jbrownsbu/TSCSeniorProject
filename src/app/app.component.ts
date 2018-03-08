@@ -13,11 +13,8 @@ export class AppComponent {
   title = 'app';
   // @param {OrderPipe} orderPipe
 
-  constructor(private orderPipe: OrderPipe) {
+  constructor(private orderPipe: OrderPipe,
+              filterPipe: FilterPipe) {
     // console.log(this.orderPipe.transform(this.collection, this.order));
-  }
-
-  constructor(private filterPipe: FilterPipe) {
-
   }
 }
