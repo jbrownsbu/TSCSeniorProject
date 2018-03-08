@@ -9,6 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ConsultantComponent } from './consultant/consultant.component';
 import { ConsultantDetailComponent } from './consultant-detail/consultant-detail.component';
 import { ConsultantEditComponent } from './consultant-edit/consultant-edit.component';
+import { FilterModule } from './filter-pipe/filter.module';
 
 const appRoutes: Routes = [
   {
@@ -43,6 +44,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    FilterModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
