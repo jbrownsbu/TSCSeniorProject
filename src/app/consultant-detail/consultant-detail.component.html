@@ -1,6 +1,6 @@
 <div class="container">
-  <h1>{{ consultant.firstName }} {{consultant.lastName }}</h1>
   <dl class="list">
+    <h1>{{ consultant.firstName }} {{consultant.lastName }}</h1>
     <dt>Phone</dt>
     <dd>{{ consultant.phone }}</dd>
     <dt>Email</dt>
@@ -9,18 +9,66 @@
     <dd>{{ consultant.address }}</dd>
     <dt>Biography</dt>
     <dd>{{ consultant.biography }}</dd>
-    <dt>Supervisor Name</dt>
-    <dd>{{ consultant.supervisorFirstName }} {{consultant.supervisorLastName }}</dd>
-    <dt>Supervisor Email</dt>
-    <dd>{{ consultant.email}}</dd>
-    <dt>Supervisor Phone</dt>
-    <dd>{{consultant.phone}}</dd>
     <dt>Company Name</dt>
-    <dd>{{consultant.companyName}}</dd>
+    <dd>{{ consultant.companyName}}</dd>
     <dt>isActive</dt>
-    <dd>{{consultant.isActive}}</dd>
+    <dd>{{ consultant.isActive }}</dd>
+    <h2>Supervisor Information</h2>
+    <dt>Name</dt>
+    <dd>{{ consultant.supervisorFirstName }} {{ consultant.supervisorLastName }}</dd>
+    <dt>Email</dt>
+    <dd>{{ consultant.supervisorEmail }}</dd>
+    <dt>Phone</dt>
+    <dd>{{ consultant.supervisorPhone }}</dd>
+    <h2>Translation Proficiencies</h2>
+    <h3>Testaments</h3>
+    <dt>Old Testament</dt>
+    <dd>{{ consultant.isOldTestament }}</dd>
+    <dt>New Testament</dt>
+    <dd>{{ consultant.isNewTestament }}</dd>
+    <h3>Regions</h3>
+    <dt>Global</dt>
+    <dd>{{ consultant.isGlobalRegion }}</dd>
+    <dt>Africa</dt>
+    <dd>{{ consultant.isAfricaRegion }}</dd>
+    <dt>Americas</dt>
+    <dd>{{ consultant.isAmericasRegion }}</dd>
+    <dt>Asia</dt>
+    <dd>{{ consultant.isAsiaRegion }}</dd>
+    <dt>Asia - Mainland</dt>
+    <dd>{{ consultant.isAsiaMainlandRegion }}</dd>
+    <dt>Asia - South</dt>
+    <dd>{{ consultant.isAsiaSouthRegion }}</dd>
+    <dt>Eurasia</dt>
+    <dd>{{ consultant.isEurasiaRegion }}</dd>
+    <dt>Europe</dt>
+    <dd>{{ consultant.isEuropeRegion }}</dd>
+    <dt>Pacific</dt>
+    <dd>{{ consultant.isPacificRegion }}</dd>
+    <h3>Media</h3>
+    <dt>Written</dt>
+    <dd>{{ consultant.isWrittenMedia }}</dd>
+    <dt>Audio</dt>
+    <dd>{{ consultant.isAudioMedia }}</dd>
+    <dt>Story Telling</dt>
+    <dd>{{ consultant.isStoryTellingMedia }}</dd>
+    <h3>Roles</h3>
+    <dt>Audio to Audio Translation Consultant</dt>
+    <dd>{{ consultant.isAudioToAudioRole }}</dd>
+    <dt>Guest Scholar (Exegetical, Linguistic, Bible)</dt>
+    <dd>{{ consultant.isGuestScholarRole }}</dd>
+    <dt>Linguistic Consultant</dt>
+    <dd>{{ consultant.isLinguisticConsultantRole }}</dd>
+    <dt>Manager - Translation Consultant</dt>
+    <dd>{{ consultant.isManagerRole }}</dd>
+    <dt>Story Checker</dt>
+    <dd>{{ consultant.isStoryCheckerRole }}</dd>
+    <dt>Translation Consultant in Training</dt>
+    <dd>{{ consultant.isTranslationConsultantInTrainingRole }}</dd>
+    <dt>Translation Consultant</dt>
+    <dd>{{ consultant.isTranslationConsultantRole }}</dd>
     <dt>Update Date</dt>
-    <dd>{{ consultant.updated_at }}</dd>
+    <dd>{{ consultant.updated_date }}</dd>
   </dl>
 </div>
 
