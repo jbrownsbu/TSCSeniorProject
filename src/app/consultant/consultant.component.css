@@ -6,6 +6,11 @@ div{
 button{
   background-color: #C1D82F;
   border-radius: 10px;
+
+}
+
+button:hover{
+  opacity: .5;
 }
 
 span{
