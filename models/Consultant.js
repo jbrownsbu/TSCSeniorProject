@@ -1,19 +1,48 @@
 var mongoose = require('mongoose');
 
 var ConsultantSchema = new mongoose.Schema({
+  // Contact Info
   firstName: String,
   lastName: String,
   phone: String,
   email: String,
   address: String,
   biography: String,
+  companyName: String,
+  isActive: Boolean,
+  // Supervisor Contact Info
   supervisorFirstName: String,
   supervisorLastName: String,
   supervisorEmail: String,
   supervisorPhone: String,
-  companyName: String,
-  isActive: Boolean,
-  updated_date: { type: Date, default: Date.now },
+  // Translation Proficiencies
+  notes: String,
+  // Testaments
+  isOldTestament: Boolean,
+  isNewTestament: Boolean,
+  // Regions
+  isGlobalRegion: Boolean,
+  isAfricaRegion: Boolean,
+  isAmericasRegion: Boolean,
+  isAsiaRegion: Boolean,
+  isAsiaMainlandRegion: Boolean,
+  isAsiaSouthRegion: Boolean,
+  isEurasiaRegion: Boolean,
+  isEuropeRegion: Boolean,
+  isPacificRegion: Boolean,
+  // Media
+  isWrittenMedia: Boolean,
+  isAudioMedia: Boolean,
+  isStoryTellingMedia: Boolean,
+  // Roles
+  isAudioToAudioRole: Boolean,
+  isGuestScholarRole: Boolean,
+  isLinguisticConsultantRole: Boolean,
+  isManagerRole: Boolean,
+  isStoryCheckerRole: Boolean,
+  isTranslationConsultantInTrainingRole: Boolean,
+  isTranslationConsultantRole: Boolean,
+  updated_date: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Consultant', ConsultantSchema);
