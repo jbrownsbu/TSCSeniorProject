@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var proficiencySchema = new Schema({
+var proficiencySchema = new mongoose.Schema({
   language: String,
   reading: Number,
   writing: Number,
