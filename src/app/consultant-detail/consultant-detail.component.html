@@ -1,6 +1,11 @@
 <div class="container">
   <dl class="list">
     <h1>{{ consultant.firstName }} {{consultant.lastName }}</h1>
+    <div class="row">
+      <div class="col-md-12">
+        <a [routerLink]="['/consultant-edit', consultant._id]" class="btn btn-success">EDIT</a>
+      </div>
+    </div>
     <dt>Phone</dt>
     <dd>{{ consultant.phone }}</dd>
     <dt>Email</dt>
@@ -11,8 +16,8 @@
     <dd>{{ consultant.biography }}</dd>
     <dt>Company Name</dt>
     <dd>{{ consultant.companyName}}</dd>
-    <dt>isActive</dt>
-    <dd>{{ consultant.isActive }}</dd>
+    <dt><input type="checkbox" disabled="disabled" checked="{{ consultant.isActive }}"> Is Active</dt>
+    <dd></dd>
     <h2>Supervisor Information</h2>
     <dt>Name</dt>
     <dd>{{ consultant.supervisorFirstName }} {{ consultant.supervisorLastName }}</dd>
@@ -70,10 +75,4 @@
     <dt>Update Date</dt>
     <dd>{{ consultant.updated_date }}</dd>
   </dl>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <a [routerLink]="['/consultant-edit', consultant._id]" class="btn btn-success">EDIT</a>
-  </div>
 </div>
