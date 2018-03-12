@@ -1,5 +1,13 @@
 var mongoose = require('mongoose');
 
+var proficiencySchema = new Schema({
+  language: String,
+  reading: Number,
+  writing: Number,
+  speaking: Number,
+  listening: Number
+});
+
 var ConsultantSchema = new mongoose.Schema({
   // Contact Info
   firstName: String,
@@ -16,6 +24,7 @@ var ConsultantSchema = new mongoose.Schema({
   supervisorEmail: String,
   supervisorPhone: String,
   // Translation Proficiencies
+  proficiencies: [ proficiencySchema ], //This only works in mongoose >=4.2.0
   notes: String,
   // Testaments
   isOldTestament: Boolean,
