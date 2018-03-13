@@ -56,55 +56,23 @@
 
         <h3>Testaments</h3>
         <div class="form-group">
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isOldTestament" name="isOldTestament">Old Testament
+            <label class="checkbox-inline">
+              <input type="checkbox" [(ngModel)]="consultant.isOldTestament" name="isOldTestament">Old Testament<br>
+              <input type="checkbox" [(ngModel)]="consultant.isNewTestament" name="isNewTestament">New Testament
             </label>
-          </div>
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isNewTestament" name="isNewTestament">New Testament
-            </label>
-          </div>
         </div>
 
-        <h3>Regions</h3>
+        <h3>Region</h3>
         <div class="form-group">
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isGlobalRegion" name="isGlobalRegion">Global
-            </label>
-          </div>
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isAfricaRegion" name="isAfricaRegion">Africa
-            </label>
-          </div>
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isAmericasRegion" name="isAmericasRegion">Americas
-            </label>
-          </div>
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isAsiaRegion" name="isAsiaRegion">Asia
-            </label>
-          </div>
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isAsiaMainlandRegion" name="isAsiaMainlandRegion">Asia - Mainland
-            </label>
-          </div>
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isAsiaSouthRegion" name="isAsiaSouthRegion">Asia - South
-            </label>
-          </div>
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isEurasiaRegion" name="isEurasiaRegion">Eurasia
-            </label>
-          </div>
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isEuropeRegion" name="isEuropeRegion">Europe
-            </label>
-          </div>
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isPacificRegion" name="isPacificRegion">Pacific
-            </label>
-          </div>
-
+          <input type="radio" name="region" [(ngModel)]="consultant.region" value="Global"> Global<br>
+          <input type="radio" name="region" [(ngModel)]="consultant.region" value="Africa"> Africa<br>
+          <input type="radio" name="region" [(ngModel)]="consultant.region" value="Americas"> Americas<br>
+          <input type="radio" name="region" [(ngModel)]="consultant.region" value="Asia"> Asia<br>
+          <input type="radio" name="region" [(ngModel)]="consultant.region" value="Asia - Mainland"> Asia - Mainland<br>
+          <input type="radio" name="region" [(ngModel)]="consultant.region" value="Asia - South"> Asia - South<br>
+          <input type="radio" name="region" [(ngModel)]="consultant.region" value="Eurasia"> Eurasia<br>
+          <input type="radio" name="region" [(ngModel)]="consultant.region" value="Europe"> Europe<br>
+          <input type="radio" name="region" [(ngModel)]="consultant.region" value="Pacific"> Pacific
         </div>
 
         <div class="form-group">

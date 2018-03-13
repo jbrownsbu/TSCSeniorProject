@@ -29,16 +29,8 @@ var ConsultantSchema = new mongoose.Schema({
   // Testaments
   isOldTestament: Boolean,
   isNewTestament: Boolean,
-  // Regions
-  isGlobalRegion: Boolean,
-  isAfricaRegion: Boolean,
-  isAmericasRegion: Boolean,
-  isAsiaRegion: Boolean,
-  isAsiaMainlandRegion: Boolean,
-  isAsiaSouthRegion: Boolean,
-  isEurasiaRegion: Boolean,
-  isEuropeRegion: Boolean,
-  isPacificRegion: Boolean,
+  // Region
+  region: String,
   // Media
   isWrittenMedia: Boolean,
   isAudioMedia: Boolean,
