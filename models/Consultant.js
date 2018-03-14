@@ -34,7 +34,7 @@ var ConsultantSchema = new mongoose.Schema({
   // Media
   isWrittenMedia: Boolean,
   isAudioMedia: Boolean,
-  isStoryTellingMedia: Boolean,
+  isStorytellingMedia: Boolean,
   // Roles
   isAudioToAudioRole: Boolean,
   isGuestScholarRole: Boolean,

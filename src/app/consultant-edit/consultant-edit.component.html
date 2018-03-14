@@ -75,6 +75,28 @@
           <input type="radio" name="region" [(ngModel)]="consultant.region" value="Pacific"> Pacific
         </div>
 
+        <h3>Media</h3>
+        <div class="form-group">
+          <label class="checkbox-inline">
+            <input type="checkbox" [(ngModel)]="consultant.isWrittenMedia" name="isWrittenMedia">Written<br>
+            <input type="checkbox" [(ngModel)]="consultant.isAudioMedia" name="isAudioMedia">Audio<br>
+            <input type="checkbox" [(ngModel)]="consultant.isStorytellingMedia" name="isStorytellingMedia">Storytelling
+          </label>
+        </div>
+
+        <h3>Roles</h3>
+        <div class="form-group">
+          <label class="checkbox-inline">
+            <input type="checkbox" [(ngModel)]="consultant.isAudioToAudioRole" name="isAudioToAudioRole">Audio to Audio Translation Consultant<br>
+            <input type="checkbox" [(ngModel)]="consultant.isGuestScholarRole" name="isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br>
+            <input type="checkbox" [(ngModel)]="consultant.isLinguisticConsultantRole" name="isLinguisticConsultantRole">Linguistic Consultant<br>
+            <input type="checkbox" [(ngModel)]="consultant.isManagerRole" name="isManagerRole">Manager - Translation Consultant<br>
+            <input type="checkbox" [(ngModel)]="consultant.isStoryCheckerRole" name="isStoryCheckerRole">Story Checker<br>
+            <input type="checkbox" [(ngModel)]="consultant.isTranslationConsultantInTrainingRole" name="isTranslationConsultantInTrainingRole">Translation CiT<br>
+            <input type="checkbox" [(ngModel)]="consultant.isTranslationConsultantRole" name="isTranslationConsultantRole">Translation Consultant
+          </label>
+        </div>
+
         <div class="form-group">
           <button type="submit" class="btn btn-success" [disabled]="!consultantForm.form.valid">Update</button>
         </div>
