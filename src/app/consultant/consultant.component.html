@@ -5,7 +5,7 @@
   </div>
     <table class="table">
       <thead>
-      <th>First Name</th>
+        <th>First Name</th>
         <th [class.active]="order === 'lastName'"
             (click)="setOrder('lastName')"
             class="mdl-data-table__cell--non-numeric">
@@ -14,6 +14,8 @@
         <th>Phone</th>
         <th>Email</th>
         <th>Address</th>
+        <th>Region</th>
+        <th>Actions</th>
       </thead>
       <tbody>
       <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'| filter: searchTerms">
@@ -22,7 +24,11 @@
         <td>{{ consultant.phone }}</td>
         <td>{{ consultant.email}}</td>
         <td>{{ consultant.address}}</td>
-        <td> <button [routerLink]="['/consultant-details', consultant._id]" type="button">Show Details</button></td>
+        <td>{{ consultant.region}}</td>
+        <td>
+          <button [routerLink]="['/consultant-details', consultant._id]" type="button">Show Details</button>
+          <button [routerLink]="['/consultant-edit', consultant._id]" type="button">EDIT</button>
+        </td>
       </tr>
       </tbody>
     </table>
