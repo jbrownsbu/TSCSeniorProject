@@ -1,11 +1,6 @@
 <div class="container">
   <dl class="list">
     <h1>{{ consultant.firstName }} {{consultant.lastName }}</h1>
-    <div class="row">
-      <div class="col-md-12">
-        <a [routerLink]="['/consultant-edit', consultant._id]" class="btn btn-success">EDIT</a>
-      </div>
-    </div>
     <dt>Phone:</dt>
     <dd>{{ consultant.phone }}</dd>
     <dt>Email:</dt>
@@ -28,6 +23,23 @@
     <dt>Phone:</dt>
     <dd>{{ consultant.supervisorPhone }}</dd>
     <h2>Translation Proficiencies</h2>
+    <h3>Language Proficiencies</h3>
+    <table class="table" id="languageTable">
+      <thead>
+      <th>Language</th>
+      <th>Speaking</th>
+      <th>Listening</th>
+      <th>Writing</th>
+      <th>Reading</th>
+      </thead>
+      <tr *ngFor="let proficiency of consultant.proficiencies">
+        <td>{{ proficiency[0] }}</td>
+        <td>{{ proficiency[1] }}</td>
+        <td>{{ proficiency[2] }}</td>
+        <td>{{ proficiency[3] }}</td>
+        <td>{{ proficiency[4] }}</td>
+      </tr>
+    </table>
     <h3>Testaments</h3>
     <dt><input type="checkbox" disabled="disabled" [(ngModel)]="consultant.isOldTestament" name="isOldTestament"> Old Testament</dt>
     <dt><input type="checkbox" disabled="disabled" [(ngModel)]="consultant.isNewTestament" name="isNewTestament"> New Testament</dt>

@@ -49,6 +49,60 @@
         </div>
 
         <h2>Translation Proficiencies</h2>
+
+        <h3>Language Proficiencies</h3>
+        <table class="table" id="languageTable">
+          <thead>
+          <th>Language</th>
+          <th>Speaking</th>
+          <th>Listening</th>
+          <th>Writing</th>
+          <th>Reading</th>
+          </thead>
+          <tr *ngFor="let proficiency of consultant.proficiencies">
+            <td><select id="language"
+                        required
+                        [(ngModel)]="proficiency[0]" name="language">
+              <option value="English">English</option>
+              <option value="Spanish">Spanish</option>
+            </select></td>
+            <td><select id="speaking"
+                        required
+                        [(ngModel)]="proficiency[1]" name="speaking">
+              <option value=1 >Not very fluent</option>
+              <option value=2>Somewhat fluent</option>
+              <option value=3>Fluent</option>
+              <option value=4>Very Fluent</option>
+            </select></td>
+            <td><select id="listening"
+                        required
+                        [(ngModel)]="proficiency[2]" name="speaking">
+              <option value=1>Not very fluent</option>
+              <option value=2>Somewhat fluent</option>
+              <option value=3>Fluent</option>
+              <option value=4>Very Fluent</option>
+            </select></td>
+            <td><select id="writing"
+                        required
+                        [(ngModel)]="proficiency[3]" name="speaking">
+              <option value=1>Not very fluent</option>
+              <option value=2>Somewhat fluent</option>
+              <option value=3>Fluent</option>
+              <option value=4>Very Fluent</option>
+            </select></td>
+            <td><select id="reading"
+                        required
+                        [(ngModel)]="proficiency[4]" name="speaking">
+              <option value=1>Not very fluent</option>
+              <option value=2>Somewhat fluent</option>
+              <option value=3>Fluent</option>
+              <option value=4>Very Fluent</option>
+            </select></td>
+          </tr>
+        </table>
+
+        <button type="button" (click)="addLanguageRow()">Add Language</button>
+
         <div class="form-group">
           <label>Consultant Notes</label>
           <input type="text" class="form-control" [(ngModel)]="consultant.notes" name="notes" required>
