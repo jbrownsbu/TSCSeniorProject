@@ -1,5 +1,30 @@
 .list{
   background-color: white;
-  padding: 20px;
+}
+
+div{
+  background-color: #FFFFFF;
   border-radius: 5px;
+}
+
+#div2{
+
+  padding-left: 100px;
+  padding-top: 50px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+
+}
+dd{
+  margin-left: 40px;
+  display: block;
+}
+
+#columns{
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+  -webkit-column-width: 100px; /* Chrome, Safari, Opera */
+  -moz-column-width: 100px; /* Firefox */
+  column-width: 100px;
 }
