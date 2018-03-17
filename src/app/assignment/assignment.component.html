@@ -1,0 +1,33 @@
+<div class="container">
+  <h1>Assignment List</h1>
+  <table class="table">
+    <thead>
+    <th>Assignment Name</th>
+    <!--Went ahead and commented out since I'm not sure how this works yet-->
+    <!--<th [class.active]="order === 'lastName'"-->
+    <!--(click)="setOrder('lastName')"-->
+    <!--class="mdl-data-table__cell&#45;&#45;non-numeric">-->
+    <!--Last Name <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>-->
+    <!--</th>-->
+    <th>Language</th>
+    <th>Region</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <!--<th>Consultant Assigned</th>-->
+    </thead>
+    <tbody>
+    <tr *ngFor="let assignment of assignments | orderBy: order:reverse:'case-insensitive'| filter: searchTerms">
+      <td>{{ assignment.name }}</td>
+      <td>{{ assignment.language }}</td>
+      <td>{{ assignment.region }}</td>
+      <td>{{ assignment.startDate }}</td>
+      <td>{{ assignment.endDate }}</td>
+      <!--I think this is the structure I'm aiming for.
+      Should be a checkbox to say whether or not there is a consultant on the assignment.-->
+      <!--<td type="checkbox" disabled="disabled"-->
+          <!--[selected]= "assignment.consultantID != null"></td>-->
+      <td> <button [routerLink]="['/assignment-details', assignment._id]" type="button">Show Details</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
