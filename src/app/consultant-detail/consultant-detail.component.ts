@@ -23,4 +23,9 @@ export class ConsultantDetailComponent implements OnInit {
       this.consultant = data;
     });
   }
+
+  // addRowtoTable() {
+  //   var table = document.getElementById('languageTable');
+  //   var row = table.insertRow(table.);
+  // }
 }

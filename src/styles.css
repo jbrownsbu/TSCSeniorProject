@@ -5,3 +5,17 @@ h1{
 body{
   background-color: #C1D82F;
 }
+
+
+#nav {
+  border: 1px solid gray;
+  border-radius: 5px;
+
+  text-align: center;
+  border-collapse: separate;
+  border-spacing: 15px;
+  margin-right: 100px;
+  width: 150px;
+}
+
+
