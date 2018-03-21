@@ -8,9 +8,11 @@ var AssignmentSchema = new mongoose.Schema({
   name: String,
   startDate: Date,
   endDate: Date,
-  consultantRole: String,
+  role: String,
   language: String,
-  region: String
+  testament: String,
+  media: String,
+  translationRegion: String
 });
 
 module.exports = mongoose.model('Assignment', AssignmentSchema);
