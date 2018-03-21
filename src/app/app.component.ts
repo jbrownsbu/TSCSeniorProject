@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { FilterPipe } from './filter-pipe/filter.pipe';
+import { FilterPipeNamePipe } from './filter-pipe-name/filter-pipe-name.pipe';
+import { FilterPipeRegionPipe } from './filter-pipe-region/filter-pipe-region.pipe';
 
 import { OrderPipe } from './order-pipe/ngx-order.pipe';
 

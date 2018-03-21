@@ -30,7 +30,7 @@ var ConsultantSchema = new mongoose.Schema({
   isOldTestament: Boolean,
   isNewTestament: Boolean,
   // Region
-  region: String,
+  translationRegion: String,
   // Media
   isWrittenMedia: Boolean,
   isAudioMedia: Boolean,

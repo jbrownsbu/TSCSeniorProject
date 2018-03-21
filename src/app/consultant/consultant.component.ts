@@ -10,7 +10,8 @@ import { OrderPipe} from 'ngx-order-pipe';
 export class ConsultantComponent implements OnInit {
 
   consultants: any;
-  searchTerms: string;
+  searchTermsName: string;
+  searchTermsRegion: string;
 
   order: string = 'info.name';
   reverse: boolean = false;
