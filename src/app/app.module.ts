@@ -12,8 +12,9 @@ import { ConsultantDetailComponent } from './consultant-detail/consultant-detail
 import { ConsultantEditComponent } from './consultant-edit/consultant-edit.component';
 import { FilterPipeNameModule } from './filter-pipe-name/filter-pipe-name.module';
 import { FilterPipeRegionModule} from './filter-pipe-region/filter-pipe-region.module';
-
-// import { OrderModule } from 'ngx-order-pipe';
+import { AssignmentComponent } from './assignment/assignment.component';
+import { AssignmentDetailComponent } from './assignment-detail/assignment-detail.component';
+import { AssignmentEditComponent } from './assignment-edit/assignment-edit.component';
 
 const appRoutes: Routes = [
   {
@@ -33,7 +34,22 @@ const appRoutes: Routes = [
   {
     path: 'consultant-edit/:id',
     component: ConsultantEditComponent,
-    data: { title: 'Edit Book' }
+    data: { title: 'Edit Consultant' }
+  },
+  {
+    path: 'assignments',
+    component: AssignmentComponent,
+    data: { title: 'Assignment List'}
+  },
+  {
+    path: 'assignment-details/:id',
+    component: AssignmentDetailComponent,
+    data: { title: 'Assignment Detail'}
+  },
+  {
+    path: 'assignment-edit/:id',
+    component: AssignmentEditComponent,
+    data: {title: 'Edit Assignment'}
   }
 ];
 
@@ -42,7 +58,10 @@ const appRoutes: Routes = [
     AppComponent,
     ConsultantComponent,
     ConsultantDetailComponent,
-    ConsultantEditComponent
+    ConsultantEditComponent,
+    AssignmentComponent,
+    AssignmentDetailComponent,
+    AssignmentEditComponent
   ],
   imports: [
     BrowserModule,
