@@ -16,11 +16,11 @@
     <!--<th>Consultant Assigned</th>-->
     </thead>
     <tbody>
-    <tr *ngFor="let assignment of assignments | orderBy: order:reverse:'case-insensitive'| filter: searchTerms">
+    <tr *ngFor="let assignment of assignments"> <!-- | orderBy: order:reverse:'case-insensitive'| filter: searchTerms"-->
       <td>{{ assignment.name }}</td>
       <td>{{ assignment.language }}</td>
       <td>{{ assignment.region }}</td>
-      <td>{{ assignment.startDate }}</td>
+      <td class="date">{{ assignment.startDate }}</td>
       <td>{{ assignment.endDate }}</td>
       <!--I think this is the structure I'm aiming for.
       Should be a checkbox to say whether or not there is a consultant on the assignment.-->
