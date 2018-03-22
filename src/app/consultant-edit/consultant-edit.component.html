@@ -1,6 +1,7 @@
-<div class="container">
+<div id= "list" class="container">
   <div class="row">
     <div class="col-md-6">
+      <section>
       <h1>{{ consultant.firstName }} {{ consultant.lastName }}</h1>
       <form (ngSubmit)="updateConsultant(consultant._id)" #consultantForm="ngForm">
         <div class="form-group">
@@ -47,6 +48,7 @@
           <label>Phone</label>
           <input type="text" class="form-control" [(ngModel)]="consultant.supervisorPhone" name="supervisorPhone" required>
         </div>
+
 
         <h2>Translation Proficiencies</h2>
 
@@ -155,6 +157,7 @@
           <button type="submit" class="btn btn-success" [disabled]="!consultantForm.form.valid">Update</button>
         </div>
       </form>
+      </section>
     </div>
   </div>
 </div>
