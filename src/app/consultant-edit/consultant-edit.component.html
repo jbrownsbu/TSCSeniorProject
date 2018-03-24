@@ -2,161 +2,145 @@
   <div class="row">
     <div class="col-md-6">
       <section>
-      <h1>{{ consultant.firstName }} {{ consultant.lastName }}</h1>
-      <form (ngSubmit)="updateConsultant(consultant._id)" #consultantForm="ngForm">
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="text" class="form-control" [(ngModel)]="consultant.phone" name="phone" required>
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="text" class="form-control" [(ngModel)]="consultant.email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label>Address</label>
-          <input type="text" class="form-control" [(ngModel)]="consultant.address" name="address" required>
-        </div>
-        <div class="form-group">
-          <label>Biography</label>
-          <input type="text" class="form-control" [(ngModel)]="consultant.biography" name="biography" required>
-        </div>
-        <div class="form-group">
-          <label>Company</label>
-          <input type="text" class="form-control" [(ngModel)]="consultant.companyName" name="companyName" required>
-        </div>
-        <div class="form-group">
-          <div class="form-control">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="consultant.isActive" name="isActive">Active Status
+        <h1>{{ consultant.firstName }} {{ consultant.lastName }}</h1>
+        <form (ngSubmit)="updateConsultant(consultant._id)" #consultantForm="ngForm">
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" class="form-control" [(ngModel)]="consultant.phone" name="phone" required><br>
+            <label>Email</label>
+            <input type="text" class="form-control" [(ngModel)]="consultant.email" name="email" required><br>
+            <label>Address</label>
+            <input type="text" class="form-control" [(ngModel)]="consultant.address" name="address" required><br>
+            <label>Biography</label>
+            <input type="text" class="form-control" [(ngModel)]="consultant.biography" name="biography" required><br>
+            <label>Company</label>
+            <input type="text" class="form-control" [(ngModel)]="consultant.companyName" name="companyName" required><br>
+            <label class="checkbox-inline">
+              <input type="checkbox" [(ngModel)]="consultant.isActive" name="isActive">Active Status
             </label>
           </div>
-        </div>
 
-        <h2>Supervisor</h2>
-        <div class="form-group">
-          <label>First Name</label>
-          <input type="text" class="form-control" [(ngModel)]="consultant.supervisorFirstName" name="supervisorFirstName" required>
-        </div>
-        <div class="form-group">
-          <label>Last Name</label>
-          <input type="text" class="form-control" [(ngModel)]="consultant.supervisorLastName" name="supervisorLastName" required>
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="text" class="form-control" [(ngModel)]="consultant.supervisorEmail" name="supervisorEmail" required>
-        </div>
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="text" class="form-control" [(ngModel)]="consultant.supervisorPhone" name="supervisorPhone" required>
-        </div>
+          <h2>Supervisor</h2>
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" [(ngModel)]="consultant.supervisorFirstName" name="supervisorFirstName" required><br>
+            <label>Last Name</label>
+            <input type="text" class="form-control" [(ngModel)]="consultant.supervisorLastName" name="supervisorLastName" required><br>
+            <label>Email</label>
+            <input type="text" class="form-control" [(ngModel)]="consultant.supervisorEmail" name="supervisorEmail" required><br>
+            <label>Phone</label>
+            <input type="text" class="form-control" [(ngModel)]="consultant.supervisorPhone" name="supervisorPhone" required><br>
+          </div>
 
 
-        <h2>Translation Proficiencies</h2>
 
-        <h3>Language Proficiencies</h3>
-        <table class="table" id="languageTable">
-          <thead>
-          <th>Language</th>
-          <th>Speaking</th>
-          <th>Listening</th>
-          <th>Writing</th>
-          <th>Reading</th>
-          </thead>
-          <tr *ngFor="let proficiency of consultant.proficiencies">
-            <td><select id="language"
-                        required
-                        [(ngModel)]="proficiency[0]" name="language">
-              <option value="English">English</option>
-              <option value="Spanish">Spanish</option>
-            </select></td>
-            <td><select id="speaking"
-                        required
-                        [(ngModel)]="proficiency[1]" name="speaking">
-              <option value=1 >Not very fluent</option>
-              <option value=2>Somewhat fluent</option>
-              <option value=3>Fluent</option>
-              <option value=4>Very Fluent</option>
-            </select></td>
-            <td><select id="listening"
-                        required
-                        [(ngModel)]="proficiency[2]" name="speaking">
-              <option value=1>Not very fluent</option>
-              <option value=2>Somewhat fluent</option>
-              <option value=3>Fluent</option>
-              <option value=4>Very Fluent</option>
-            </select></td>
-            <td><select id="writing"
-                        required
-                        [(ngModel)]="proficiency[3]" name="speaking">
-              <option value=1>Not very fluent</option>
-              <option value=2>Somewhat fluent</option>
-              <option value=3>Fluent</option>
-              <option value=4>Very Fluent</option>
-            </select></td>
-            <td><select id="reading"
-                        required
-                        [(ngModel)]="proficiency[4]" name="speaking">
-              <option value=1>Not very fluent</option>
-              <option value=2>Somewhat fluent</option>
-              <option value=3>Fluent</option>
-              <option value=4>Very Fluent</option>
-            </select></td>
-          </tr>
-        </table>
+          <h2>Translation Proficiencies</h2>
 
-        <button type="button" (click)="addLanguageRow()">Add Language</button>
+          <h3>Language Proficiencies</h3>
+          <table class="table" id="languageTable">
+            <thead>
+            <th>Language</th>
+            <th>Speaking</th>
+            <th>Listening</th>
+            <th>Writing</th>
+            <th>Reading</th>
+            </thead>
+            <tr *ngFor="let proficiency of consultant.proficiencies">
+              <td><select id="language"
+                          required
+                          [(ngModel)]="proficiency[0]" name="language">
+                <option value="English">English</option>
+                <option value="Spanish">Spanish</option>
+              </select></td>
+              <td><select id="speaking"
+                          required
+                          [(ngModel)]="proficiency[1]" name="speaking">
+                <option value=1>Not very fluent</option>
+                <option value=2>Somewhat fluent</option>
+                <option value=3>Fluent</option>
+                <option value=4>Very Fluent</option>
+              </select></td>
+              <td><select id="listening"
+                          required
+                          [(ngModel)]="proficiency[2]" name="speaking">
+                <option value=1>Not very fluent</option>
+                <option value=2>Somewhat fluent</option>
+                <option value=3>Fluent</option>
+                <option value=4>Very Fluent</option>
+              </select></td>
+              <td><select id="writing"
+                          required
+                          [(ngModel)]="proficiency[3]" name="speaking">
+                <option value=1>Not very fluent</option>
+                <option value=2>Somewhat fluent</option>
+                <option value=3>Fluent</option>
+                <option value=4>Very Fluent</option>
+              </select></td>
+              <td><select id="reading"
+                          required
+                          [(ngModel)]="proficiency[4]" name="speaking">
+                <option value=1>Not very fluent</option>
+                <option value=2>Somewhat fluent</option>
+                <option value=3>Fluent</option>
+                <option value=4>Very Fluent</option>
+              </select></td>
+            </tr>
+          </table>
 
-        <div class="form-group">
-          <label>Consultant Notes</label>
-          <input type="text" class="form-control" [(ngModel)]="consultant.notes" name="notes" required>
-        </div>
+          <button type="button" (click)="addLanguageRow()">Add Language</button>
 
-        <h3>Testaments</h3>
-        <div class="form-group">
+          <div class="form-group">
+            <label>Consultant Notes</label>
+            <input type="text" class="form-control" [(ngModel)]="consultant.notes" name="notes" required>
+          </div>
+
+          <h3>Testaments</h3>
+          <div class="form-group">
             <label class="checkbox-inline">
               <input type="checkbox" [(ngModel)]="consultant.isOldTestament" name="isOldTestament">Old Testament<br>
               <input type="checkbox" [(ngModel)]="consultant.isNewTestament" name="isNewTestament">New Testament
             </label>
-        </div>
+          </div>
 
-        <h3>Region</h3>
-        <div class="form-group">
-          <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Global"> Global<br>
-          <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Africa"> Africa<br>
-          <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Americas"> Americas<br>
-          <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia"> Asia<br>
-          <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia - Mainland"> Asia - Mainland<br>
-          <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia - South"> Asia - South<br>
-          <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Eurasia"> Eurasia<br>
-          <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Europe"> Europe<br>
-          <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Pacific"> Pacific
-        </div>
+          <h3>Region</h3>
+          <div class="form-group">
+            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Global"> Global<br>
+            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Africa"> Africa<br>
+            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Americas"> Americas<br>
+            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia"> Asia<br>
+            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia - Mainland"> Asia - Mainland<br>
+            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia - South"> Asia - South<br>
+            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Eurasia"> Eurasia<br>
+            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Europe"> Europe<br>
+            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Pacific"> Pacific
+          </div>
 
-        <h3>Media</h3>
-        <div class="form-group">
-          <label class="checkbox-inline">
-            <input type="checkbox" [(ngModel)]="consultant.isWrittenMedia" name="isWrittenMedia">Written<br>
-            <input type="checkbox" [(ngModel)]="consultant.isAudioMedia" name="isAudioMedia">Audio<br>
-            <input type="checkbox" [(ngModel)]="consultant.isStorytellingMedia" name="isStorytellingMedia">Storytelling
-          </label>
-        </div>
+          <h3>Media</h3>
+          <div class="form-group">
+            <label class="checkbox-inline">
+              <input type="checkbox" [(ngModel)]="consultant.isWrittenMedia" name="isWrittenMedia">Written<br>
+              <input type="checkbox" [(ngModel)]="consultant.isAudioMedia" name="isAudioMedia">Audio<br>
+              <input type="checkbox" [(ngModel)]="consultant.isStorytellingMedia" name="isStorytellingMedia">Storytelling
+            </label>
+          </div>
 
-        <h3>Roles</h3>
-        <div class="form-group">
-          <label class="checkbox-inline">
-            <input type="checkbox" [(ngModel)]="consultant.isAudioToAudioRole" name="isAudioToAudioRole">Audio to Audio Translation Consultant<br>
-            <input type="checkbox" [(ngModel)]="consultant.isGuestScholarRole" name="isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br>
-            <input type="checkbox" [(ngModel)]="consultant.isLinguisticConsultantRole" name="isLinguisticConsultantRole">Linguistic Consultant<br>
-            <input type="checkbox" [(ngModel)]="consultant.isManagerRole" name="isManagerRole">Manager - Translation Consultant<br>
-            <input type="checkbox" [(ngModel)]="consultant.isStoryCheckerRole" name="isStoryCheckerRole">Story Checker<br>
-            <input type="checkbox" [(ngModel)]="consultant.isTranslationConsultantInTrainingRole" name="isTranslationConsultantInTrainingRole">Translation CiT<br>
-            <input type="checkbox" [(ngModel)]="consultant.isTranslationConsultantRole" name="isTranslationConsultantRole">Translation Consultant
-          </label>
-        </div>
+          <h3>Roles</h3>
+          <div class="form-group">
+            <label class="checkbox-inline">
+              <input type="checkbox" [(ngModel)]="consultant.isAudioToAudioRole" name="isAudioToAudioRole">Audio to Audio Translation Consultant<br>
+              <input type="checkbox" [(ngModel)]="consultant.isGuestScholarRole" name="isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br>
+              <input type="checkbox" [(ngModel)]="consultant.isLinguisticConsultantRole" name="isLinguisticConsultantRole">Linguistic Consultant<br>
+              <input type="checkbox" [(ngModel)]="consultant.isManagerRole" name="isManagerRole">Manager - Translation Consultant<br>
+              <input type="checkbox" [(ngModel)]="consultant.isStoryCheckerRole" name="isStoryCheckerRole">Story Checker<br>
+              <input type="checkbox" [(ngModel)]="consultant.isTranslationConsultantInTrainingRole" name="isTranslationConsultantInTrainingRole">Translation CiT<br>
+              <input type="checkbox" [(ngModel)]="consultant.isTranslationConsultantRole" name="isTranslationConsultantRole">Translation Consultant
+            </label>
+          </div>
 
-        <div class="form-group">
-          <button type="submit" class="btn btn-success" [disabled]="!consultantForm.form.valid">Update</button>
-        </div>
-      </form>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success" [disabled]="!consultantForm.form.valid">Update</button>
+          </div>
+        </form>
       </section>
     </div>
   </div>
