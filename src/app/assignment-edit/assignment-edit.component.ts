@@ -20,7 +20,7 @@ export class AssignmentEditComponent implements OnInit {
   }
 
   getAssignment(id) {
-    this.http.get('/assignment/' + id).subscribe(data => {
+    this.http.get('/assignment-edit/' + id).subscribe(data => {
       this.assignment = data;
     });
   }
@@ -29,7 +29,7 @@ export class AssignmentEditComponent implements OnInit {
     this.http.put('/assignment/' + id, this.assignment)
       .subscribe(res => {
           const id = res['_id'];
-          this.router.navigate(['/assignments']);
+          this.router.navigate(['/assignment/' + assignment.consultantId]);
         }, (err) => {
           console.log(err);
         }

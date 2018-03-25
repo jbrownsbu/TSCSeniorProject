@@ -37,7 +37,7 @@ const appRoutes: Routes = [
     data: { title: 'Edit Consultant' }
   },
   {
-    path: 'assignments',
+    path: 'assignment/:consultantId',
     component: AssignmentComponent,
     data: { title: 'Assignment List'}
   },

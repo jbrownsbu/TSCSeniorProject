@@ -3,9 +3,9 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Assignment = require('../models/Assignment');
 
-/* GET ALL ASSIGNMENTS */
-router.get('/', function(req, res, next) {
-  Assignment.find(function (err, products) {
+/* GET ALL ASSIGNMENTS FOR A CONSULTANT*/
+router.get('/:consultantId', function(req, res, next) {
+  Assignment.find({ consultantId: req.params.consultantId }, function (err, products) {
     if (err) return next(err);
     res.json(products);
   });
