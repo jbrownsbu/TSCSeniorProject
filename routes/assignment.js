@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Assignment = require('../models/Assignment');
 
 /* GET ALL ASSIGNMENTS FOR A CONSULTANT*/
-router.get('/:consultantId', function(req, res, next) {
+router.get('/consultant/:consultantId', function(req, res, next) {
   Assignment.find({ consultantId: req.params.consultantId }, function (err, products) {
     if (err) return next(err);
     res.json(products);

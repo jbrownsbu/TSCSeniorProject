@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <section>
         <h1>{{ assignment.consultantName }} - {{ assignment.name }}</h1>
-        <form (ngSubmit)="updateAssignment(assignment._id)" #assignmentForm="ngForm">
+        <form (ngSubmit)="updateAssignment(assignment._id, assignment.consultantId)" #assignmentForm="ngForm">
           <h3>Dates</h3>
           <div class="form-group">
             <label>Start <input type="date" class="form-control" [(ngModel)]="assignment.startDate" name="startDate" required></label>

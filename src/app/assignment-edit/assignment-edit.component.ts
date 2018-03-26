@@ -20,16 +20,16 @@ export class AssignmentEditComponent implements OnInit {
   }
 
   getAssignment(id) {
-    this.http.get('/assignment-edit/' + id).subscribe(data => {
+    this.http.get('/assignment/' + id).subscribe(data => {
       this.assignment = data;
     });
   }
 
-  updateAssignment(id, assignment) {
+  updateAssignment(id, consultantId) {
     this.http.put('/assignment/' + id, this.assignment)
       .subscribe(res => {
           const id = res['_id'];
-          this.router.navigate(['/assignment/' + assignment.consultantId]);
+          this.router.navigate(['/assignment/consultant/' + consultantId]);
         }, (err) => {
           console.log(err);
         }

@@ -20,7 +20,7 @@ export class AssignmentComponent implements OnInit {
   }
 
   getAssignmentsByConsultantId(consultantId) {
-    this.http.get('/assignment/' + consultantId).subscribe(data => {
+    this.http.get('/assignment/consultant/' + consultantId).subscribe(data => {
       this.assignments = data;
     });
   }
