@@ -17,14 +17,14 @@ import { AssignmentDetailComponent } from './assignment-detail/assignment-detail
 import { AssignmentEditComponent } from './assignment-edit/assignment-edit.component';
 
 const appRoutes: Routes = [
+  { path: '',
+    redirectTo: '/consultants',
+    pathMatch: 'full'
+  },
   {
   path: 'consultants',
   component: ConsultantComponent,
   data: { title: 'Consultant List' }
-  },
-  { path: '',
-    redirectTo: '/consultants',
-    pathMatch: 'full'
   },
   {
     path: 'consultant-details/:id',
@@ -37,7 +37,7 @@ const appRoutes: Routes = [
     data: { title: 'Edit Consultant' }
   },
   {
-    path: 'assignments',
+    path: 'assignment/consultant/:consultantId',
     component: AssignmentComponent,
     data: { title: 'Assignment List'}
   },
