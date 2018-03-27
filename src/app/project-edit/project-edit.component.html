@@ -1,0 +1,63 @@
+<div id="list" class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <section>
+        <h1>{{ project.projectName }}</h1>
+        <form (ngSubmit)="updateProject(project._id)" #projectForm="ngForm">
+          <h3>Dates</h3>
+          <div class="form-group">
+            <label>Start <input type="date" class="form-control" [(ngModel)]="project.startDate" name="startDate" required></label>
+            <label>End <input type="date" class="form-control" [(ngModel)]="project.endDate" name="endDate" required></label>
+          </div>
+
+          <h3>Language</h3>
+          <div class="form-group">
+            <input type="radio" name="language" [(ngModel)]="project.language" value="Spanish"> Spanish<br>
+            <input type="radio" name="language" [(ngModel)]="project.language" value="English"> English
+          </div>
+
+          <h3>Testament</h3>
+          <div class="form-group">
+            <input type="radio" name="testament" [(ngModel)]="project.testament" value="Old Testament"> Old Testament<br>
+            <input type="radio" name="testament" [(ngModel)]="project.testament" value="New Testament"> New Testament
+          </div>
+
+          <h3>Region</h3>
+          <div class="form-group">
+            <input type="radio" name="region" [(ngModel)]="project.translationRegion" value="Global"> Global<br>
+            <input type="radio" name="region" [(ngModel)]="project.translationRegion" value="Africa"> Africa<br>
+            <input type="radio" name="region" [(ngModel)]="project.translationRegion" value="Americas"> Americas<br>
+            <input type="radio" name="region" [(ngModel)]="project.translationRegion" value="Asia"> Asia<br>
+            <input type="radio" name="region" [(ngModel)]="project.translationRegion" value="Asia - Mainland"> Asia - Mainland<br>
+            <input type="radio" name="region" [(ngModel)]="project.translationRegion" value="Asia - South"> Asia - South<br>
+            <input type="radio" name="region" [(ngModel)]="project.translationRegion" value="Eurasia"> Eurasia<br>
+            <input type="radio" name="region" [(ngModel)]="project.translationRegion" value="Europe"> Europe<br>
+            <input type="radio" name="region" [(ngModel)]="project.translationRegion" value="Pacific"> Pacific
+          </div>
+
+          <h3>Media</h3>
+          <div class="form-group">
+            <input type="radio" name="media" [(ngModel)]="project.media" value="Written"> Written<br>
+            <input type="radio" name="media" [(ngModel)]="project.media" value="Audio"> Audio<br>
+            <input type="radio" name="media" [(ngModel)]="project.media" value="Storytelling"> Storytelling
+          </div>
+
+          <h3>Role</h3>
+          <div class="form-group">
+            <input type="radio" name="role" [(ngModel)]="project.role" value="Audio to Audio Translation Consultant"> Audio to Audio Translation Consultant<br>
+            <input type="radio" name="role" [(ngModel)]="project.role" value="Guest Scholar (Exegetical, Linguistic, Bible)"> Guest Scholar (Exegetical, Linguistic, Bible)<br>
+            <input type="radio" name="role" [(ngModel)]="project.role" value="Linguistic Consultant"> Linguistic Consultant<br>
+            <input type="radio" name="role" [(ngModel)]="project.role" value="Manager - Translation Consultant"> Manager - Translation Consultant<br>
+            <input type="radio" name="role" [(ngModel)]="project.role" value="Story Checker"> Story Checker<br>
+            <input type="radio" name="role" [(ngModel)]="project.role" value="Translation CiT"> Translation CiT<br>
+            <input type="radio" name="role" [(ngModel)]="project.role" value="Translation Consultant"> Translation Consultant
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-success" [disabled]="!projectForm.form.valid">Update</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>

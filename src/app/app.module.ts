@@ -15,6 +15,8 @@ import { FilterPipeRegionModule} from './filter-pipe-region/filter-pipe-region.m
 import { AssignmentComponent } from './assignment/assignment.component';
 import { AssignmentDetailComponent } from './assignment-detail/assignment-detail.component';
 import { AssignmentEditComponent } from './assignment-edit/assignment-edit.component';
+import { ProjectComponent } from './project/project.component';
+import { ProjectEditComponent } from './project-edit/project-edit.component';
 
 const appRoutes: Routes = [
   { path: '',
@@ -50,6 +52,16 @@ const appRoutes: Routes = [
     path: 'assignment-edit/:id',
     component: AssignmentEditComponent,
     data: {title: 'Edit Assignment'}
+  },
+  {
+    path: 'projects',
+    component: ProjectComponent,
+    data: { title: 'Project List' }
+  },
+  {
+    path: 'project-edit/:id',
+    component: ProjectEditComponent,
+    data: {title: 'Edit Project'}
   }
 ];
 
@@ -61,7 +73,9 @@ const appRoutes: Routes = [
     ConsultantEditComponent,
     AssignmentComponent,
     AssignmentDetailComponent,
-    AssignmentEditComponent
+    AssignmentEditComponent,
+    ProjectComponent,
+    ProjectEditComponent
   ],
   imports: [
     BrowserModule,
