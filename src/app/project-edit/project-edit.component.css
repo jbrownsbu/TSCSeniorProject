@@ -1,0 +1,29 @@
+.row{
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#columns{
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+  -webkit-column-width: 150px; /* Chrome, Safari, Opera */
+  -moz-column-width: 150px; /* Firefox */
+  column-width: 150px;
+}
+
+section {
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  columns: 2;
+  width: 200%;
+}
+section * {
+  margin: 0;
+}
+section div {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
