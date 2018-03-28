@@ -1,3 +1,8 @@
+/*
+project component loads list of projects from database.
+On initialization, this file calls http GET to retrieve the project data.
+*/
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 

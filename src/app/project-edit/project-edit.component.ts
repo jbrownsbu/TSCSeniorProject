@@ -1,7 +1,12 @@
+/*
+project-edit component loads details of a project from database.
+On initialization, this file calls http GET to retrieve the project data.
+On update, this file calls http PUT to send updated project data back to database and navigates back to projects list.
+*/
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import {getCollection} from '@angular/cli/utilities/schematics';
 
 @Component({
   selector: 'app-project-edit',
@@ -28,7 +33,6 @@ export class ProjectEditComponent implements OnInit {
   updateProject(id) {
     this.http.put('/project/' + id, this.project)
       .subscribe(res => {
-          const id = res['_id'];
           this.router.navigate(['/projects']);
         }, (err) => {
           console.log(err);
