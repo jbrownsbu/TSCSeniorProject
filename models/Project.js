@@ -14,7 +14,8 @@ var ProjectSchema = new mongoose.Schema({
   language: String,
   testament: String,
   media: String,
-  translationRegion: String
+  translationRegion: String,
+  hasConsultantAssigned: Boolean
 });
 
 module.exports = mongoose.model('Project', ProjectSchema);
