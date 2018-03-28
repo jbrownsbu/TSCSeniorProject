@@ -12,6 +12,7 @@ import { ConsultantDetailComponent } from './consultant-detail/consultant-detail
 import { ConsultantEditComponent } from './consultant-edit/consultant-edit.component';
 import { FilterPipeNameModule } from './filter-pipe-name/filter-pipe-name.module';
 import { FilterPipeRegionModule} from './filter-pipe-region/filter-pipe-region.module';
+import { FilterPipeAssignedModule } from './filter-pipe-assigned/filter-pipe-assigned.module';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { AssignmentDetailComponent } from './assignment-detail/assignment-detail.component';
 import { AssignmentEditComponent } from './assignment-edit/assignment-edit.component';
@@ -84,6 +85,7 @@ const appRoutes: Routes = [
     FormsModule,
     FilterPipeNameModule,
     FilterPipeRegionModule,
+    FilterPipeAssignedModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only

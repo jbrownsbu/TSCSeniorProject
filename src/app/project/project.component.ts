@@ -13,7 +13,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProjectComponent implements OnInit {
 
-  projects: any;
+  projects: any; // Holds project data after retrieved from database.
+  searchTermsAssigned: boolean; // Variable for the value of the unassigned only filter.
 
   constructor(private http: HttpClient) {}
 
