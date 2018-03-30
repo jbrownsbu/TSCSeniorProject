@@ -1,7 +1,12 @@
+/*
+assignment-edit component loads details of an assignment from database.
+On initialization, this file calls http GET to retrieve the assignment data.
+On update, this file calls http PUT to send updated assignment data back to database and navigates back to assignments list.
+*/
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import {getCollection} from '@angular/cli/utilities/schematics';
 
 @Component({
   selector: 'app-assignment-edit',

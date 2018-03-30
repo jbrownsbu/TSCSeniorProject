@@ -1,9 +1,11 @@
+/* Background of edit fields is white with rounded corners. */
 .row{
   background-color: white;
   padding: 20px;
   border-radius: 5px;
 }
 
+/* Edit fields are shown in two columns. */
 #columns{
   -webkit-column-count: 2; /* Chrome, Safari, Opera */
   -moz-column-count: 2; /* Firefox */

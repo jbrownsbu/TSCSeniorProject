@@ -1,3 +1,9 @@
+/*
+consultant-edit component loads details of a consultant from database.
+On initialization, this file calls http GET to retrieve the consultant data.
+On update, this file calls http PUT to send updated consultant data back to database and navigates back to consultants list.
+*/
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';

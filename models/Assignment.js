@@ -1,3 +1,8 @@
+/*
+Assignment data will be created and edited within the Consultant Tracker System. An assignment is a piece of work on a
+project with a specified time period, testament, medium, and set of roles.
+ */
+
 var  mongoose =require('mongoose');
 
 var AssignmentSchema = new mongoose.Schema({

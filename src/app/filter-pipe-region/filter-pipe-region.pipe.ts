@@ -1,3 +1,7 @@
+/*
+This pipe is used with a textbox on the consultants listing page to filter by the consultant's region.
+*/
+
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

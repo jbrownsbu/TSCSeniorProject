@@ -1,3 +1,4 @@
+// Assignment routes implement express functions for manipulating project data
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
