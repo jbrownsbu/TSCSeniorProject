@@ -8,8 +8,8 @@ var  mongoose =require('mongoose');
 
 var ProjectSchema = new mongoose.Schema({
   projectName: String,
-  startDate: Date,
-  endDate: Date,
+  startDate: String,
+  endDate: String,
   role: String,
   language: String,
   testament: String,
