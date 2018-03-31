@@ -1,18 +1,21 @@
+/* White background and rounded edges for consultants table. */
 div{
   background-color: #FFFFFF;
   border-radius: 5px;
 }
 
+/* Green buttons with rounded edges for view workload and edit consultant. */
 button{
   background-color: #C1D82F;
   border-radius: 10px;
-
 }
 
+/* Button goes to 50% opacity when hovered over. */
 button:hover{
   opacity: .5;
 }
 
+/* Cursor changes to pointer finger when hovering over ordering arrows. */
 span{
   cursor: pointer;
 }

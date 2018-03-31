@@ -1,3 +1,9 @@
+/*
+Consultant data will be inserted and maintained by Consultant managers, and eventually, consultants themselves.
+Consultant data includes a consultant's contact information, supervisor information, and translation proficiencies.
+TODO: Comment on structure of language proficiencies when complete.
+*/
+
 var mongoose = require('mongoose');
 
 var proficiencySchema = new mongoose.Schema({

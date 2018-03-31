@@ -1,3 +1,8 @@
+/*
+assignment component loads list of assignments from database for a specific consultant.
+On initialization, this file calls http GET to retrieve the assignment data.
+*/
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -11,7 +16,6 @@ import { HttpClient } from '@angular/common/http';
 export class AssignmentComponent implements OnInit {
 
   assignments: any;
-  searchTerms: string;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 

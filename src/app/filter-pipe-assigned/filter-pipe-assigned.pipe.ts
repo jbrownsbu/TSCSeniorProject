@@ -1,5 +1,5 @@
 /*
-This pipe is used with an checkbox on the projects listing page to filter the list by whether or not a project has had a consultant assigned to it.
+This pipe is used with a checkbox on the projects listing page to filter by whether or not a project has had a consultant assigned to it.
 */
 
 import { Pipe, PipeTransform } from '@angular/core';
