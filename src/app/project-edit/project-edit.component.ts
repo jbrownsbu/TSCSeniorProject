@@ -33,10 +33,10 @@ export class ProjectEditComponent implements OnInit {
   updateProject(id) {
     this.http.put('/project/' + id, this.project)
       .subscribe(res => {
-          this.router.navigate(['/projects']);
         }, (err) => {
           console.log(err);
         }
       );
+    this.router.navigate(['/projects']);
   }
 }

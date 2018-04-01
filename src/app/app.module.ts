@@ -45,7 +45,7 @@ const appRoutes: Routes = [
     data: {title: 'Edit Assignment'}
   },
   {
-    path: 'assignment-create',
+    path: 'assignment-create/project/:projectId',
     component: AssignmentCreateComponent,
     data: {title: 'Create Assignment'}
   },

@@ -26,7 +26,7 @@ The list is filterable by whether or not a consultant has been assigned to the p
       <td>{{ project.language}}</td>
       <td>{{ project.translationRegion}}</td>
       <td>
-        <button type="button">Assign Consultant</button>
+        <button [routerLink]="['/assignment-create/project', project._id]" type="button">Create Assignment</button>
         <button [routerLink]="['/project-edit', project._id]" type="button">Edit</button>
       </td>
     </tr>
