@@ -9,7 +9,7 @@ back to the database to be stored.
     <div class="col-md-6">
       <section>
         <h1>{{ consultant.firstName }} {{ consultant.lastName }}</h1>
-        <form (ngSubmit)="updateConsultant(consultant._id)" #consultantForm="ngForm">
+        <form (ngSubmit)="updateConsultant(consultant._id, consultant)" #consultantForm="ngForm">
           <div class="form-group">
             <label>Phone</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.phone" name="phone" required><br>

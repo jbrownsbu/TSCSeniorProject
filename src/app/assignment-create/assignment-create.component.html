@@ -1,0 +1,63 @@
+<!--
+assignment-create component loads some project details from the database, but is otherwise an empty form.
+This html displays a new assignment's project information along with various controls for editing assignment-specific information.
+When 'save' button is clicked, information is sent to the database to be stored as a new assignment.
+-->
+
+<div id="list" class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>New Assignment</h1>
+      <section>
+        <form (ngSubmit)="createAssignment(project._id)" #assignmentForm="ngForm">
+
+          <div class="form-group">
+            <label>Assignment Name <input type="text" class="form-control" [(ngModel)]="assignment.assignmentName" name="assignmentName" required></label>
+          </div>
+
+          <div class="form-group">
+            <label>Project <input type="text" class="form-control" [(ngModel)]="assignment.projectName" name="projectName" value="{{ assignment.projectName }}" disabled required="false"></label><br>
+            <br>
+            <label>Language <input type="text" class="form-control" [(ngModel)]="assignment.language" name="language" value="{{ assignment.language }}" disabled required="false"></label><br>
+            <br>
+            <label>Region <input type="text" class="form-control" [(ngModel)]="assignment.translationRegion" name="translationRegion" value="{{ assignment.translationRegion }}" disabled required="false"></label>
+          </div>
+
+          <div class="form-group">
+            <h3>Dates</h3>
+            <label>Start <input type="date" class="form-control" [(ngModel)]="assignment.startDate" name="startDate" required></label>
+            <label>End <input type="date" class="form-control" [(ngModel)]="assignment.endDate" name="endDate" required></label>
+          </div>
+
+          <div class="form-group">
+            <h3>Testament</h3>
+            <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="Old Testament" required> Old Testament<br>
+            <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="New Testament" required> New Testament
+          </div>
+
+          <div class="form-group">
+            <h3>Media</h3>
+            <input type="radio" name="media" [(ngModel)]="assignment.media" value="Written" required> Written<br>
+            <input type="radio" name="media" [(ngModel)]="assignment.media" value="Audio" required> Audio<br>
+            <input type="radio" name="media" [(ngModel)]="assignment.media" value="Storytelling" required> Storytelling
+          </div>
+
+          <div class="form-group">
+            <h3>Role</h3>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Audio to Audio Translation Consultant" required> Audio to Audio Translation Consultant<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Guest Scholar (Exegetical, Linguistic, Bible)" required> Guest Scholar (Exegetical, Linguistic, Bible)<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Linguistic Consultant" required> Linguistic Consultant<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Manager - Translation Consultant" required> Manager - Translation Consultant<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Story Checker" required> Story Checker<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Translation CiT" required> Translation CiT<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Translation Consultant" required> Translation Consultant
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-success" [disabled]="!assignmentForm.form.valid">Save</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>

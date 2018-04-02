@@ -1,33 +1,25 @@
 <!--
 Project component loads list of projects from database.
-This html displays a list containing project information along with button links to assign a consultant to that project or edit that project's details.
-The list is filterable by whether or not a consultant has been assigned to the project.
+This html displays a list containing project information along with button link to create an assignment for that project.
+Project data is not editable within consultant tracker because projects are managed in another system.
 -->
 
 <div class="container">
   <h1>Project List</h1>
-  <div>
-    <h5>Unassigned Only: <input type="checkbox" checked [(ngModel)]="searchTermsAssigned"></h5>
-  </div>
   <table class="table">
     <thead>
     <th>Project Name</th>
-    <th>Start Date</th>
-    <th>End Date</th>
     <th>Language</th>
     <th>Region</th>
     <th>Actions</th>
     </thead>
     <tbody>
-    <tr *ngFor="let project of projects | filterAssigned: searchTermsAssigned">
+    <tr *ngFor="let project of projects">
       <td>{{ project.projectName }}</td>
-      <td>{{ project.startDate }}</td>
-      <td>{{ project.endDate }}</td>
       <td>{{ project.language}}</td>
       <td>{{ project.translationRegion}}</td>
       <td>
-        <button type="button">Assign Consultant</button>
-        <button [routerLink]="['/project-edit', project._id]" type="button">Edit</button>
+        <button [routerLink]="['/assignment-create/project', project._id]" type="button">Create Assignment</button>
       </td>
     </tr>
     </tbody>

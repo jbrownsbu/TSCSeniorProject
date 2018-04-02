@@ -14,18 +14,20 @@ import { FilterPipeRegionModule} from './filter-pipe-region/filter-pipe-region.m
 import { FilterPipeAssignedModule } from './filter-pipe-assigned/filter-pipe-assigned.module';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { AssignmentEditComponent } from './assignment-edit/assignment-edit.component';
+import { AssignmentCreateComponent } from './assignment-create/assignment-create.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectEditComponent } from './project-edit/project-edit.component';
 
 const appRoutes: Routes = [
-  { path: '',
-    redirectTo: '/consultants',
+  {
+    path: '',
+    redirectTo: '/projects',
     pathMatch: 'full'
   },
   {
-  path: 'consultants',
-  component: ConsultantComponent,
-  data: { title: 'Consultant List' }
+    path: 'consultants',
+    component: ConsultantComponent,
+    data: { title: 'Consultant List' }
   },
   {
     path: 'consultant-edit/:id',
@@ -41,6 +43,11 @@ const appRoutes: Routes = [
     path: 'assignment-edit/:id',
     component: AssignmentEditComponent,
     data: {title: 'Edit Assignment'}
+  },
+  {
+    path: 'assignment-create/project/:projectId',
+    component: AssignmentCreateComponent,
+    data: {title: 'Create Assignment'}
   },
   {
     path: 'projects',
@@ -61,6 +68,7 @@ const appRoutes: Routes = [
     ConsultantEditComponent,
     AssignmentComponent,
     AssignmentEditComponent,
+    AssignmentCreateComponent,
     ProjectComponent,
     ProjectEditComponent
   ],
