@@ -1,3 +1,10 @@
+/*
+assignment-create component loads some project details from the database, and uses those details with new assignment details to create an assignment.
+This code loads a new assignment's project information based on the project's key.
+That information is displayed in assignment-create.component.html and the user can specify new assignment information there too.
+When 'save' button is clicked in the html, 'createAssignment' function is called to insert new assignment data into the database.
+*/
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
