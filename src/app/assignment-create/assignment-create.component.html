@@ -7,49 +7,33 @@ back to the database to be stored.
 <div id="list" class="container">
   <div class="row">
     <div class="col-md-6">
+      <h1>New Assignment - {{ assignment.projectName }}</h1>
       <section>
-        <h1>Assignment For: {{ project.projectName }}</h1>
         <form (ngSubmit)="createAssignment(project._id)" #assignmentForm="ngForm">
-          <h3>Dates</h3>
+          <h3>Language: {{ assignment.language }}</h3><br>
+          <h3>Region: {{ assignment.translationRegion }}</h3><br>
+
           <div class="form-group">
+            <h3>Dates</h3>
             <label>Start <input type="date" class="form-control" [(ngModel)]="assignment.startDate" name="startDate" required></label>
             <label>End <input type="date" class="form-control" [(ngModel)]="assignment.endDate" name="endDate" required></label>
           </div>
 
-          <h3>Language</h3>
           <div class="form-group">
-            <input type="radio" name="language" [(ngModel)]="assignment.language" value="Spanish"> Spanish<br>
-            <input type="radio" name="language" [(ngModel)]="assignment.language" value="English"> English
-          </div>
-
-          <h3>Testament</h3>
-          <div class="form-group">
+            <h3>Testament</h3>
             <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="Old Testament"> Old Testament<br>
             <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="New Testament"> New Testament
           </div>
 
-          <h3>Region</h3>
           <div class="form-group">
-            <input type="radio" name="region" [(ngModel)]="assignment.translationRegion" value="Global"> Global<br>
-            <input type="radio" name="region" [(ngModel)]="assignment.translationRegion" value="Africa"> Africa<br>
-            <input type="radio" name="region" [(ngModel)]="assignment.translationRegion" value="Americas"> Americas<br>
-            <input type="radio" name="region" [(ngModel)]="assignment.translationRegion" value="Asia"> Asia<br>
-            <input type="radio" name="region" [(ngModel)]="assignment.translationRegion" value="Asia - Mainland"> Asia - Mainland<br>
-            <input type="radio" name="region" [(ngModel)]="assignment.translationRegion" value="Asia - South"> Asia - South<br>
-            <input type="radio" name="region" [(ngModel)]="assignment.translationRegion" value="Eurasia"> Eurasia<br>
-            <input type="radio" name="region" [(ngModel)]="assignment.translationRegion" value="Europe"> Europe<br>
-            <input type="radio" name="region" [(ngModel)]="assignment.translationRegion" value="Pacific"> Pacific
-          </div>
-
-          <h3>Media</h3>
-          <div class="form-group">
+            <h3>Media</h3>
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Written"> Written<br>
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Audio"> Audio<br>
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Storytelling"> Storytelling
           </div>
 
-          <h3>Role</h3>
           <div class="form-group">
+            <h3>Role</h3>
             <input type="radio" name="role" [(ngModel)]="assignment.role" value="Audio to Audio Translation Consultant"> Audio to Audio Translation Consultant<br>
             <input type="radio" name="role" [(ngModel)]="assignment.role" value="Guest Scholar (Exegetical, Linguistic, Bible)"> Guest Scholar (Exegetical, Linguistic, Bible)<br>
             <input type="radio" name="role" [(ngModel)]="assignment.role" value="Linguistic Consultant"> Linguistic Consultant<br>

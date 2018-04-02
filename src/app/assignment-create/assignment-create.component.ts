@@ -22,10 +22,14 @@ export class AssignmentCreateComponent implements OnInit {
   getProject(id) {
     this.http.get('/project/' + id).subscribe(data => {
       this.project = data;
+      this.assignment['projectId'] = data['_id'];
+      this.assignment['projectName'] = data['projectName'];
+      this.assignment['language'] = data['language'];
+      this.assignment['translationRegion'] = data['translationRegion'];
     });
   }
 
-  createAssignment(projectId) {
+  createAssignment(projectId, project) {
     this.http.post('assignment/project/' + projectId, this.assignment)
       .subscribe(res => {
         }, (err) => {
