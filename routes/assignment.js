@@ -4,9 +4,25 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var Assignment = require('../models/Assignment.js');
 
+/* GET ALL ASSIGNMENTS*/
+router.get('', function(req, res, next) {
+  Assignment.find(function (err, products) {
+    if (err) return next(err);
+    res.json(products);
+  });
+});
+
 /* GET ALL ASSIGNMENTS FOR A CONSULTANT*/
 router.get('/consultant/:consultantId', function(req, res, next) {
   Assignment.find({ consultantId: req.params.consultantId }, function (err, products) {
+    if (err) return next(err);
+    res.json(products);
+  });
+});
+
+/* GET ALL ASSIGNMENTS FOR A PROJECT*/
+router.get('/project/:projectId', function(req, res, next) {
+  Assignment.find({ projectId: req.params.projectId }, function (err, products) {
     if (err) return next(err);
     res.json(products);
   });
@@ -21,7 +37,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 /* UPDATE ASSIGNMENT */
-router.post('/:id', function(req, res, next) {
+router.put('/:id', function(req, res, next) {
   Assignment.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

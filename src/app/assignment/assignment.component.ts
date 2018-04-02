@@ -20,7 +20,15 @@ export class AssignmentComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getAssignmentsByConsultantId(this.route.snapshot.params['consultantId']);
+    if (this.route.snapshot.url.length > 2) {
+      if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'consultant') {
+        this.getAssignmentsByConsultantId(this.route.snapshot.params['consultantId']);
+      } else if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'project') {
+        this.getAssignmentsByProjectId(this.route.snapshot.params['projectId']);
+      }
+    } else {
+      this.getAllAssignments();
+    }
   }
 
   getAssignmentsByConsultantId(consultantId) {
@@ -29,4 +37,15 @@ export class AssignmentComponent implements OnInit {
     });
   }
 
+  getAssignmentsByProjectId(projectId) {
+    this.http.get('/assignment/project/' + projectId).subscribe(data => {
+      this.assignments = data;
+    });
+  }
+
+  getAllAssignments() {
+    this.http.get('/assignment').subscribe(data => {
+      this.assignments = data;
+    });
+  }
 }

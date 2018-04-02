@@ -2,12 +2,12 @@
 Assignment component loads list of assignments for a specific consultant from database.
 This html displays a list containing assignment information along with button links to edit that assignments's details.
 -->
-
 <div class="container">
   <h1>Assignment List</h1>
   <table class="table">
     <thead>
     <th>Consultant Name</th>
+    <th>Project Name</th>
     <th>Assignment Name</th>
     <th>Language</th>
     <th>Region</th>
@@ -17,6 +17,7 @@ This html displays a list containing assignment information along with button li
     <tbody>
     <tr *ngFor="let assignment of assignments">
       <td>{{ assignment.consultantName }}</td>
+      <td>{{ assignment.projectName }}</td>
       <td>{{ assignment.assignmentName }}</td>
       <td>{{ assignment.language }}</td>
       <td>{{ assignment.translationRegion }}</td>

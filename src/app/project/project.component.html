@@ -20,6 +20,7 @@ Project data is not editable within consultant tracker because projects are mana
       <td>{{ project.translationRegion}}</td>
       <td>
         <button [routerLink]="['/assignment-create/project', project._id]" type="button">Create Assignment</button>
+        <button [routerLink]="['/assignment/project', project._id]" type="button">View Assignments</button>
       </td>
     </tr>
     </tbody>

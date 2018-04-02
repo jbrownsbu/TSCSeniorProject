@@ -7,6 +7,7 @@ On update, this file calls http PUT to send updated assignment data back to data
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-assignment-edit',
@@ -18,7 +19,7 @@ export class AssignmentEditComponent implements OnInit {
 
   assignment = {};
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getAssignment(this.route.snapshot.params['id']);
@@ -33,8 +34,7 @@ export class AssignmentEditComponent implements OnInit {
   updateAssignment(id, consultantId) {
     this.http.put('/assignment/' + id, this.assignment)
       .subscribe(res => {
-          const id = res['_id'];
-          this.router.navigate(['/assignment/consultant/' + consultantId]);
+          this._location.back();
         }, (err) => {
           console.log(err);
         }
