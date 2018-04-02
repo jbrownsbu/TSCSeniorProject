@@ -7,11 +7,17 @@ When 'save' button is clicked, information is sent to the database to be stored 
 <div id="list" class="container">
   <div class="row">
     <div class="col-md-6">
-      <h1>New Assignment - {{ assignment.projectName }}</h1>
+      <h1>New Assignment</h1>
       <section>
         <form (ngSubmit)="createAssignment(project._id)" #assignmentForm="ngForm">
 
           <div class="form-group">
+            <label>Assignment Name <input type="text" class="form-control" [(ngModel)]="assignment.assignmentName" name="assignmentName" required></label>
+          </div>
+
+          <div class="form-group">
+            <label>Project <input type="text" class="form-control" [(ngModel)]="assignment.projectName" name="projectName" value="{{ assignment.projectName }}" disabled required="false"></label><br>
+            <br>
             <label>Language <input type="text" class="form-control" [(ngModel)]="assignment.language" name="language" value="{{ assignment.language }}" disabled required="false"></label><br>
             <br>
             <label>Region <input type="text" class="form-control" [(ngModel)]="assignment.translationRegion" name="translationRegion" value="{{ assignment.translationRegion }}" disabled required="false"></label>
@@ -25,26 +31,26 @@ When 'save' button is clicked, information is sent to the database to be stored 
 
           <div class="form-group">
             <h3>Testament</h3>
-            <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="Old Testament"> Old Testament<br>
-            <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="New Testament"> New Testament
+            <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="Old Testament" required> Old Testament<br>
+            <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="New Testament" required> New Testament
           </div>
 
           <div class="form-group">
             <h3>Media</h3>
-            <input type="radio" name="media" [(ngModel)]="assignment.media" value="Written"> Written<br>
-            <input type="radio" name="media" [(ngModel)]="assignment.media" value="Audio"> Audio<br>
-            <input type="radio" name="media" [(ngModel)]="assignment.media" value="Storytelling"> Storytelling
+            <input type="radio" name="media" [(ngModel)]="assignment.media" value="Written" required> Written<br>
+            <input type="radio" name="media" [(ngModel)]="assignment.media" value="Audio" required> Audio<br>
+            <input type="radio" name="media" [(ngModel)]="assignment.media" value="Storytelling" required> Storytelling
           </div>
 
           <div class="form-group">
             <h3>Role</h3>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Audio to Audio Translation Consultant"> Audio to Audio Translation Consultant<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Guest Scholar (Exegetical, Linguistic, Bible)"> Guest Scholar (Exegetical, Linguistic, Bible)<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Linguistic Consultant"> Linguistic Consultant<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Manager - Translation Consultant"> Manager - Translation Consultant<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Story Checker"> Story Checker<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Translation CiT"> Translation CiT<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Translation Consultant"> Translation Consultant
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Audio to Audio Translation Consultant" required> Audio to Audio Translation Consultant<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Guest Scholar (Exegetical, Linguistic, Bible)" required> Guest Scholar (Exegetical, Linguistic, Bible)<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Linguistic Consultant" required> Linguistic Consultant<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Manager - Translation Consultant" required> Manager - Translation Consultant<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Story Checker" required> Story Checker<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Translation CiT" required> Translation CiT<br>
+            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Translation Consultant" required> Translation Consultant
           </div>
 
           <div class="form-group">
