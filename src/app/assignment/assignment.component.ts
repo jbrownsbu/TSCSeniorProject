@@ -16,11 +16,25 @@ import { HttpClient } from '@angular/common/http';
 export class AssignmentComponent implements OnInit {
 
   assignments: any;
+  isConsultantView: boolean;
+  isProjectView: boolean;
+  isAllView: boolean;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getAssignmentsByConsultantId(this.route.snapshot.params['consultantId']);
+    if (this.route.snapshot.url.length > 2) {
+      if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'consultant') {
+        this.getAssignmentsByConsultantId(this.route.snapshot.params['consultantId']);
+        this.isConsultantView = true;
+      } else if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'project') {
+        this.getAssignmentsByProjectId(this.route.snapshot.params['projectId']);
+        this.isProjectView = true;
+      }
+    } else {
+      this.getAllAssignments();
+      this.isAllView = true;
+    }
   }
 
   getAssignmentsByConsultantId(consultantId) {
@@ -29,4 +43,15 @@ export class AssignmentComponent implements OnInit {
     });
   }
 
+  getAssignmentsByProjectId(projectId) {
+    this.http.get('/assignment/project/' + projectId).subscribe(data => {
+      this.assignments = data;
+    });
+  }
+
+  getAllAssignments() {
+    this.http.get('/assignment').subscribe(data => {
+      this.assignments = data;
+    });
+  }
 }
