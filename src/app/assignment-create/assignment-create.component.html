@@ -12,15 +12,15 @@ When 'save' button is clicked, information is sent to the database to be stored 
         <form (ngSubmit)="createAssignment(project._id)" #assignmentForm="ngForm">
 
           <div class="form-group">
-            <label>Assignment Name <input type="text" class="form-control" [(ngModel)]="assignment.assignmentName" name="assignmentName" required></label>
-          </div>
-
-          <div class="form-group">
             <label>Project <input type="text" class="form-control" [(ngModel)]="assignment.projectName" name="projectName" value="{{ assignment.projectName }}" disabled required="false"></label><br>
             <br>
             <label>Language <input type="text" class="form-control" [(ngModel)]="assignment.language" name="language" value="{{ assignment.language }}" disabled required="false"></label><br>
             <br>
             <label>Region <input type="text" class="form-control" [(ngModel)]="assignment.translationRegion" name="translationRegion" value="{{ assignment.translationRegion }}" disabled required="false"></label>
+          </div>
+
+          <div class="form-group">
+            <label>Notes <input type="text" class="form-control" [(ngModel)]="assignment.notes" name="notes" required="false"></label>
           </div>
 
           <div class="form-group">
@@ -40,6 +40,18 @@ When 'save' button is clicked, information is sent to the database to be stored 
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Written" required> Written<br>
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Audio" required> Audio<br>
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Storytelling" required> Storytelling
+          </div>
+
+          <div class="form-group">
+            <h3>Assignment Type</h3>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Administration (Supervisors Only)" required> Administration (Supervisors Only)<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Off-Site Checking" required> Off-Site Checking<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="On-Site Checking" required> On-Site Checking<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Partnership Development (supported staff)" required> Partnership Development (supported staff)<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Prep to Check" required> Prep to Check<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Professional Growth" required> Professional Growth<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Special Projects" required> Special Projects<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Training Others" required> Training Others
           </div>
 
           <div class="form-group">

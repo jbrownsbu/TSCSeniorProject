@@ -9,13 +9,14 @@ var AssignmentSchema = new mongoose.Schema({
   // This is supposed to link to the consultant schema, but it isn't quite working. So I'm just going to give it a name.
   // this is temporary so that I can ensure that the connection is being made
   // consultantID: [{type: Schema.Types.ObjectId, ref: 'Consultant'}],
-  assignmentName: String,
+  notes: String,
   projectId: String,
   projectName: String,
   consultantId: String,
   consultantName: String,
   startDate: String,
   endDate: String,
+  assignmentType: String,
   isAudioToAudioRole: Boolean,
   isGuestScholarRole: Boolean,
   isLinguisticConsultantRole: Boolean,
