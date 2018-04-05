@@ -3,8 +3,8 @@ Assignment component loads list of assignments for a specific consultant from da
 This html displays a list containing assignment information along with button links to edit that assignments's details.
 -->
 <div class="container">
-  <h1 *ngIf="isConsultantView">Assignments - Consultant: {{assignments[0].consultantName}}</h1>
-  <h1 *ngIf="isProjectView">Assignments - Project: {{assignments[0].projectName}}</h1>
+  <h1 *ngIf="isConsultantView">Assignments - {{assignments[0].consultantName}}</h1>
+  <h1 *ngIf="isProjectView">Assignments - {{assignments[0].projectName}}</h1>
   <h1 *ngIf="isAllView">Assignments - All</h1>
   <table class="table">
     <thead>
@@ -26,6 +26,7 @@ This html displays a list containing assignment information along with button li
       <td class="date">{{ assignment.startDate }}</td>
       <td>{{ assignment.endDate }}</td>
       <td> <button [routerLink]="['/assignment-edit', assignment._id]" type="button">Edit</button></td>
+      <td *ngIf="assignment.consultantId=='Unassigned'"> <button [routerLink]="['/assign-consultant', assignment._id]" type="button">Assign Consultant</button></td>
     </tr>
     </tbody>
   </table>

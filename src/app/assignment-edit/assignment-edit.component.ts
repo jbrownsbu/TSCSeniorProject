@@ -31,7 +31,7 @@ export class AssignmentEditComponent implements OnInit {
     });
   }
 
-  updateAssignment(id, consultantId) {
+  updateAssignment(id) {
     this.http.put('/assignment/' + id, this.assignment)
       .subscribe(res => {
           this._location.back();

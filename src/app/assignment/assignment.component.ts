@@ -25,15 +25,15 @@ export class AssignmentComponent implements OnInit {
   ngOnInit() {
     if (this.route.snapshot.url.length > 2) {
       if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'consultant') {
-        this.getAssignmentsByConsultantId(this.route.snapshot.params['consultantId']);
         this.isConsultantView = true;
+        this.getAssignmentsByConsultantId(this.route.snapshot.params['consultantId']);
       } else if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'project') {
-        this.getAssignmentsByProjectId(this.route.snapshot.params['projectId']);
         this.isProjectView = true;
+        this.getAssignmentsByProjectId(this.route.snapshot.params['projectId']);
       }
     } else {
-      this.getAllAssignments();
       this.isAllView = true;
+      this.getAllAssignments();
     }
   }
 
