@@ -14,7 +14,9 @@
 nav{
   background-color: white;
   text-align: center;
-  padding: 8px;
+  padding-top: 10px;
+  padding-bottom: 1px;
+  margin: 10px;
 }
 
 nav li {
@@ -25,7 +27,8 @@ nav li {
   border-spacing: 15px;
   padding: 10px;
 
-  margin-right: 100px;
+  margin-right: 50px;
+  margin-left: 50px;
   width: 150px;
 
   display: inline-block;

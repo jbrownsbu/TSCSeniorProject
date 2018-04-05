@@ -43,6 +43,18 @@ back to the database to be stored.
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Storytelling"> Storytelling
           </div>
 
+          <div class="form-group">
+            <h3>Assignment Type</h3>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Administration (Supervisors Only)" required> Administration (Supervisors Only)<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Off-Site Checking" required> Off-Site Checking<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="On-Site Checking" required> On-Site Checking<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Partnership Development (supported staff)" required> Partnership Development (supported staff)<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Prep to Check" required> Prep to Check<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Professional Growth" required> Professional Growth<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Special Projects" required> Special Projects<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Training Others" required> Training Others
+          </div>
+
           <h3>Roles Needed</h3>
           <div class="form-group">
             <input type="checkbox" name="isAudioToAudioRole" [(ngModel)]="assignment.isAudioToAudioRole" value="Audio to Audio Translation Consultant"> Audio to Audio Translation Consultant<br>

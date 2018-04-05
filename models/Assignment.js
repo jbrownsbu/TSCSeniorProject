@@ -16,6 +16,7 @@ var AssignmentSchema = new mongoose.Schema({
   consultantName: String,
   startDate: String,
   endDate: String,
+  assignmentType: String,
   isAudioToAudioRole: Boolean,
   isGuestScholarRole: Boolean,
   isLinguisticConsultantRole: Boolean,

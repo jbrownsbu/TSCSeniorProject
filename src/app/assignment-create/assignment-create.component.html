@@ -43,6 +43,18 @@ When 'save' button is clicked, information is sent to the database to be stored 
           </div>
 
           <div class="form-group">
+            <h3>Assignment Type</h3>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Administration (Supervisors Only)" required> Administration (Supervisors Only)<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Off-Site Checking" required> Off-Site Checking<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="On-Site Checking" required> On-Site Checking<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Partnership Development (supported staff)" required> Partnership Development (supported staff)<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Prep to Check" required> Prep to Check<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Professional Growth" required> Professional Growth<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Special Projects" required> Special Projects<br>
+            <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Training Others" required> Training Others
+          </div>
+
+          <div class="form-group">
             <h3>Roles Needed</h3>
             <input type="checkbox" name="isAudioToAudioRole" [(ngModel)]="assignment.isAudioToAudioRole" value="Audio to Audio Translation Consultant"> Audio to Audio Translation Consultant<br>
             <input type="checkbox" name="isGuestScholarRole" [(ngModel)]="assignment.isGuestScholarRole" value="Guest Scholar (Exegetical, Linguistic, Bible)"> Guest Scholar (Exegetical, Linguistic, Bible)<br>

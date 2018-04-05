@@ -34,6 +34,9 @@ back to the database to be stored.
           <label>Notes: </label>
           <p>{{ assignment.notes }}</p>
 
+          <label>Type: </label>
+          <p>{{ assignment.assignmentType }}</p>
+
           <label>Roles Needed: </label><br>
           <p *ngIf="assignment.isAudioToAudioRole">Audio to Audio Translation Consultant<br></p>
           <p *ngIf="assignment.isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br></p>
