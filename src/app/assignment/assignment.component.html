@@ -8,20 +8,24 @@ This html displays a list containing assignment information along with button li
   <h1 *ngIf="isAllView">Assignments - All</h1>
   <table class="table">
     <thead>
-    <th>Consultant Name</th>
-    <th>Project Name</th>
-    <th>Language</th>
-    <th>Region</th>
+    <th *ngIf="!isConsultantView">Consultant Name</th>
+    <th *ngIf="!isProjectView">Project Name</th>
+    <th *ngIf="!isProjectView">Language</th>
+    <th *ngIf="!isProjectView">Region</th>
+    <th>Media</th>
+    <th>Notes</th>
     <th>Start Date</th>
     <th>End Date</th>
     </thead>
     <tbody>
     <tr *ngFor="let assignment of assignments">
-      <td>{{ assignment.consultantName }}</td>
-      <td>{{ assignment.projectName }}</td>
-      <td>{{ assignment.language }}</td>
-      <td>{{ assignment.translationRegion }}</td>
-      <td class="date">{{ assignment.startDate }}</td>
+      <td *ngIf="!isConsultantView">{{ assignment.consultantName }}</td>
+      <td *ngIf="!isProjectView">{{ assignment.projectName }}</td>
+      <td *ngIf="!isProjectView">{{ assignment.language }}</td>
+      <td *ngIf="!isProjectView">{{ assignment.translationRegion }}</td>
+      <td>{{ assignment.media }}</td>
+      <td>{{ assignment.notes }}</td>
+      <td>{{ assignment.startDate }}</td>
       <td>{{ assignment.endDate }}</td>
       <td> <button [routerLink]="['/assignment-edit', assignment._id]" type="button">Edit</button></td>
       <td *ngIf="assignment.consultantId=='Unassigned'"> <button [routerLink]="['/assign-consultant', assignment._id]" type="button">Assign Consultant</button></td>
