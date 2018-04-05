@@ -10,7 +10,6 @@ This html displays a list containing assignment information along with button li
     <thead>
     <th>Consultant Name</th>
     <th>Project Name</th>
-    <th>Assignment Name</th>
     <th>Language</th>
     <th>Region</th>
     <th>Start Date</th>
@@ -20,7 +19,6 @@ This html displays a list containing assignment information along with button li
     <tr *ngFor="let assignment of assignments">
       <td>{{ assignment.consultantName }}</td>
       <td>{{ assignment.projectName }}</td>
-      <td>{{ assignment.assignmentName }}</td>
       <td>{{ assignment.language }}</td>
       <td>{{ assignment.translationRegion }}</td>
       <td class="date">{{ assignment.startDate }}</td>

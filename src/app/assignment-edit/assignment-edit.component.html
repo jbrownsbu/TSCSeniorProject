@@ -11,6 +11,11 @@ back to the database to be stored.
         <h1 *ngIf="isAssigned">{{ assignment.consultantName }} - {{ assignment.projectName }}</h1>
         <h1 *ngIf="!isAssigned">Unassigned - {{ assignment.projectName }}</h1>
         <form (ngSubmit)="updateAssignment(assignment._id, assignment.consultantId)" #assignmentForm="ngForm">
+
+          <div class="form-group">
+            <label>Notes <input type="text" class="form-control" [(ngModel)]="assignment.notes" name="notes" required="false"></label>
+          </div>
+
           <h3>Dates</h3>
           <div class="form-group">
             <label>Start <input type="date" class="form-control" [(ngModel)]="assignment.startDate" name="startDate" required></label>

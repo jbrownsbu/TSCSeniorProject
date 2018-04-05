@@ -31,6 +31,9 @@ back to the database to be stored.
           <label>Medium: </label>
           <p>{{ assignment.media }}</p>
 
+          <label>Notes: </label>
+          <p>{{ assignment.notes }}</p>
+
           <label>Roles Needed: </label><br>
           <p *ngIf="assignment.isAudioToAudioRole">Audio to Audio Translation Consultant<br></p>
           <p *ngIf="assignment.isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br></p>
