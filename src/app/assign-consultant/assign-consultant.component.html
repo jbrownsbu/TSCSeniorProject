@@ -9,23 +9,44 @@ back to the database to be stored.
       <section>
         <h1>Assign Consultant</h1>
 
-          <label>Project: {{ assignment.projectName }}</label><br>
+        <div>
+          <label>Project: </label>
+          <p>{{ assignment.projectName }}</p>
 
-          <label>Start Date: {{ assignment.startDate }}</label><br>
-          <label>End Date: {{ assignment.endDate }}</label><br>
+          <label>Start Date: </label>
+          <p>{{ assignment.startDate }}</p>
 
-          <label>Language: {{ assignment.language }}</label><br>
+          <label>End Date: </label>
+          <p>{{ assignment.endDate }}</p>
 
-          <label>Testament: {{ assignment.testament }}</label><br>
+          <label>Language: </label>
+          <p>{{ assignment.language }}</p>
 
-          <label>Region: {{ assignment.translationRegion }}</label><br>
+          <label>Testament: </label>
+          <p>{{ assignment.testament }}</p>
 
-          <label>Medium: {{ assignment.media }}</label><br>
+          <label>Region: </label>
+          <p>{{ assignment.translationRegion }}</p>
 
-          <label>Role: {{ assignment.role }}</label><br>
+          <label>Medium: </label>
+          <p>{{ assignment.media }}</p>
 
-          <label>ConsultantId: {{ selectedConsultant._id }} </label><br>
-          <label>Name: {{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</label>
+          <label>Roles Needed: </label><br>
+          <p *ngIf="assignment.isAudioToAudioRole">Audio to Audio Translation Consultant<br></p>
+          <p *ngIf="assignment.isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br></p>
+          <p *ngIf="assignment.isLinguisticConsultantRole">Linguistic Consultant<br></p>
+          <p *ngIf="assignment.isManagerRole">Manager - Translation Consultant<br></p>
+          <p *ngIf="assignment.isStoryCheckerRole">Story Checker<br></p>
+          <p *ngIf="assignment.isTranslationConsultantInTrainingRole">Translation CiT<br></p>
+          <p *ngIf="assignment.isTranslationConsultantRole">Translation Consultant<br></p>
+        </div>
+
+        <div>
+          <!--<label>ConsultantId: {{ selectedConsultant._id }} </label><br>-->
+          <label>Name: </label>
+          <p>{{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</p>
+          <label>Region: </label>
+          <p>{{ selectedConsultant.translationRegion }}</p><br><br>
 
           <table class="table">
             <thead>
@@ -38,13 +59,14 @@ back to the database to be stored.
               <td>{{ consultant.firstName }}</td>
               <td>{{ consultant.lastName }}</td>
               <td>
-                <button (click)="this.getConsultant(consultant._id)">Select</button>
+                <button (click)="this.getConsultant(consultant._id)">View Details</button>
               </td>
             </tr>
             </tbody>
           </table>
 
           <button (click)="this.assignConsultant(assignment._id)">Assign</button>
+        </div>
       </section>
     </div>
   </div>

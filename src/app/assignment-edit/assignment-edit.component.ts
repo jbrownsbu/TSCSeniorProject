@@ -18,6 +18,7 @@ import { Location } from '@angular/common';
 export class AssignmentEditComponent implements OnInit {
 
   assignment = {};
+  isAssigned = false;
 
   constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
@@ -28,6 +29,9 @@ export class AssignmentEditComponent implements OnInit {
   getAssignment(id) {
     this.http.get('/assignment/' + id).subscribe(data => {
       this.assignment = data;
+      if (data['consultantName']) {
+        this.isAssigned = true;
+      }
     });
   }
 
