@@ -43,14 +43,14 @@ When 'save' button is clicked, information is sent to the database to be stored 
           </div>
 
           <div class="form-group">
-            <h3>Role</h3>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Audio to Audio Translation Consultant" required> Audio to Audio Translation Consultant<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Guest Scholar (Exegetical, Linguistic, Bible)" required> Guest Scholar (Exegetical, Linguistic, Bible)<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Linguistic Consultant" required> Linguistic Consultant<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Manager - Translation Consultant" required> Manager - Translation Consultant<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Story Checker" required> Story Checker<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Translation CiT" required> Translation CiT<br>
-            <input type="radio" name="role" [(ngModel)]="assignment.role" value="Translation Consultant" required> Translation Consultant
+            <h3>Roles Needed</h3>
+            <input type="checkbox" name="isAudioToAudioRole" [(ngModel)]="assignment.isAudioToAudioRole" value="Audio to Audio Translation Consultant"> Audio to Audio Translation Consultant<br>
+            <input type="checkbox" name="isGuestScholarRole" [(ngModel)]="assignment.isGuestScholarRole" value="Guest Scholar (Exegetical, Linguistic, Bible)"> Guest Scholar (Exegetical, Linguistic, Bible)<br>
+            <input type="checkbox" name="isLinguisticConsultantRole" [(ngModel)]="assignment.isLinguisticConsultantRole" value="Linguistic Consultant"> Linguistic Consultant<br>
+            <input type="checkbox" name="isManagerRole" [(ngModel)]="assignment.isManagerRole" value="Manager - Translation Consultant"> Manager - Translation Consultant<br>
+            <input type="checkbox" name="isStoryCheckerRole" [(ngModel)]="assignment.isStoryCheckerRole" value="Story Checker"> Story Checker<br>
+            <input type="checkbox" name="isTranslationConsultantInTrainingRole" [(ngModel)]="assignment.isTranslationConsultantInTrainingRole" value="Translation CiT"> Translation CiT<br>
+            <input type="checkbox" name="isTranslationConsultantRole" [(ngModel)]="assignment.isTranslationConsultantRole" value="Translation Consultant"> Translation Consultant
           </div>
 
           <div class="form-group">
