@@ -8,7 +8,7 @@ back to the database to be stored.
   <div class="row">
     <div class="col-md-6">
       <section>
-        <h1>{{ assignment.consultantName }} - {{ assignment.assignmentName }}</h1>
+        <h1>{{ assignment.consultantName }} - {{ assignment.projectName }}</h1>
         <form (ngSubmit)="updateAssignment(assignment._id, assignment.consultantId)" #assignmentForm="ngForm">
           <h3>Dates</h3>
           <div class="form-group">
