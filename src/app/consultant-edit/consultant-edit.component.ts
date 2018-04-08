@@ -5,9 +5,8 @@ On update, this file calls http PUT to send updated consultant data back to data
 */
 
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import {getCollection} from '@angular/cli/utilities/schematics';
 
 @Component({
   selector: 'app-consultant-edit',
@@ -19,10 +18,27 @@ export class ConsultantEditComponent implements OnInit {
 
   consultant = {};
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient,
+              private router: Router,
+              private route: ActivatedRoute) {
+    // override the route reuse strategy
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
+
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        // trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+        // if you need to scroll back to top, here is the right place
+        window.scrollTo(0, 0);
+      }
+    });
+  }
 
   ngOnInit() {
     this.getConsultant(this.route.snapshot.params['id']);
+
   }
 
   getConsultant(id) {
@@ -34,25 +50,23 @@ export class ConsultantEditComponent implements OnInit {
   updateConsultant(id, consultant) {
     this.http.put('/consultant/' + id, this.consultant)
       .subscribe(res => {
-          const id = res['_id'];
-          this.router.navigate(['/consultants']);
+        const id = res['_id'];
+        this.router.navigate(['/consultants']);
         }, (err) => {
           console.log(err);
         }
       );
   }
 
-  addLanguageRow() {
-    const tableRef = document.getElementById('languageTable') as HTMLTableElement;
-    console.log(tableRef);
-    const newRow = tableRef.insertRow();
-    console.log('Hello!');
-    const cell1 = newRow.insertCell(0);
-    const cell2 = newRow.insertCell(1);
-    const cell3 = newRow.insertCell(2);
-
-    cell1.innerHTML = 'Hello';
-    cell2.innerHTML = 'there';
-    cell3.innerHTML = 'General Kenobi';
+  pushLanguage(id, consultant) {
+    this.http.patch('/consultant/' + id, this.consultant)
+      .subscribe(res => {
+        console.log(this.consultant);
+        const id = res['_id'];
+        this.router.navigate(['/consultant-edit/' + id, ]);
+      }, (err) => {
+        console.log(err);
+      }
+      );
   }
 }
