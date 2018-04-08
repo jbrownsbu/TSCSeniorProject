@@ -61,12 +61,22 @@ export class ConsultantEditComponent implements OnInit {
   pushLanguage(id, consultant) {
     this.http.patch('/consultant/' + id, this.consultant)
       .subscribe(res => {
-        console.log(this.consultant);
         const id = res['_id'];
-        this.router.navigate(['/consultant-edit/' + id, ]);
+        this.router.navigate(['/consultant-edit/' + id]);
       }, (err) => {
         console.log(err);
       }
       );
+  }
+
+  removeProficiency(id, consultant) {
+  this.http.delete('/consultant/' + id, this.consultant)
+    .subscribe((res => {
+      const id = res['_id'];
+      this.router.navigate(['/consultant-edit/' + id]);
+    }, (err) => {
+      console.log(err);
+    })
+    );
   }
 }
