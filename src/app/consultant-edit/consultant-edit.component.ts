@@ -22,9 +22,9 @@ export class ConsultantEditComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {
     // override the route reuse strategy
-    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
-    }
+    };
 
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd) {
@@ -71,12 +71,11 @@ export class ConsultantEditComponent implements OnInit {
 
   removeProficiency(id, consultant) {
   this.http.delete('/consultant/' + id, this.consultant)
-    .subscribe((res => {
+    .subscribe(res => {
       const id = res['_id'];
       this.router.navigate(['/consultant-edit/' + id]);
     }, (err) => {
       console.log(err);
-    })
-    );
+    });
   }
 }
