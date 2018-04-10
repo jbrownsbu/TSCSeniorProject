@@ -31,19 +31,34 @@ export class AssignConsultantComponent implements OnInit {
     this.http.get('/consultant').subscribe(data => {
       const dataLength = data['length'];
 
-      let arrayLength = 0;
+      let numMatches = 0;
       let i;
-      for ( i = 0; i < dataLength; i++) {
-        if (data[(i).toString()]['translationRegion'] === this.assignment['translationRegion']) {
-          arrayLength++;
+      let k;
+      for (i = 0; i < dataLength; i++) {
+        let hasLanguage = false;
+        const numLanguages = data[(i).toString()]['proficiencies'].length;
+        for (k = 0; k < numLanguages; k++) {
+          if (data[(i).toString()]['proficiencies'][(k).toString()]['language'] === this.assignment['language']) {
+            hasLanguage = true;
+          }
+        }
+        if (data[(i).toString()]['translationRegion'] === this.assignment['translationRegion'] && hasLanguage) {
+          numMatches++;
         }
       }
 
       let j = 0;
 
-      this.consultants = new Array(arrayLength);
+      this.consultants = new Array(numMatches);
       for ( i = 0; i < dataLength; i++) {
-        if (data[(i).toString()]['translationRegion'] === this.assignment['translationRegion']) {
+        let hasLanguage = false;
+        const numLanguages = data[(i).toString()]['proficiencies'].length;
+        for (k = 0; k < numLanguages; k++) {
+          if (data[(i).toString()]['proficiencies'][(k).toString()]['language'] === this.assignment['language']) {
+            hasLanguage = true;
+          }
+        }
+        if (data[(i).toString()]['translationRegion'] === this.assignment['translationRegion'] && hasLanguage) {
           this.consultants[j] = data[i.toString()];
           j++;
         }
