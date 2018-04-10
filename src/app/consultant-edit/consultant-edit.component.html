@@ -52,31 +52,31 @@ back to the database to be stored.
             <th>Reading</th>
             </thead>
             <tr *ngFor="let proficiency of consultant.proficiencies">
-              <td><select id="language"
+              <td style="word-break:break-all;"><select id="language"
                           required
                           [(ngModel)]="proficiency.language" name="language">
                 <option *ngFor="let language of languages"
                         [value]="language">{{ language }}</option>
               </select></td>
-              <td><select id="speaking"
+              <td style="word-break:break-all;"><select id="speaking"
                           required
                           [(ngModel)]="proficiency.speaking" name="speaking">
                 <option *ngFor="let ranking of rankings"
                         [value]="ranking.value">{{ ranking.level }}</option>
               </select></td>
-              <td><select id="listening"
+              <td style="word-break:break-all;"><select id="listening"
                           required
                           [(ngModel)]="proficiency.listening" name="listening">
                 <option *ngFor="let ranking of rankings"
                         [value]="ranking.value">{{ ranking.level }}</option>
               </select></td>
-              <td><select id="writing"
+              <td style="word-break:break-all;"><select id="writing"
                           required
                           [(ngModel)]="proficiency.writing" name="writing">
                 <option *ngFor="let ranking of rankings"
                         [value]="ranking.value">{{ ranking.level }}</option>
               </select></td>
-              <td><select id="reading"
+              <td style="word-break:break-all;"><select id="reading"
                           required
                           [(ngModel)]="proficiency.reading" name="reading">
                 <option *ngFor="let ranking of rankings"
