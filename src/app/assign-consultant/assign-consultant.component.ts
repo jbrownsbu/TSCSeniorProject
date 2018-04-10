@@ -11,14 +11,14 @@ import { Location } from '@angular/common';
 export class AssignConsultantComponent implements OnInit {
 
   assignment = {};
-  consultants: any;
+  consultants: any[];
   selectedConsultant = {};
 
   constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getAssignment(this.route.snapshot.params['assignmentId']);
-    this.getConsultants();
+    this.getTopConsultantMatches();
   }
 
   getAssignment(id) {
@@ -27,9 +27,27 @@ export class AssignConsultantComponent implements OnInit {
     });
   }
 
-  getConsultants() {
+  getTopConsultantMatches() {
     this.http.get('/consultant').subscribe(data => {
-      this.consultants = data;
+      const dataLength = data['length'];
+
+      let arrayLength = 0;
+      let i;
+      for ( i = 0; i < dataLength; i++) {
+        if (data[(i).toString()]['translationRegion'] === this.assignment['translationRegion']) {
+          arrayLength++;
+        }
+      }
+
+      let j = 0;
+
+      this.consultants = new Array(arrayLength);
+      for ( i = 0; i < dataLength; i++) {
+        if (data[(i).toString()]['translationRegion'] === this.assignment['translationRegion']) {
+          this.consultants[j] = data[i.toString()];
+          j++;
+        }
+      }
     });
   }
 
