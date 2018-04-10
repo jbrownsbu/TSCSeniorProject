@@ -55,40 +55,32 @@ back to the database to be stored.
               <td><select id="language"
                           required
                           [(ngModel)]="proficiency.language" name="language">
-                <option value="English">English</option>
-                <option value="Spanish">Spanish</option>
+                <option *ngFor="let language of languages"
+                        [value]="language">{{ language }}</option>
               </select></td>
               <td><select id="speaking"
                           required
                           [(ngModel)]="proficiency.speaking" name="speaking">
-                <option value=1>Not very fluent</option>
-                <option value=2>Somewhat fluent</option>
-                <option value=3>Fluent</option>
-                <option value=4>Very Fluent</option>
+                <option *ngFor="let ranking of rankings"
+                        [value]="ranking.value">{{ ranking.level }}</option>
               </select></td>
               <td><select id="listening"
                           required
                           [(ngModel)]="proficiency.listening" name="listening">
-                <option value=1>Not very fluent</option>
-                <option value=2>Somewhat fluent</option>
-                <option value=3>Fluent</option>
-                <option value=4>Very Fluent</option>
+                <option *ngFor="let ranking of rankings"
+                        [value]="ranking.value">{{ ranking.level }}</option>
               </select></td>
               <td><select id="writing"
                           required
                           [(ngModel)]="proficiency.writing" name="writing">
-                <option value=1>Not very fluent</option>
-                <option value=2>Somewhat fluent</option>
-                <option value=3>Fluent</option>
-                <option value=4>Very Fluent</option>
+                <option *ngFor="let ranking of rankings"
+                        [value]="ranking.value">{{ ranking.level }}</option>
               </select></td>
               <td><select id="reading"
                           required
                           [(ngModel)]="proficiency.reading" name="reading">
-                <option value=1>Not very fluent</option>
-                <option value=2>Somewhat fluent</option>
-                <option value=3>Fluent</option>
-                <option value=4>Very Fluent</option>
+                <option *ngFor="let ranking of rankings"
+                        [value]="ranking.value">{{ ranking.level }}</option>
               </select></td>
               <td><button (click)="removeProficiency(consultant._id)">Remove</button></td>
             </tr>
