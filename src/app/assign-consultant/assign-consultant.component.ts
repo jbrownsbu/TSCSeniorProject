@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 })
 export class AssignConsultantComponent implements OnInit {
 
+  assignments: any;
   assignment = {};
   consultants: any[];
   scores: any[];
@@ -18,12 +19,20 @@ export class AssignConsultantComponent implements OnInit {
   selectedConsultantRoles: string[];
   selectedConsultantTestament: string;
   selectedConsultantMedia: string;
+  selectedConsultantAssignments: any[];
 
   constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getAllAssignments();
     this.getAssignment(this.route.snapshot.params['assignmentId']);
     this.getTopConsultantMatches();
+  }
+
+  getAllAssignments() {
+    this.http.get('/assignment').subscribe(data => {
+      this.assignments = data;
+    });
   }
 
   getAssignment(id) {
@@ -56,59 +65,81 @@ export class AssignConsultantComponent implements OnInit {
       // Iterate through consultants, calculate and assign score for each consultant
       for (let i = 0; i < this.consultants.length; i++) {
 
-          // Add point to consultant's score for each role they match
-          if (this.assignment['isAudioToAudioRole'] === true && this.consultants[i]['isAudioToAudioRole'] === true) {
-            this.scores[i] += 1;
-          }
-          if (this.assignment['isGuestScholarRole'] === true && this.consultants[i]['isGuestScholarRole'] === true) {
-            this.scores[i] += 1;
-          }
-          if (this.assignment['isLinguisticConsultantRole'] === true && this.consultants[i]['isLinguisticConsultantRole'] === true) {
-            this.scores[i] += 1;
-          }
-          if (this.assignment['isManagerRole'] === true && this.consultants[i]['isManagerRole'] === true) {
-            this.scores[i] += 1;
-          }
-          if (this.assignment['isStoryCheckerRole'] === true && this.consultants[i]['isStoryCheckerRole'] === true) {
-            this.scores[i] += 1;
-          }
-          if (this.assignment['isTranslationConsultantInTrainingRole'] === true && this.consultants[i]['isTranslationConsultantInTrainingRole'] === true) {
-            this.scores[i] += 1;
-          }
-          if (this.assignment['isTranslationConsultantRole'] === true && this.consultants[i]['isTranslationConsultantRole'] === true) {
-            this.scores[i] += 1;
-          }
+        // Add point to consultant's score for each role they match
+        if (this.assignment['isAudioToAudioRole'] === true &&
+            this.consultants[i]['isAudioToAudioRole'] === true) {
+          this.scores[i] += 1;
+        }
+        if (this.assignment['isGuestScholarRole'] === true &&
+            this.consultants[i]['isGuestScholarRole'] === true) {
+          this.scores[i] += 1;
+        }
+        if (this.assignment['isLinguisticConsultantRole'] === true &&
+            this.consultants[i]['isLinguisticConsultantRole'] === true) {
+          this.scores[i] += 1;
+        }
+        if (this.assignment['isManagerRole'] === true &&
+            this.consultants[i]['isManagerRole'] === true) {
+          this.scores[i] += 1;
+        }
+        if (this.assignment['isStoryCheckerRole'] === true &&
+            this.consultants[i]['isStoryCheckerRole'] === true) {
+          this.scores[i] += 1;
+        }
+        if (this.assignment['isTranslationConsultantInTrainingRole'] === true &&
+            this.consultants[i]['isTranslationConsultantInTrainingRole'] === true) {
+          this.scores[i] += 1;
+        }
+        if (this.assignment['isTranslationConsultantRole'] === true &&
+            this.consultants[i]['isTranslationConsultantRole'] === true) {
+          this.scores[i] += 1;
+        }
 
-          // Add point to consultant's score if they match the testament
-          if (this.assignment['testament'] === 'Old Testament' && this.consultants[i]['isOldTestament'] === true) {
-            this.scores[i] += 1;
-          }
-          if (this.assignment['testament'] === 'New Testament' && this.consultants[i]['isNewTestament'] === true) {
-            this.scores[i] += 1;
-          }
+        // Add point to consultant's score if they match the testament
+        if (this.assignment['testament'] === 'Old Testament' &&
+            this.consultants[i]['isOldTestament'] === true) {
+          this.scores[i] += 1;
+        }
+        if (this.assignment['testament'] === 'New Testament' &&
+            this.consultants[i]['isNewTestament'] === true) {
+          this.scores[i] += 1;
+        }
 
-          // Add 3 points to consultant's score if they match the media
-          if (this.assignment['media'] === 'Written' && this.consultants[i]['isWrittenMedia'] === true) {
-            this.scores[i] += 3;
-          }
-          if (this.assignment['media'] === 'Audio' && this.consultants[i]['isAudioMedia'] === true) {
-            this.scores[i] += 3;
-          }
-          if (this.assignment['media'] === 'Storytelling' && this.consultants[i]['isStorytellingMedia'] === true) {
-            this.scores[i] += 3;
-          }
+        // Add 3 points to consultant's score if they match the media
+        if (this.assignment['media'] === 'Written' &&
+            this.consultants[i]['isWrittenMedia'] === true) {
+          this.scores[i] += 3;
+        }
+        if (this.assignment['media'] === 'Audio' &&
+            this.consultants[i]['isAudioMedia'] === true) {
+          this.scores[i] += 3;
+        }
+        if (this.assignment['media'] === 'Storytelling' &&
+            this.consultants[i]['isStorytellingMedia'] === true) {
+          this.scores[i] += 3;
+        }
 
-          let language;
-          for (let j = 0; j < this.consultants[i]['proficiencies'].length; j++) {
-            if (this.assignment['language'] === this.consultants[i]['proficiencies'][j]['language']) {
-              language = this.consultants[i]['proficiencies'][j];
-            }
+        // Add points to consultant's score, weighing different language proficiencies more than others depending on media
+        let language;
+        for (let j = 0; j < this.consultants[i]['proficiencies'].length; j++) {
+          if (this.assignment['language'] === this.consultants[i]['proficiencies'][j]['language']) {
+            language = this.consultants[i]['proficiencies'][j];
           }
-          if (this.assignment['media'] === 'Written') {
-            this.scores[i] += (language['speaking'] + language['listening'] + 2 * language['reading'] + 2 * language['writing']);
-          } else {
-            this.scores[i] += (2 * language['speaking'] + 2 * language['listening'] + language['reading'] + language['writing']);
+        }
+        if (this.assignment['media'] === 'Written') {
+          this.scores[i] += (language['speaking'] + language['listening'] + 2 * language['reading'] + 2 * language['writing']);
+        } else {
+          this.scores[i] += (2 * language['speaking'] + 2 * language['listening'] + language['reading'] + language['writing']);
+        }
+
+        // For each previous assignment this consultant has had on this project, add 3 points
+        for (let j = 0; j < this.assignments['length']; j++) {
+          if (this.assignments[j.toString()]['projectId'] === this.assignment['projectId'] &&
+              this.assignments[j.toString()]['consultantId'] === this.consultants[i.toString()]['_id']) {
+            this.scores[i] += 3;
+            console.log('match on assignments');
           }
+        }
 
         console.log('consultant ' + this.consultants[i.toString()]['firstName'] + ' score: ' + this.scores[i]);
       }
@@ -169,6 +200,14 @@ export class AssignConsultantComponent implements OnInit {
         this.selectedConsultantMedia = 'Storytelling';
       } else {
         this.selectedConsultantMedia = 'none';
+      }
+
+      this.selectedConsultantAssignments = new Array(0);
+      for (let j = 0; j < this.assignments['length']; j++) {
+        if (this.assignments[j.toString()]['projectId'] === this.assignment['projectId'] &&
+          this.assignments[j.toString()]['consultantId'] === data['_id']) {
+          this.selectedConsultantAssignments.push(this.assignments[j.toString()]);
+        }
       }
 
       this.assignment['consultantId'] = data['_id'];

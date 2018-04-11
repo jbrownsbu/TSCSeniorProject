@@ -62,6 +62,19 @@ back to the database to be stored.
           <p><b>Matched Media: </b>{{ selectedConsultantMedia }}</p>
           <b>Matched Roles: </b>
           <p style="text-indent: 10px" *ngFor="let role of selectedConsultantRoles">{{ role }}<br></p>
+          <b>Previous Assignments: </b>
+          <table class="table">
+            <thead>
+              <th>Start Date</th>
+              <th>End Date</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let assignment of selectedConsultantAssignments">
+              <td>{{ assignment.startDate }}</td>
+              <td>{{ assignment.endDate }}</td>
+            </tr>
+            </tbody>
+          </table>
 
           <br><button (click)="this.assignConsultant(assignment._id)">Assign</button>
         </div>
