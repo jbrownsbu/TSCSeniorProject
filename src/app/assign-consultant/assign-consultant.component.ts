@@ -12,9 +12,12 @@ export class AssignConsultantComponent implements OnInit {
 
   assignment = {};
   consultants: any[];
+  scores: any[];
   selectedConsultant = {};
   selectedConsultantLanguage = {};
   selectedConsultantRoles: string[];
+  selectedConsultantTestament: string;
+  selectedConsultantMedia: string;
 
   constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
@@ -32,8 +35,10 @@ export class AssignConsultantComponent implements OnInit {
   getTopConsultantMatches() {
     this.http.get('/consultant').subscribe(data => {
       const dataLength = data['length'];
+      this.consultants = new Array(0); // Array storing consultant JSON objects
+      this.scores = new Array(0); // Array storing scores corresponding to consultants
 
-      let numMatches = 0;
+      // Add all consultants with correct language and region to array with scores of zero
       for (let i = 0; i < dataLength; i++) {
         let hasLanguage = false;
         const numLanguages = data[(i).toString()]['proficiencies'].length;
@@ -42,50 +47,72 @@ export class AssignConsultantComponent implements OnInit {
             hasLanguage = true;
           }
         }
-        if (data[(i).toString()]['translationRegion'] === this.assignment['translationRegion'] && hasLanguage) {
-          numMatches++;
+        if ((data[(i).toString()]['translationRegion'] === this.assignment['translationRegion']) && hasLanguage) {
+          this.consultants.push(data[(i).toString()]);
+          this.scores.push(0);
         }
       }
 
-      let matchedConsultants = 0;
-      this.consultants = new Array(numMatches);
-      for (let i = 0; i < dataLength; i++) {
-        let numRoles = 0;
-        if (this.assignment['isAudioToAudioRole'] === true && data[(i).toString()]['isAudioToAudioRole'] === true) {
-          numRoles++;
-        }
-        if (this.assignment['isGuestScholarRole'] === true && data[(i).toString()]['isGuestScholarRole'] === true) {
-          numRoles++;
-        }
-        if (this.assignment['isLinguisticConsultantRole'] === true && data[(i).toString()]['isLinguisticConsultantRole'] === true) {
-          numRoles++;
-        }
-        if (this.assignment['isManagerRole'] === true && data[(i).toString()]['isManagerRole'] === true) {
-          numRoles++;
-        }
-        if (this.assignment['isStoryCheckerRole'] === true && data[(i).toString()]['isStoryCheckerRole'] === true) {
-          numRoles++;
-        }
-        if (this.assignment['isTranslationConsultantInTrainingRole'] === true && data[(i).toString()]['isTranslationConsultantInTrainingRole'] === true) {
-          numRoles++;
-        }
-        if (this.assignment['isTranslationConsultantRole'] === true && data[(i).toString()]['isTranslationConsultantRole'] === true) {
-          numRoles++;
-        }
+      // Iterate through consultants, calculate and assign score for each consultant
+      for (let i = 0; i < this.consultants.length; i++) {
 
-        let hasLanguage = false;
-        const numLanguages = data[(i).toString()]['proficiencies'].length;
-        for (let k = 0; k < numLanguages; k++) {
-          if (data[(i).toString()]['proficiencies'][(k).toString()]['language'] === this.assignment['language']) {
-            hasLanguage = true;
+          // Add point to consultant's score for each role they match
+          if (this.assignment['isAudioToAudioRole'] === true && this.consultants[i]['isAudioToAudioRole'] === true) {
+            this.scores[i] += 1;
           }
-        }
-        if (data[(i).toString()]['translationRegion'] === this.assignment['translationRegion'] && hasLanguage) {
-          this.consultants[matchedConsultants] = data[i.toString()];
-          matchedConsultants++;
-        }
+          if (this.assignment['isGuestScholarRole'] === true && this.consultants[i]['isGuestScholarRole'] === true) {
+            this.scores[i] += 1;
+          }
+          if (this.assignment['isLinguisticConsultantRole'] === true && this.consultants[i]['isLinguisticConsultantRole'] === true) {
+            this.scores[i] += 1;
+          }
+          if (this.assignment['isManagerRole'] === true && this.consultants[i]['isManagerRole'] === true) {
+            this.scores[i] += 1;
+          }
+          if (this.assignment['isStoryCheckerRole'] === true && this.consultants[i]['isStoryCheckerRole'] === true) {
+            this.scores[i] += 1;
+          }
+          if (this.assignment['isTranslationConsultantInTrainingRole'] === true && this.consultants[i]['isTranslationConsultantInTrainingRole'] === true) {
+            this.scores[i] += 1;
+          }
+          if (this.assignment['isTranslationConsultantRole'] === true && this.consultants[i]['isTranslationConsultantRole'] === true) {
+            this.scores[i] += 1;
+          }
+
+          // Add point to consultant's score if they match the testament
+          if (this.assignment['testament'] === 'Old Testament' && this.consultants[i]['isOldTestament'] === true) {
+            this.scores[i] += 1;
+          }
+          if (this.assignment['testament'] === 'New Testament' && this.consultants[i]['isNewTestament'] === true) {
+            this.scores[i] += 1;
+          }
+
+          // Add 3 points to consultant's score if they match the media
+          if (this.assignment['media'] === 'Written' && this.consultants[i]['isWrittenMedia'] === true) {
+            this.scores[i] += 3;
+          }
+          if (this.assignment['media'] === 'Audio' && this.consultants[i]['isAudioMedia'] === true) {
+            this.scores[i] += 3;
+          }
+          if (this.assignment['media'] === 'Storytelling' && this.consultants[i]['isStorytellingMedia'] === true) {
+            this.scores[i] += 3;
+          }
+
+          let language;
+          for (let j = 0; j < this.consultants[i]['proficiencies'].length; j++) {
+            if (this.assignment['language'] === this.consultants[i]['proficiencies'][j]['language']) {
+              language = this.consultants[i]['proficiencies'][j];
+            }
+          }
+          if (this.assignment['media'] === 'Written') {
+            this.scores[i] += (language['speaking'] + language['listening'] + 2 * language['reading'] + 2 * language['writing']);
+          } else {
+            this.scores[i] += (2 * language['speaking'] + 2 * language['listening'] + language['reading'] + language['writing']);
+          }
+
+        console.log('consultant ' + this.consultants[i.toString()]['firstName'] + ' score: ' + this.scores[i]);
       }
-      this.getConsultant(this.consultants[0]['_id']);
+      this.getConsultant(this.consultants['0']['_id']);
     });
   }
 
@@ -100,7 +127,7 @@ export class AssignConsultantComponent implements OnInit {
         }
       }
 
-      this.selectedConsultantRoles = new Array(0)
+      this.selectedConsultantRoles = new Array(0);
       if (this.assignment['isAudioToAudioRole'] === true && data['isAudioToAudioRole'] === true) {
         this.selectedConsultantRoles.push('Audio to Audio Translation Consultant');
       }
@@ -121,6 +148,27 @@ export class AssignConsultantComponent implements OnInit {
       }
       if (this.assignment['isTranslationConsultantRole'] === true && data['isTranslationConsultantRole'] === true) {
         this.selectedConsultantRoles.push('Translation Consultant');
+      }
+      if (this.selectedConsultantRoles.length === 0) {
+        this.selectedConsultantRoles.push('none');
+      }
+
+      if (this.assignment['testament'] === 'Old Testament' && data['isOldTestament'] === true) {
+        this.selectedConsultantTestament = 'Old Testament';
+      } else if (this.assignment['testament'] === 'New Testament' && data['isNewTestament'] === true) {
+        this.selectedConsultantTestament = 'New Testament';
+      } else {
+        this.selectedConsultantTestament = 'None';
+      }
+
+      if (this.assignment['media'] === 'Written' && data['isWrittenMedia'] === true) {
+        this.selectedConsultantMedia = 'Written';
+      } else if (this.assignment['media'] === 'Audio' && data['isAudioMedia'] === true) {
+        this.selectedConsultantMedia = 'Audio';
+      } else if (this.assignment['media'] === 'Storytelling' && data['isStorytellingMedia'] === true) {
+        this.selectedConsultantMedia = 'Storytelling';
+      } else {
+        this.selectedConsultantMedia = 'none';
       }
 
       this.assignment['consultantId'] = data['_id'];
