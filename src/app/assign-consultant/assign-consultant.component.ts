@@ -137,14 +137,81 @@ export class AssignConsultantComponent implements OnInit {
           if (this.assignments[j.toString()]['projectId'] === this.assignment['projectId'] &&
               this.assignments[j.toString()]['consultantId'] === this.consultants[i.toString()]['_id']) {
             this.scores[i] += 3;
-            console.log('match on assignments');
           }
         }
 
         console.log('consultant ' + this.consultants[i.toString()]['firstName'] + ' score: ' + this.scores[i]);
       }
-      this.getConsultant(this.consultants['0']['_id']);
+      console.log('scoresLengthBefore: ' + this.scores[0]);
+      console.log('consLengthBefore: ' + this.consultants[0]);
+      this.mergeSort(this.scores, this.consultants, 0, this.scores.length - 1);
+      console.log('scoresLengthAfter: ' + this.scores[0]);
+      console.log('consLengthAfter: ' + this.consultants[0]);
+
+      this.getConsultant(this.consultants[0]['_id']);
     });
+  }
+
+  mergeSort(arrScores, arrCons, l , r) {
+    if (l < r) {
+      const m = Math.floor((l + r) / 2);
+      console.log('merge l: ' + l + ' r: ' + r + ' m: ' + m);
+      this.mergeSort(arrScores, arrCons, l, m);
+      this.mergeSort(arrScores, arrCons, m + 1, r);
+      this.merge(arrScores, arrCons, l, m, r);
+    }
+  }
+
+  merge(arrScores, arrCons, l, m, r) {
+    let i, j, k;
+    const nOne = m - l + 1;
+    const nTwo = r - m;
+
+    const arrLeftScores = new Array(nOne);
+    const arrLeftCons = new Array(nOne);
+    const arrRightScores = new Array(nTwo);
+    const arrRightCons = new Array(nTwo);
+
+    for (i = 0; i < nOne; i++) {
+      arrLeftScores[i] = arrScores[l + i];
+      arrLeftCons[i] = arrCons[l + i];
+    }
+
+    for (j = 0; j < nTwo; j++) {
+      arrRightScores[j] = arrScores[m + j + 1];
+      arrRightCons[j] = arrCons[m + j + 1];
+    }
+
+    i = 0;
+    j = 0;
+    k = 0;
+
+    while (i < nOne && j < nTwo) {
+      if (arrLeftScores[i] >= arrRightScores[j]) {
+        arrScores[k] = arrLeftScores[i];
+        arrCons[k] = arrLeftCons[i];
+        i++;
+      } else {
+        arrScores[k] = arrRightScores[j];
+        arrCons[k] = arrRightCons[j];
+        j++;
+      }
+      k++;
+    }
+
+    while (i < nOne) {
+      arrCons[k] = arrLeftCons[i];
+      arrScores[k] = arrLeftScores[i];
+      i++;
+      k++;
+    }
+
+    while (j < nTwo) {
+      arrCons[k] = arrRightCons[j];
+      arrScores[k] = arrRightScores[j];
+      j++;
+      k++;
+    }
   }
 
   getConsultant(id) {
