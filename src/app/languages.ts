@@ -1,8 +1,15 @@
 export const LANGUAGES = [
-  'English',
-  'Spanish',
+  'Amharic',
   'Arabic',
+  'English',
   'French',
+  'Hausa',
+  'Hindi',
+  'Indonesian',
   'Mandarin',
-  'Thai'
+  'Portuguese',
+  'Russian',
+  'Spanish',
+  'Swahili',
+  'Tok Pisin'
 ];
