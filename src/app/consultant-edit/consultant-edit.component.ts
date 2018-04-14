@@ -74,8 +74,8 @@ export class ConsultantEditComponent implements OnInit {
       );
   }
 
-  removeProficiency(id, consultant) {
-  this.http.delete('/consultant/' + id, this.consultant)
+  removeProficiency(consultantId, proficiencyId) {
+    this.http.delete('/consultant/' + consultantId + '/proficiencies/' + proficiencyId, this.consultant)
     .subscribe(res => {
       const id = res['_id'];
       this.router.navigate(['/consultant-edit/' + id]);

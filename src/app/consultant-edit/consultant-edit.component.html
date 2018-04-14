@@ -82,8 +82,10 @@ back to the database to be stored.
                 <option *ngFor="let ranking of rankings"
                         [value]="ranking.value">{{ ranking.level }}</option>
               </select></td>
-              <td><button (click)="removeProficiency(consultant._id)">Remove</button></td>
+
+              <td><button [routerLink]="['/consultant-edit', consultant._id]" (click)="removeProficiency(consultant._id, proficiency._id)" type="button">Remove</button></td>
             </tr>
+
           </table>
 
           <button [routerLink]="['/consultant-edit', consultant._id]" (click)="pushLanguage(consultant._id)" type="button">Add Language</button>

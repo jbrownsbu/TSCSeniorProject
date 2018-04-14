@@ -47,10 +47,14 @@ router.patch('/:id', function(req, res, next) {
 });
 
 /*REMOVE PROFICIENCY*/
-router.delete('/:id', function(req, res, next) {
-  // TODO: Remove consultant proficiency by id
-  // Consultant.findByIdAndUpdate({ _id: req.params.id},
-  //                             {$delete: { proficiencies: }})
+router.delete('/:id/proficiencies/:proficiencyId', function(req, res, next) {
+  var proficiencyId = req.params['proficiencyId'];
+  Consultant.findByIdAndUpdate({ _id: req.params.id },
+                    {$pull : {proficiencies : {_id: proficiencyId } } },
+                              function (err, consultant) {
+      if (err) return next(err);
+      res.json(consultant);
+  });
 })
 
 module.exports = router;
