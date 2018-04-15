@@ -1,12 +1,14 @@
+// External Imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-import { OrderModule } from './order-pipe/ngx-order.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 import { RouterModule, Routes } from '@angular/router';
+
+// Internal Imports
+import { AppComponent } from './app.component';
+import { OrderModule } from './order-pipe/ngx-order.module';
+
 import { ConsultantComponent } from './consultant/consultant.component';
 import { ConsultantEditComponent } from './consultant-edit/consultant-edit.component';
 import { FilterPipeNameModule } from './filter-pipe-name/filter-pipe-name.module';

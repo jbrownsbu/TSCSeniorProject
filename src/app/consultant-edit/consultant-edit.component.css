@@ -29,3 +29,25 @@ section div {
   page-break-inside: avoid;
   break-inside: avoid;
 }
+
+/* added styling to the table so that it fits on the page*/
+
+table {
+  hight: 100px;
+  width: 100px;
+}
+
+td{
+  width: 75px;
+  hight: auto;
+}
+select{
+  hight: 100px;
+  width: 75px;
+}
+
+thead{
+  hight: 100px;
+  width: 75px;
+}
+

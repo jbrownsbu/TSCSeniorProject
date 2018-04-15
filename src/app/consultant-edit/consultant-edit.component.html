@@ -52,48 +52,49 @@ back to the database to be stored.
             <th>Reading</th>
             </thead>
             <tr *ngFor="let proficiency of consultant.proficiencies">
-              <td><select id="language"
+              <td style="word-break:break-all;"><select id="language"
                           required
-                          [(ngModel)]="proficiency[0]" name="language">
+                          [(ngModel)]="proficiency.language" name="language">
                 <option value="English">English</option>
                 <option value="Spanish">Spanish</option>
               </select></td>
-              <td><select id="speaking"
+              <td style="word-break:break-all;"><select id="speaking"
                           required
-                          [(ngModel)]="proficiency[1]" name="speaking">
+                          [(ngModel)]="proficiency.speaking" name="speaking">
                 <option value=1>Not very fluent</option>
                 <option value=2>Somewhat fluent</option>
                 <option value=3>Fluent</option>
                 <option value=4>Very Fluent</option>
               </select></td>
-              <td><select id="listening"
+              <td style="word-break:break-all;"><select id="listening"
                           required
-                          [(ngModel)]="proficiency[2]" name="speaking">
+                          [(ngModel)]="proficiency.listening" name="listening">
                 <option value=1>Not very fluent</option>
                 <option value=2>Somewhat fluent</option>
                 <option value=3>Fluent</option>
                 <option value=4>Very Fluent</option>
               </select></td>
-              <td><select id="writing"
+              <td style="word-break:break-all;"><select id="writing"
                           required
-                          [(ngModel)]="proficiency[3]" name="speaking">
+                          [(ngModel)]="proficiency.writing" name="writing">
                 <option value=1>Not very fluent</option>
                 <option value=2>Somewhat fluent</option>
                 <option value=3>Fluent</option>
                 <option value=4>Very Fluent</option>
               </select></td>
-              <td><select id="reading"
+              <td style="word-break:break-all;"><select id="reading"
                           required
-                          [(ngModel)]="proficiency[4]" name="speaking">
+                          [(ngModel)]="proficiency.reading" name="reading">
                 <option value=1>Not very fluent</option>
                 <option value=2>Somewhat fluent</option>
                 <option value=3>Fluent</option>
                 <option value=4>Very Fluent</option>
               </select></td>
+              <td><button (click)="removeProficiency(consultant._id)">Remove</button></td>
             </tr>
           </table>
 
-          <button type="button" (click)="addLanguageRow()">Add Language</button>
+          <button [routerLink]="['/consultant-edit', consultant._id]" (click)="pushLanguage(consultant._id)" type="button">Add Language</button>
 
           <div class="form-group">
             <label>Consultant Notes</label>

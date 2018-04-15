@@ -6,25 +6,25 @@ var Assignment = require('../models/Assignment.js');
 
 /* GET ALL ASSIGNMENTS*/
 router.get('', function(req, res, next) {
-  Assignment.find(function (err, products) {
+  Assignment.find(function (err, assignment) {
     if (err) return next(err);
-    res.json(products);
+    res.json(assignment);
   });
 });
 
 /* GET ALL ASSIGNMENTS FOR A CONSULTANT*/
 router.get('/consultant/:consultantId', function(req, res, next) {
-  Assignment.find({ consultantId: req.params.consultantId }, function (err, products) {
+  Assignment.find({ consultantId: req.params.consultantId }, function (err, assignment) {
     if (err) return next(err);
-    res.json(products);
+    res.json(assignment);
   });
 });
 
 /* GET ALL ASSIGNMENTS FOR A PROJECT*/
 router.get('/project/:projectId', function(req, res, next) {
-  Assignment.find({ projectId: req.params.projectId }, function (err, products) {
+  Assignment.find({ projectId: req.params.projectId }, function (err, assignment) {
     if (err) return next(err);
-    res.json(products);
+    res.json(assignment);
   });
 });
 

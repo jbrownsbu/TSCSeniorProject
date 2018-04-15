@@ -1,58 +1,38 @@
 <!--
-assignment-edit component loads details of an assignment from database. This html displays an assignment's existing information
-along with various controls for editing that information. When 'update' button is clicked, changed information is sent
-back to the database to be stored.
+assign-consultant component loads details of an assignment from database. This html displays an assignment's information
+along with a list of the best consultants to be matched to the assignment. When 'assign' button is clicked, displayed
+consultant's information is sent back to the database to be stored in the assignment as it's assigned consultant.
 -->
 <div id="list" class="container">
   <div class="row">
     <div class="col-md-6">
+      <h1>Assign Consultant</h1>
       <section>
-        <h1>Assign Consultant</h1>
 
         <div>
-          <label>Project: </label>
-          <p>{{ assignment.projectName }}</p>
+          <h3>Assignment Information</h3>
+          <p><b>Project: </b>{{ assignment.projectName }}</p>
+          <p><b>Start Date: </b>{{ assignment.startDate }}</p>
+          <p><b>End Date: </b>{{ assignment.endDate }}</p>
+          <p><b>Language: </b>{{ assignment.language }}</p>
+          <p><b>Testament: </b>{{ assignment.testament }}</p>
+          <p><b>Region: </b>{{ assignment.translationRegion }}</p>
+          <p><b>Medium: </b>{{ assignment.media }}</p>
+          <p><b>Notes: </b>{{ assignment.notes }}</p>
+          <p><b>Type: </b>{{ assignment.assignmentType }}</p>
 
-          <label>Start Date: </label>
-          <p>{{ assignment.startDate }}</p>
-
-          <label>End Date: </label>
-          <p>{{ assignment.endDate }}</p>
-
-          <label>Language: </label>
-          <p>{{ assignment.language }}</p>
-
-          <label>Testament: </label>
-          <p>{{ assignment.testament }}</p>
-
-          <label>Region: </label>
-          <p>{{ assignment.translationRegion }}</p>
-
-          <label>Medium: </label>
-          <p>{{ assignment.media }}</p>
-
-          <label>Notes: </label>
-          <p>{{ assignment.notes }}</p>
-
-          <label>Type: </label>
-          <p>{{ assignment.assignmentType }}</p>
-
-          <label>Roles Needed: </label><br>
-          <p *ngIf="assignment.isAudioToAudioRole">Audio to Audio Translation Consultant<br></p>
-          <p *ngIf="assignment.isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br></p>
-          <p *ngIf="assignment.isLinguisticConsultantRole">Linguistic Consultant<br></p>
-          <p *ngIf="assignment.isManagerRole">Manager - Translation Consultant<br></p>
-          <p *ngIf="assignment.isStoryCheckerRole">Story Checker<br></p>
-          <p *ngIf="assignment.isTranslationConsultantInTrainingRole">Translation CiT<br></p>
-          <p *ngIf="assignment.isTranslationConsultantRole">Translation Consultant<br></p>
+          <b>Roles Needed: </b><br>
+          <p style="text-indent: 10px" *ngIf="assignment.isAudioToAudioRole">Audio to Audio Translation Consultant<br></p>
+          <p style="text-indent: 10px" *ngIf="assignment.isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br></p>
+          <p style="text-indent: 10px" *ngIf="assignment.isLinguisticConsultantRole">Linguistic Consultant<br></p>
+          <p style="text-indent: 10px" *ngIf="assignment.isManagerRole">Manager - Translation Consultant<br></p>
+          <p style="text-indent: 10px" *ngIf="assignment.isStoryCheckerRole">Story Checker<br></p>
+          <p style="text-indent: 10px" *ngIf="assignment.isTranslationConsultantInTrainingRole">Translation CiT<br></p>
+          <p style="text-indent: 10px" *ngIf="assignment.isTranslationConsultantRole">Translation Consultant<br></p>
         </div>
 
         <div>
-          <!--<label>ConsultantId: {{ selectedConsultant._id }} </label><br>-->
-          <label>Name: </label>
-          <p>{{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</p>
-          <label>Region: </label>
-          <p>{{ selectedConsultant.translationRegion }}</p><br><br>
+          <h3>Top Consultant Matches</h3>
 
           <table class="table">
             <thead>
@@ -71,7 +51,32 @@ back to the database to be stored.
             </tbody>
           </table>
 
-          <button (click)="this.assignConsultant(assignment._id)">Assign</button>
+          <p><b>Name: </b>{{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</p>
+          <p><b>Region: </b>{{ selectedConsultant.translationRegion }}</p>
+          <p><b>Language: </b>{{ selectedConsultantLanguage.language }}</p>
+          <p style="text-indent: 10px"><b>Reading: </b>{{ selectedConsultantLanguage.reading }}</p>
+          <p style="text-indent: 10px"><b>Writing: </b>{{ selectedConsultantLanguage.writing }}</p>
+          <p style="text-indent: 10px"><b>Speaking: </b>{{ selectedConsultantLanguage.speaking }}</p>
+          <p style="text-indent: 10px"><b>Listening: </b>{{ selectedConsultantLanguage.listening }}</p>
+          <p><b>Matched Testament: </b>{{ selectedConsultantTestament }}</p>
+          <p><b>Matched Media: </b>{{ selectedConsultantMedia }}</p>
+          <b>Matched Roles: </b>
+          <p style="text-indent: 10px" *ngFor="let role of selectedConsultantRoles">{{ role }}<br></p>
+          <b>Previous Assignments: </b>
+          <table class="table">
+            <thead>
+              <th>Start Date</th>
+              <th>End Date</th>
+            </thead>
+            <tbody>
+            <tr *ngFor="let assignment of selectedConsultantAssignments">
+              <td>{{ assignment.startDate }}</td>
+              <td>{{ assignment.endDate }}</td>
+            </tr>
+            </tbody>
+          </table>
+
+          <br><button (click)="this.assignConsultant(assignment._id)">Assign</button>
         </div>
       </section>
     </div>

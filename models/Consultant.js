@@ -6,14 +6,6 @@ TODO: Comment on structure of language proficiencies when complete.
 
 var mongoose = require('mongoose');
 
-var proficiencySchema = new mongoose.Schema({
-  language: String,
-  reading: Number,
-  writing: Number,
-  speaking: Number,
-  listening: Number
-});
-
 var ConsultantSchema = new mongoose.Schema({
   // Contact Info
   firstName: String,
@@ -30,7 +22,13 @@ var ConsultantSchema = new mongoose.Schema({
   supervisorEmail: String,
   supervisorPhone: String,
   // Translation Proficiencies
-  proficiencies: [ proficiencySchema ], //This only works in mongoose >=4.2.0
+  proficiencies: [{
+    language: String,
+    reading: Number,
+    writing: Number,
+    speaking: Number,
+    listening: Number
+  }],
   notes: String,
   // Testaments
   isOldTestament: Boolean,
