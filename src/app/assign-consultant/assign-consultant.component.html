@@ -47,6 +47,9 @@ consultant's information is sent back to the database to be stored in the assign
               <td>
                 <button (click)="this.getConsultant(consultant._id)">View Details</button>
               </td>
+              <td>
+                <button (click)="this.assignConsultant(assignment._id, consultant._id, (consultant.firstName + consultant.lastName))">Assign</button>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -62,21 +65,23 @@ consultant's information is sent back to the database to be stored in the assign
           <p><b>Matched Media: </b>{{ selectedConsultantMedia }}</p>
           <b>Matched Roles: </b>
           <p style="text-indent: 10px" *ngFor="let role of selectedConsultantRoles">{{ role }}<br></p>
-          <b>Previous Assignments: </b>
-          <table class="table">
+          <p *ngIf="selectedConsultantAssignments.length === 0"><b>Previous Assignments on this Project: </b> none </p>
+          <b *ngIf="selectedConsultantAssignments.length > 0">Previous Assignments on this Project: </b>
+          <table *ngIf="selectedConsultantAssignments.length > 0" class="table">
             <thead>
               <th>Start Date</th>
               <th>End Date</th>
+              <th>Type</th>
             </thead>
             <tbody>
             <tr *ngFor="let assignment of selectedConsultantAssignments">
               <td>{{ assignment.startDate }}</td>
               <td>{{ assignment.endDate }}</td>
+              <td>{{ assignment.assignmentType }}</td>
             </tr>
             </tbody>
           </table>
 
-          <br><button (click)="this.assignConsultant(assignment._id)">Assign</button>
         </div>
       </section>
     </div>

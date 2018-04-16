@@ -155,7 +155,9 @@ export class AssignConsultantComponent implements OnInit {
       this.mergeSort(this.scores, this.consultants, 0, this.scores.length - 1);
 
       // Automatically display top consultant's information
-      this.getConsultant(this.consultants[0]['_id']);
+      if (this.consultants.length > 0) {
+        this.getConsultant(this.consultants[0]['_id']);
+      }
     });
   }
 
@@ -284,7 +286,7 @@ export class AssignConsultantComponent implements OnInit {
       } else if (this.assignment['testament'] === 'New Testament' && data['isNewTestament'] === true) {
         this.selectedConsultantTestament = 'New Testament';
       } else {
-        this.selectedConsultantTestament = 'None';
+        this.selectedConsultantTestament = 'none';
       }
 
       // Capture consultant media required by assignment
@@ -315,7 +317,7 @@ export class AssignConsultantComponent implements OnInit {
   }
 
   // assignConsultant saves consultant whose information is currently displayed as the consultant assigned to this assignment
-  assignConsultant(assignmentId) {
+  assignConsultant(assignmentId, consultantId, consultantName) {
     this.http.put('/assignment/' + assignmentId, this.assignment)
       .subscribe(res => {
           this._location.back();
