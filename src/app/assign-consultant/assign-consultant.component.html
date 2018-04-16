@@ -41,12 +41,9 @@ consultant's information is sent back to the database to be stored in the assign
             <th>Actions</th>
             </thead>
             <tbody>
-            <tr *ngFor="let consultant of consultants">
+            <tr *ngFor="let consultant of consultants" (click)="this.getConsultant(consultant._id)" style="cursor: pointer">
               <td>{{ consultant.firstName }}</td>
               <td>{{ consultant.lastName }}</td>
-              <td>
-                <button (click)="this.getConsultant(consultant._id)">View Details</button>
-              </td>
               <td>
                 <button (click)="this.assignConsultant(assignment._id, consultant._id, (consultant.firstName + consultant.lastName))">Assign</button>
               </td>
@@ -54,7 +51,7 @@ consultant's information is sent back to the database to be stored in the assign
             </tbody>
           </table>
 
-          <p><b>Name: </b>{{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</p>
+          <h4>{{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</h4>
           <p><b>Region: </b>{{ selectedConsultant.translationRegion }}</p>
           <p><b>Language: </b>{{ selectedConsultantLanguage.language }}</p>
           <p style="text-indent: 10px"><b>Reading: </b>{{ selectedConsultantLanguage.reading }}</p>
