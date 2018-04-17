@@ -8,7 +8,7 @@ header{
 
 }
 *{
-  magin: 0;
+  margin: 0;
   padding: 0;
   border-radius: 5px;
 }
@@ -47,7 +47,7 @@ nav li:hover{
   text-decoration: underline;
 }
 
-@media screen and (max-width: 1100px){
+@media screen and (max-width: 800px){
 
   nav {
     padding: 0;

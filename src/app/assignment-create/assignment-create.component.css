@@ -15,6 +15,8 @@
   column-width: 150px;
 }
 
+
+
 section {
   -webkit-columns: 2;
   -moz-columns: 2;
@@ -28,4 +30,31 @@ section div {
   -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
   break-inside: avoid;
+}
+
+@media screen and (max-width: 1300px) {
+  .row {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+
+  }
+
+  /* Edit fields are shown in two columns. */
+  #columns {
+    -webkit-column-count: 1; /* Chrome, Safari, Opera */
+    -moz-column-count: 1; /* Firefox */
+    column-count: 1;
+    -webkit-column-width: 150px; /* Chrome, Safari, Opera */
+    -moz-column-width: 150px; /* Firefox */
+    column-width: 150px;
+  }
+
+  section {
+    -webkit-columns: 1;
+    -moz-columns: 1;
+    columns: 1;
+    width: 200%;
+
+  }
 }
