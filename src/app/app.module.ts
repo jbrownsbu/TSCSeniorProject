@@ -18,7 +18,6 @@ import { AssignmentComponent } from './assignment/assignment.component';
 import { AssignmentEditComponent } from './assignment-edit/assignment-edit.component';
 import { AssignmentCreateComponent } from './assignment-create/assignment-create.component';
 import { ProjectComponent } from './project/project.component';
-import { ProjectEditComponent } from './project-edit/project-edit.component';
 import { AssignConsultantComponent } from './assign-consultant/assign-consultant.component';
 
 const appRoutes: Routes = [
@@ -68,11 +67,6 @@ const appRoutes: Routes = [
     data: { title: 'Project List' }
   },
   {
-    path: 'project-edit/:id',
-    component: ProjectEditComponent,
-    data: {title: 'Edit Project'}
-  },
-  {
     path: 'assign-consultant/:assignmentId',
     component: AssignConsultantComponent,
     data: {title: 'Assign Consultant'}
@@ -88,7 +82,6 @@ const appRoutes: Routes = [
     AssignmentEditComponent,
     AssignmentCreateComponent,
     ProjectComponent,
-    ProjectEditComponent,
     AssignConsultantComponent
   ],
   imports: [
