@@ -1,7 +1,8 @@
 <!--
 assign-consultant component loads details of an assignment from database. This html displays an assignment's information
-along with a list of the best consultants to be matched to the assignment. When 'assign' button is clicked, displayed
-consultant's information is sent back to the database to be stored in the assignment as it's assigned consultant.
+along with a list of the best consultants to be matched to the assignment. When 'assign' button is clicked on a row of
+consultants table, that consultant's information is sent back to the database to be stored in the assignment as the
+assignment's assigned consultant.
 -->
 <div id="list" class="container">
   <div class="row">
@@ -31,7 +32,7 @@ consultant's information is sent back to the database to be stored in the assign
           <p style="text-indent: 10px" *ngIf="assignment.isTranslationConsultantRole">Translation Consultant<br></p>
         </div>
 
-        <div>
+        <div *ngIf="consultants.length > 0">
           <h3>Top Consultant Matches</h3>
 
           <table class="table">
@@ -45,7 +46,7 @@ consultant's information is sent back to the database to be stored in the assign
               <td>{{ consultant.firstName }}</td>
               <td>{{ consultant.lastName }}</td>
               <td>
-                <button (click)="this.assignConsultant(assignment._id, consultant._id, (consultant.firstName + consultant.lastName))">Assign</button>
+                <button (click)="this.assignConsultant(assignment._id, consultant._id, (consultant.firstName + ' ' + consultant.lastName))">Assign</button>
               </td>
             </tr>
             </tbody>
@@ -61,7 +62,8 @@ consultant's information is sent back to the database to be stored in the assign
           <p><b>Matched Testament: </b>{{ selectedConsultantTestament }}</p>
           <p><b>Matched Media: </b>{{ selectedConsultantMedia }}</p>
           <b>Matched Roles: </b>
-          <p style="text-indent: 10px" *ngFor="let role of selectedConsultantRoles">{{ role }}<br></p>
+          <div *ngIf="selectedConsultantRoles.length > 0"><p style="text-indent: 10px" *ngFor="let role of selectedConsultantRoles">{{ role }}<br></p></div>
+          <p *ngIf="selectedConsultantRoles.length === 0" style="text-indent: 10px">none</p>
           <p *ngIf="selectedConsultantAssignments.length === 0"><b>Previous Assignments on this Project: </b> none </p>
           <b *ngIf="selectedConsultantAssignments.length > 0">Previous Assignments on this Project: </b>
           <table *ngIf="selectedConsultantAssignments.length > 0" class="table">
@@ -79,6 +81,10 @@ consultant's information is sent back to the database to be stored in the assign
             </tbody>
           </table>
 
+        </div>
+
+        <div *ngIf="consultants.length === 0">
+          <h3>No Consultant Matches</h3>
         </div>
       </section>
     </div>

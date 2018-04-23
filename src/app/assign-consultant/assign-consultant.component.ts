@@ -13,16 +13,16 @@ export class AssignConsultantComponent implements OnInit {
   // These variables are used by the getTopConsultantMatches method
   assignments: any;
   assignment = {};
-  consultants: any[];
+  consultants = new Array(0);
   scores: any[];
 
   // These variables are used by the getConsultant method
   selectedConsultant = {};
   selectedConsultantLanguage = {};
-  selectedConsultantRoles: string[];
+  selectedConsultantRoles = new Array(0);
   selectedConsultantTestament: string;
   selectedConsultantMedia: string;
-  selectedConsultantAssignments: any[];
+  selectedConsultantAssignments = new Array(0);
 
   constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
@@ -276,9 +276,6 @@ export class AssignConsultantComponent implements OnInit {
       if (this.assignment['isTranslationConsultantRole'] === true && data['isTranslationConsultantRole'] === true) {
         this.selectedConsultantRoles.push('Translation Consultant');
       }
-      if (this.selectedConsultantRoles.length === 0) {
-        this.selectedConsultantRoles.push('none');
-      }
 
       // Capture consultant testament required by assignment
       if (this.assignment['testament'] === 'Old Testament' && data['isOldTestament'] === true) {
@@ -308,16 +305,13 @@ export class AssignConsultantComponent implements OnInit {
           this.selectedConsultantAssignments.push(this.assignments[j.toString()]);
         }
       }
-
-      // Set consultant being displayed as consultant assigned to assignment
-      // When 'assign' button is clicked, this change is saved in the database
-      this.assignment['consultantId'] = data['_id'];
-      this.assignment['consultantName'] = data['firstName'] + ' ' + data['lastName'];
     });
   }
 
-  // assignConsultant saves consultant whose information is currently displayed as the consultant assigned to this assignment
+  // assignConsultant saves consultant whose assign button is clicked as the consultant assigned to this assignment
   assignConsultant(assignmentId, consultantId, consultantName) {
+    this.assignment['consultantId'] = consultantId;
+    this.assignment['consultantName'] = consultantName;
     this.http.put('/assignment/' + assignmentId, this.assignment)
       .subscribe(res => {
           this._location.back();
