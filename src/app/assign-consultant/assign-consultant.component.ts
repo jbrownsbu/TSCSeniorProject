@@ -24,7 +24,14 @@ export class AssignConsultantComponent implements OnInit {
   selectedConsultantMedia: string;
   selectedConsultantAssignments = new Array(0);
 
-  constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  setClickedRow: Function;
+  selectedRow: number;
+
+  constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+    this.setClickedRow = function(index) {
+      this.selectedRow = index;
+    };
+  }
 
   ngOnInit() {
     this.getAllAssignments();
@@ -50,29 +57,22 @@ export class AssignConsultantComponent implements OnInit {
   getTopConsultantMatches() {
     // Begin by getting all consultants from the database
     this.http.get('/consultant').subscribe(data => {
-      const dataLength = data['length'];
       this.consultants = new Array(0); // Array storing consultant JSON objects
       this.scores = new Array(0); // Array storing scores corresponding to consultants
 
-      // Add all consultants with correct language and region to array with scores of zero
-      for (let i = 0; i < dataLength; i++) {
-        // Check if consultant has the necessary language for the assignment
-        let hasLanguage = false;
-        const numLanguages = data[(i).toString()]['proficiencies'].length;
-        for (let k = 0; k < numLanguages; k++) {
-          if (data[(i).toString()]['proficiencies'][(k).toString()]['language'] === this.assignment['language']) {
-            hasLanguage = true;
-          }
-        }
-        // Check if consultant works within the necessary region for the assignment
-        if ((data[(i).toString()]['translationRegion'] === this.assignment['translationRegion']) && hasLanguage) {
+      // Add all consultants to array with scores of zero
+      for (let i = 0; i < data['length']; i++) {
           this.consultants.push(data[(i).toString()]);
           this.scores.push(0);
-        }
       }
 
-      // Iterate through consultants in consultants array, calculate and assign score for each consultant
+      // Iterate through consultants array, calculating and assigning score for each consultant
       for (let i = 0; i < this.consultants.length; i++) {
+
+        // Add 20 points to consultant's score if they work within the required region
+        if (this.consultants[i]['translationRegion'] === this.assignment['translationRegion']) {
+          this.scores[i] += 20;
+        }
 
         // Add point to consultant's score for each role they match
         if (this.assignment['isAudioToAudioRole'] === true &&
@@ -129,18 +129,23 @@ export class AssignConsultantComponent implements OnInit {
         }
 
         // Add points to consultant's score, weighing different language proficiencies more than others depending on media
+        // If consultant does not have language in their profile, do not add any points
         // Identify specific language required by the assignment, and save it to 'language' variable
         let language;
+        let hasLanguage = false;
         for (let j = 0; j < this.consultants[i]['proficiencies'].length; j++) {
           if (this.assignment['language'] === this.consultants[i]['proficiencies'][j]['language']) {
             language = this.consultants[i]['proficiencies'][j];
+            hasLanguage = true;
           }
         }
         // If assignment media is 'Written', weight 'reading' and 'writing' proficiencies
-        if (this.assignment['media'] === 'Written') {
-          this.scores[i] += (language['speaking'] + language['listening'] + 2 * language['reading'] + 2 * language['writing']);
-        } else { // If not 'Written', weight 'speaking' and 'listening' proficiencies
-          this.scores[i] += (2 * language['speaking'] + 2 * language['listening'] + language['reading'] + language['writing']);
+        if (hasLanguage) {
+          if (this.assignment['media'] === 'Written') {
+            this.scores[i] += (language['speaking'] + language['listening'] + 2 * language['reading'] + 2 * language['writing']);
+          } else { // If not 'Written', weight 'speaking' and 'listening' proficiencies
+            this.scores[i] += (2 * language['speaking'] + 2 * language['listening'] + language['reading'] + language['writing']);
+          }
         }
 
         // For each previous assignment this consultant has had on this project, add 3 points
@@ -151,12 +156,15 @@ export class AssignConsultantComponent implements OnInit {
           }
         }
       }
+
+
       // After consultants' scores have been calculated, sort the array from highest score to lowest
       this.mergeSort(this.scores, this.consultants, 0, this.scores.length - 1);
 
       // Automatically display top consultant's information
       if (this.consultants.length > 0) {
         this.getConsultant(this.consultants[0]['_id']);
+        this.selectedRow = 0;
       }
     });
   }
@@ -206,7 +214,7 @@ export class AssignConsultantComponent implements OnInit {
     // Reassign values of lcv variables to zero
     lcv1 = 0;
     lcv2 = 0;
-    lcv3 = 0;
+    lcv3 = leftEnd;
 
     // Merge partial arrays by comparing elements from both arrays and storing them back in original consultants and scores arrays
     while (lcv1 < leftLength && lcv2 < rightLength) {

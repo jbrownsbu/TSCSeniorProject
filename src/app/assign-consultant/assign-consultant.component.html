@@ -42,7 +42,7 @@ assignment's assigned consultant.
             <th>Actions</th>
             </thead>
             <tbody>
-            <tr *ngFor="let consultant of consultants" (click)="this.getConsultant(consultant._id)" style="cursor: pointer">
+            <tr *ngFor="let consultant of consultants; let i = index" (click)="this.getConsultant(consultant._id); this.setClickedRow(i)" [class.active]="i == selectedRow" style="cursor: pointer" >
               <td>{{ consultant.firstName }}</td>
               <td>{{ consultant.lastName }}</td>
               <td>
