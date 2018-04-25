@@ -5,3 +5,8 @@
 .table tr:hover {
   text-decoration: underline;
 }
+
+.table td, th {
+  width: 10%;
+}
+
