@@ -5,8 +5,10 @@ On update, this file calls http PUT to send updated consultant data back to data
 */
 
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { LANGUAGES } from '../languages';
+import { RANKING } from '../proficency-ranking';
 
 @Component({
   selector: 'app-consultant-edit',
@@ -15,6 +17,9 @@ import { HttpClient } from '@angular/common/http';
   encapsulation: ViewEncapsulation.None
 })
 export class ConsultantEditComponent implements OnInit {
+
+  languages = LANGUAGES;
+  rankings = RANKING;
 
   consultant = {};
 
@@ -69,8 +74,8 @@ export class ConsultantEditComponent implements OnInit {
       );
   }
 
-  removeProficiency(id, consultant) {
-  this.http.delete('/consultant/' + id, this.consultant)
+  removeProficiency(consultantId, proficiencyId) {
+    this.http.delete('/consultant/' + consultantId + '/proficiencies/' + proficiencyId, this.consultant)
     .subscribe(res => {
       const id = res['_id'];
       this.router.navigate(['/consultant-edit/' + id]);
