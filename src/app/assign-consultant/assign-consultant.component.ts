@@ -10,21 +10,29 @@ import { Location } from '@angular/common';
 })
 export class AssignConsultantComponent implements OnInit {
 
+  searchTermsName: string;
+
   // These variables are used by the getTopConsultantMatches method
   assignments: any;
   assignment = {};
-  consultants: any[];
-  scores: any[];
+  consultants = new Array(0);
 
   // These variables are used by the getConsultant method
   selectedConsultant = {};
   selectedConsultantLanguage = {};
-  selectedConsultantRoles: string[];
+  selectedConsultantRoles = new Array(0);
   selectedConsultantTestament: string;
   selectedConsultantMedia: string;
-  selectedConsultantAssignments: any[];
+  selectedConsultantAssignments = new Array(0);
 
-  constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  setClickedRow: Function;
+  selectedRow: number;
+
+  constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+    this.setClickedRow = function(index) {
+      this.selectedRow = index;
+    };
+  }
 
   ngOnInit() {
     this.getAllAssignments();
@@ -50,133 +58,135 @@ export class AssignConsultantComponent implements OnInit {
   getTopConsultantMatches() {
     // Begin by getting all consultants from the database
     this.http.get('/consultant').subscribe(data => {
-      const dataLength = data['length'];
       this.consultants = new Array(0); // Array storing consultant JSON objects
-      this.scores = new Array(0); // Array storing scores corresponding to consultants
 
-      // Add all consultants with correct language and region to array with scores of zero
-      for (let i = 0; i < dataLength; i++) {
-        // Check if consultant has the necessary language for the assignment
-        let hasLanguage = false;
-        const numLanguages = data[(i).toString()]['proficiencies'].length;
-        for (let k = 0; k < numLanguages; k++) {
-          if (data[(i).toString()]['proficiencies'][(k).toString()]['language'] === this.assignment['language']) {
-            hasLanguage = true;
-          }
-        }
-        // Check if consultant works within the necessary region for the assignment
-        if ((data[(i).toString()]['translationRegion'] === this.assignment['translationRegion']) && hasLanguage) {
+      // Add all consultants to array with scores of zero
+      for (let i = 0; i < data['length']; i++) {
           this.consultants.push(data[(i).toString()]);
-          this.scores.push(0);
-        }
+          this.consultants[i]['score'] = 0;
       }
 
-      // Iterate through consultants in consultants array, calculate and assign score for each consultant
+      // Iterate through consultants array, calculating and assigning score for each consultant
       for (let i = 0; i < this.consultants.length; i++) {
+
+        // Add 20 points to consultant's score if they work within the required region
+        if (this.consultants[i]['translationRegion'] === this.assignment['translationRegion']) {
+          this.consultants[i]['score'] = 20;
+        }
 
         // Add point to consultant's score for each role they match
         if (this.assignment['isAudioToAudioRole'] === true &&
             this.consultants[i]['isAudioToAudioRole'] === true) {
-          this.scores[i] += 1;
+          this.consultants[i]['score'] += 1;
         }
         if (this.assignment['isGuestScholarRole'] === true &&
             this.consultants[i]['isGuestScholarRole'] === true) {
-          this.scores[i] += 1;
+          this.consultants[i]['score'] += 1;
         }
         if (this.assignment['isLinguisticConsultantRole'] === true &&
             this.consultants[i]['isLinguisticConsultantRole'] === true) {
-          this.scores[i] += 1;
+          this.consultants[i]['score'] += 1;
         }
         if (this.assignment['isManagerRole'] === true &&
             this.consultants[i]['isManagerRole'] === true) {
-          this.scores[i] += 1;
+          this.consultants[i]['score'] += 1;
         }
         if (this.assignment['isStoryCheckerRole'] === true &&
             this.consultants[i]['isStoryCheckerRole'] === true) {
-          this.scores[i] += 1;
+          this.consultants[i]['score'] += 1;
         }
         if (this.assignment['isTranslationConsultantInTrainingRole'] === true &&
             this.consultants[i]['isTranslationConsultantInTrainingRole'] === true) {
-          this.scores[i] += 1;
+          this.consultants[i]['score'] += 1;
         }
         if (this.assignment['isTranslationConsultantRole'] === true &&
             this.consultants[i]['isTranslationConsultantRole'] === true) {
-          this.scores[i] += 1;
+          this.consultants[i]['score'] += 1;
         }
 
         // Add point to consultant's score if they match the testament
         if (this.assignment['testament'] === 'Old Testament' &&
             this.consultants[i]['isOldTestament'] === true) {
-          this.scores[i] += 1;
+          this.consultants[i]['score'] += 1;
         }
         if (this.assignment['testament'] === 'New Testament' &&
             this.consultants[i]['isNewTestament'] === true) {
-          this.scores[i] += 1;
+          this.consultants[i]['score'] += 1;
         }
 
         // Add 3 points to consultant's score if they match the media
         if (this.assignment['media'] === 'Written' &&
             this.consultants[i]['isWrittenMedia'] === true) {
-          this.scores[i] += 3;
+          this.consultants[i]['score'] += 3;
         }
         if (this.assignment['media'] === 'Audio' &&
             this.consultants[i]['isAudioMedia'] === true) {
-          this.scores[i] += 3;
+          this.consultants[i]['score'] += 3;
         }
         if (this.assignment['media'] === 'Storytelling' &&
             this.consultants[i]['isStorytellingMedia'] === true) {
-          this.scores[i] += 3;
+          this.consultants[i]['score'] += 3;
         }
 
         // Add points to consultant's score, weighing different language proficiencies more than others depending on media
+        // If consultant does not have language in their profile, do not add any points
         // Identify specific language required by the assignment, and save it to 'language' variable
         let language;
+        let hasLanguage = false;
         for (let j = 0; j < this.consultants[i]['proficiencies'].length; j++) {
           if (this.assignment['language'] === this.consultants[i]['proficiencies'][j]['language']) {
             language = this.consultants[i]['proficiencies'][j];
+            hasLanguage = true;
           }
         }
         // If assignment media is 'Written', weight 'reading' and 'writing' proficiencies
-        if (this.assignment['media'] === 'Written') {
-          this.scores[i] += (language['speaking'] + language['listening'] + 2 * language['reading'] + 2 * language['writing']);
-        } else { // If not 'Written', weight 'speaking' and 'listening' proficiencies
-          this.scores[i] += (2 * language['speaking'] + 2 * language['listening'] + language['reading'] + language['writing']);
+        if (hasLanguage) {
+          if (this.assignment['media'] === 'Written') {
+            this.consultants[i]['score'] += (language['speaking'] + language['listening'] + 2 * language['reading'] + 2 * language['writing']);
+          } else { // If not 'Written', weight 'speaking' and 'listening' proficiencies
+            this.consultants[i]['score'] += (2 * language['speaking'] + 2 * language['listening'] + language['reading'] + language['writing']);
+          }
         }
 
         // For each previous assignment this consultant has had on this project, add 3 points
         for (let j = 0; j < this.assignments['length']; j++) {
           if (this.assignments[j.toString()]['projectId'] === this.assignment['projectId'] &&
               this.assignments[j.toString()]['consultantId'] === this.consultants[i.toString()]['_id']) {
-            this.scores[i] += 3;
+            this.consultants[i]['score'] += 3;
           }
         }
       }
+
+
       // After consultants' scores have been calculated, sort the array from highest score to lowest
-      this.mergeSort(this.scores, this.consultants, 0, this.scores.length - 1);
+      this.mergeSort(this.consultants, 0, this.consultants.length - 1);
 
       // Automatically display top consultant's information
-      this.getConsultant(this.consultants[0]['_id']);
+      if (this.consultants.length > 0) {
+        this.getConsultant(this.consultants[0]['_id']);
+        this.selectedRow = 0;
+      }
     });
   }
 
   // mergeSort is called by getTopConsultantMatches to sort top consultants by their match score
   // scores and consultants arrays are passed in along with the left and right indexes of the portion of those arrays to be sorted
-  mergeSort(arrScores, arrCons, leftEnd , rightEnd) {
+  mergeSort(arrCons, leftEnd , rightEnd) {
     // If the length of the arrays passed in is greater than 1
     if (leftEnd < rightEnd) {
       // Calculate the middle position of the arrays
       const middle = Math.floor((leftEnd + rightEnd) / 2);
       // Pass first half and second half of arrays into recursive call of mergeSort
-      this.mergeSort(arrScores, arrCons, leftEnd, middle);
-      this.mergeSort(arrScores, arrCons, middle + 1, rightEnd);
+      this.mergeSort(arrCons, leftEnd, middle);
+      this.mergeSort(arrCons, middle + 1, rightEnd);
       // After arrays are broken down to single elements, call merge to reassemble arrays in sorted order
-      this.merge(arrScores, arrCons, leftEnd, middle, rightEnd);
+      this.merge(arrCons, leftEnd, middle, rightEnd);
     }
   }
 
   // merge is called by mergeSort to sort and reassemble broken down arrays
   // scores and consultants arrays are passed in along with the left, middle, and right indexes of the portion of those arrays to be sorted
-  merge(arrScores, arrCons, leftEnd, middle, rightEnd) {
+  merge(arrCons, leftEnd, middle, rightEnd) {
     // Instantiate loop control variables (lcv) for use in method
     let lcv1, lcv2, lcv3;
 
@@ -185,35 +195,29 @@ export class AssignConsultantComponent implements OnInit {
     const rightLength = rightEnd - middle;
 
     // Instantiate temporary arrays for sorting and merging partial arrays back together
-    const arrLeftScores = new Array(leftLength);
     const arrLeftCons = new Array(leftLength);
-    const arrRightScores = new Array(rightLength);
     const arrRightCons = new Array(rightLength);
 
     // Fill left and right temporary arrays with data from actual consultant and score arrays
     for (lcv1 = 0; lcv1 < leftLength; lcv1++) {
-      arrLeftScores[lcv1] = arrScores[leftEnd + lcv1];
       arrLeftCons[lcv1] = arrCons[leftEnd + lcv1];
     }
 
     for (lcv2 = 0; lcv2 < rightLength; lcv2++) {
-      arrRightScores[lcv2] = arrScores[middle + lcv2 + 1];
       arrRightCons[lcv2] = arrCons[middle + lcv2 + 1];
     }
 
     // Reassign values of lcv variables to zero
     lcv1 = 0;
     lcv2 = 0;
-    lcv3 = 0;
+    lcv3 = leftEnd;
 
     // Merge partial arrays by comparing elements from both arrays and storing them back in original consultants and scores arrays
     while (lcv1 < leftLength && lcv2 < rightLength) {
-      if (arrLeftScores[lcv1] >= arrRightScores[lcv2]) {
-        arrScores[lcv3] = arrLeftScores[lcv1];
+      if (arrLeftCons[lcv1]['score'] >= arrRightCons[lcv2]['score']) {
         arrCons[lcv3] = arrLeftCons[lcv1];
         lcv1++;
       } else {
-        arrScores[lcv3] = arrRightScores[lcv2];
         arrCons[lcv3] = arrRightCons[lcv2];
         lcv2++;
       }
@@ -223,14 +227,12 @@ export class AssignConsultantComponent implements OnInit {
     // If not all elements were placed back in original consultants and scores arrays, place them in here
     while (lcv1 < leftLength) {
       arrCons[lcv3] = arrLeftCons[lcv1];
-      arrScores[lcv3] = arrLeftScores[lcv1];
       lcv1++;
       lcv3++;
     }
 
     while (lcv2 < rightLength) {
       arrCons[lcv3] = arrRightCons[lcv2];
-      arrScores[lcv3] = arrRightScores[lcv2];
       lcv2++;
       lcv3++;
     }
@@ -244,11 +246,20 @@ export class AssignConsultantComponent implements OnInit {
 
       // Capture consultant language required by assignment
       const numLanguages = data['proficiencies'].length;
+      let hasLanguage = false;
       let i;
       for (i = 0; i < numLanguages; i++) {
         if (data['proficiencies'][(i).toString()]['language'] === this.assignment['language']) {
           this.selectedConsultantLanguage = data['proficiencies'][(i).toString()];
+          hasLanguage = true;
         }
+      }
+      if (!hasLanguage) {
+        this.selectedConsultantLanguage['language'] = 'none';
+        this.selectedConsultantLanguage['reading'] = '';
+        this.selectedConsultantLanguage['writing'] = '';
+        this.selectedConsultantLanguage['speaking'] = '';
+        this.selectedConsultantLanguage['listening'] = '';
       }
 
       // Capture consultant roles required by assignment
@@ -274,9 +285,6 @@ export class AssignConsultantComponent implements OnInit {
       if (this.assignment['isTranslationConsultantRole'] === true && data['isTranslationConsultantRole'] === true) {
         this.selectedConsultantRoles.push('Translation Consultant');
       }
-      if (this.selectedConsultantRoles.length === 0) {
-        this.selectedConsultantRoles.push('none');
-      }
 
       // Capture consultant testament required by assignment
       if (this.assignment['testament'] === 'Old Testament' && data['isOldTestament'] === true) {
@@ -284,7 +292,7 @@ export class AssignConsultantComponent implements OnInit {
       } else if (this.assignment['testament'] === 'New Testament' && data['isNewTestament'] === true) {
         this.selectedConsultantTestament = 'New Testament';
       } else {
-        this.selectedConsultantTestament = 'None';
+        this.selectedConsultantTestament = 'none';
       }
 
       // Capture consultant media required by assignment
@@ -306,16 +314,13 @@ export class AssignConsultantComponent implements OnInit {
           this.selectedConsultantAssignments.push(this.assignments[j.toString()]);
         }
       }
-
-      // Set consultant being displayed as consultant assigned to assignment
-      // When 'assign' button is clicked, this change is saved in the database
-      this.assignment['consultantId'] = data['_id'];
-      this.assignment['consultantName'] = data['firstName'] + ' ' + data['lastName'];
     });
   }
 
-  // assignConsultant saves consultant whose information is currently displayed as the consultant assigned to this assignment
-  assignConsultant(assignmentId) {
+  // assignConsultant saves consultant whose assign button is clicked as the consultant assigned to this assignment
+  assignConsultant(assignmentId, consultantId, consultantName) {
+    this.assignment['consultantId'] = consultantId;
+    this.assignment['consultantName'] = consultantName;
     this.http.put('/assignment/' + assignmentId, this.assignment)
       .subscribe(res => {
           this._location.back();
