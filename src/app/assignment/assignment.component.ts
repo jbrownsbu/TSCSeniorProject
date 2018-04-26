@@ -17,7 +17,9 @@ export class AssignmentComponent implements OnInit {
 
   assignments: any;
   isConsultantView: boolean;
+  consultantName: string;
   isProjectView: boolean;
+  projectName: string;
   isAllView: boolean;
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
@@ -26,9 +28,11 @@ export class AssignmentComponent implements OnInit {
     if (this.route.snapshot.url.length > 2) {
       if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'consultant') {
         this.isConsultantView = true;
+        this.getConsultantNameByConsultantId(this.route.snapshot.params['consultantId']);
         this.getAssignmentsByConsultantId(this.route.snapshot.params['consultantId']);
       } else if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'project') {
         this.isProjectView = true;
+        this.getProjectNameByProjectId(this.route.snapshot.params['projectId']);
         this.getAssignmentsByProjectId(this.route.snapshot.params['projectId']);
       }
     } else {
@@ -52,6 +56,18 @@ export class AssignmentComponent implements OnInit {
   getAllAssignments() {
     this.http.get('/assignment').subscribe(data => {
       this.assignments = data;
+    });
+  }
+
+  getConsultantNameByConsultantId(consultantId) {
+    this.http.get('/consultant/' + consultantId).subscribe(data => {
+      this.consultantName = data['firstName'] + ' ' + data['lastName'];
+    });
+  }
+
+  getProjectNameByProjectId(projectId) {
+    this.http.get('/project/' + projectId).subscribe(data => {
+      this.projectName = data['projectName'];
     });
   }
 }

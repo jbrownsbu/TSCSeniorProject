@@ -1,7 +1,8 @@
 <!--
 assign-consultant component loads details of an assignment from database. This html displays an assignment's information
-along with a list of the best consultants to be matched to the assignment. When 'assign' button is clicked, displayed
-consultant's information is sent back to the database to be stored in the assignment as it's assigned consultant.
+along with a list of the best consultants to be matched to the assignment. When 'assign' button is clicked on a row of
+consultants table, that consultant's information is sent back to the database to be stored in the assignment as the
+assignment's assigned consultant.
 -->
 <div id="list" class="container">
   <div class="row">
@@ -32,26 +33,31 @@ consultant's information is sent back to the database to be stored in the assign
         </div>
 
         <div>
-          <h3>Top Consultant Matches</h3>
+          <br><h3>Top Consultant Matches</h3>
+          <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsName"></h5>
 
           <table class="table">
-            <thead>
+            <thead style="display: block; width: 100%">
+            <th>Match Score</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Actions</th>
             </thead>
-            <tbody>
-            <tr *ngFor="let consultant of consultants">
+            <tbody style="display: block; width: 100%; height: 215px; overflow-y: scroll">
+            <tr *ngFor="let consultant of consultants | filterName: searchTermsName; let i = index" (click)="this.getConsultant(consultant._id); this.setClickedRow(i)" [class.active]="i == selectedRow" style="cursor: pointer">
+              <td>{{ consultant.score }}</td>
               <td>{{ consultant.firstName }}</td>
               <td>{{ consultant.lastName }}</td>
               <td>
-                <button (click)="this.getConsultant(consultant._id)">View Details</button>
+                <button (click)="this.assignConsultant(assignment._id, consultant._id, (consultant.firstName + ' ' + consultant.lastName))">Assign</button>
               </td>
             </tr>
             </tbody>
           </table>
+        </div>
 
-          <p><b>Name: </b>{{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</p>
+        <div>
+          <h3>Selected Consultant: {{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</h3>
           <p><b>Region: </b>{{ selectedConsultant.translationRegion }}</p>
           <p><b>Language: </b>{{ selectedConsultantLanguage.language }}</p>
           <p style="text-indent: 10px"><b>Reading: </b>{{ selectedConsultantLanguage.reading }}</p>
@@ -61,22 +67,24 @@ consultant's information is sent back to the database to be stored in the assign
           <p><b>Matched Testament: </b>{{ selectedConsultantTestament }}</p>
           <p><b>Matched Media: </b>{{ selectedConsultantMedia }}</p>
           <b>Matched Roles: </b>
-          <p style="text-indent: 10px" *ngFor="let role of selectedConsultantRoles">{{ role }}<br></p>
-          <b>Previous Assignments: </b>
-          <table class="table">
+          <div *ngIf="selectedConsultantRoles.length > 0"><p style="text-indent: 10px" *ngFor="let role of selectedConsultantRoles">{{ role }}<br></p></div>
+          <p *ngIf="selectedConsultantRoles.length === 0" style="text-indent: 10px">none</p>
+          <p *ngIf="selectedConsultantAssignments.length === 0"><b>Previous Assignments on this Project: </b> none </p>
+          <b *ngIf="selectedConsultantAssignments.length > 0">Previous Assignments on this Project: </b>
+          <table *ngIf="selectedConsultantAssignments.length > 0" class="table">
             <thead>
               <th>Start Date</th>
               <th>End Date</th>
+              <th>Type</th>
             </thead>
             <tbody>
             <tr *ngFor="let assignment of selectedConsultantAssignments">
               <td>{{ assignment.startDate }}</td>
               <td>{{ assignment.endDate }}</td>
+              <td>{{ assignment.assignmentType }}</td>
             </tr>
             </tbody>
           </table>
-
-          <br><button (click)="this.assignConsultant(assignment._id)">Assign</button>
         </div>
       </section>
     </div>
