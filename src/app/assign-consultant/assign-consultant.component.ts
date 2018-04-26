@@ -10,6 +10,8 @@ import { Location } from '@angular/common';
 })
 export class AssignConsultantComponent implements OnInit {
 
+  searchTermsName: string;
+
   // These variables are used by the getTopConsultantMatches method
   assignments: any;
   assignment = {};
