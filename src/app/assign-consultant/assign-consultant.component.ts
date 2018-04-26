@@ -246,11 +246,20 @@ export class AssignConsultantComponent implements OnInit {
 
       // Capture consultant language required by assignment
       const numLanguages = data['proficiencies'].length;
+      let hasLanguage = false;
       let i;
       for (i = 0; i < numLanguages; i++) {
         if (data['proficiencies'][(i).toString()]['language'] === this.assignment['language']) {
           this.selectedConsultantLanguage = data['proficiencies'][(i).toString()];
+          hasLanguage = true;
         }
+      }
+      if (!hasLanguage) {
+        this.selectedConsultantLanguage['language'] = 'none';
+        this.selectedConsultantLanguage['reading'] = '';
+        this.selectedConsultantLanguage['writing'] = '';
+        this.selectedConsultantLanguage['speaking'] = '';
+        this.selectedConsultantLanguage['listening'] = '';
       }
 
       // Capture consultant roles required by assignment

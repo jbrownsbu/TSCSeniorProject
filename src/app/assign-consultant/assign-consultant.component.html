@@ -32,7 +32,7 @@ assignment's assigned consultant.
           <p style="text-indent: 10px" *ngIf="assignment.isTranslationConsultantRole">Translation Consultant<br></p>
         </div>
 
-        <div *ngIf="consultants.length > 0">
+        <div>
           <br><h3>Top Consultant Matches</h3>
           <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsName"></h5>
           <table class="table">
@@ -43,7 +43,6 @@ assignment's assigned consultant.
             <th>Actions</th>
             </thead>
             <tbody style="display: block; width: 100%; height: 215px; overflow-y: scroll">
-            <!--style="display: block; width: 500px; height: 100px; overflow-y: scroll"-->
             <tr *ngFor="let consultant of consultants | filterName: searchTermsName; let i = index" (click)="this.getConsultant(consultant._id); this.setClickedRow(i)" [class.active]="i == selectedRow" style="cursor: pointer">
               <td>{{ consultant.score }}</td>
               <td>{{ consultant.firstName }}</td>
@@ -85,10 +84,6 @@ assignment's assigned consultant.
             </tr>
             </tbody>
           </table>
-        </div>
-
-        <div *ngIf="consultants.length === 0">
-          <h3>No Consultant Matches</h3>
         </div>
       </section>
     </div>
