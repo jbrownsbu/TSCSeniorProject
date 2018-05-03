@@ -13,14 +13,15 @@ import { ConsultantComponent } from './consultant/consultant.component';
 import { ConsultantEditComponent } from './consultant-edit/consultant-edit.component';
 import { FilterPipeConsultantNameModule } from './filter-pipe-consultantName/filter-pipe-consultantName.module';
 import { FilterPipeProjectNameModule } from './filter-pipe-projectName/filter-pipe-projectName.module';
-import { FilterPipeRegionModule} from './filter-pipe-region/filter-pipe-region.module';
-import {FilterPipeLanguageModule} from './filter-pipe-language/filter-pipe-language.module';
+import { FilterPipeRegionModule } from './filter-pipe-region/filter-pipe-region.module';
+import { FilterPipeLanguageModule } from './filter-pipe-language/filter-pipe-language.module';
 import { FilterPipeAssignedModule } from './filter-pipe-assigned/filter-pipe-assigned.module';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { AssignmentEditComponent } from './assignment-edit/assignment-edit.component';
 import { AssignmentCreateComponent } from './assignment-create/assignment-create.component';
 import { ProjectComponent } from './project/project.component';
 import { AssignConsultantComponent } from './assign-consultant/assign-consultant.component';
+import { ConsultantCreateComponent } from './consultant-create/consultant-create.component';
 
 const appRoutes: Routes = [
   {
@@ -32,6 +33,11 @@ const appRoutes: Routes = [
     path: 'consultants',
     component: ConsultantComponent,
     data: { title: 'Consultant List' }
+  },
+  {
+    path: 'consultant/create',
+    component: ConsultantCreateComponent,
+    data: { title: 'Create Consultant'}
   },
   {
     path: 'consultant-edit/:id',
@@ -84,7 +90,8 @@ const appRoutes: Routes = [
     AssignmentEditComponent,
     AssignmentCreateComponent,
     ProjectComponent,
-    AssignConsultantComponent
+    AssignConsultantComponent,
+    ConsultantCreateComponent
   ],
   imports: [
     BrowserModule,

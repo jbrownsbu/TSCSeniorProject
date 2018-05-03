@@ -28,6 +28,19 @@ router.put('/:id', function(req, res, next) {
   });
 });
 
+/* CREATE CONSULTANT */
+router.post('/create', function(req, res, next) {
+  var obj = req.body;
+  var model = new Consultant(obj);
+  model.save(function(err) {
+    if (err) {
+      res.send("error");
+      return;
+    }
+    res.send("created");
+  });
+});
+
 /*ADD NEW PROFICIENCY */
 router.patch('/:id', function(req, res, next) {
   var newProficiency = {

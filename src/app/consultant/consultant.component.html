@@ -6,7 +6,8 @@ The list is sortable by the consultant's last name and region.
 -->
 
 <div class="container">
-  <h1>Consultants</h1>
+  <h1>Consultants </h1>
+  <button [routerLink]="['/consultant/create']" type="button">Add New Consultant</button>
   <div>
     <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsConsultantName"> <input type="text" placeholder="Consultant Region" [(ngModel)]="searchTermsRegion"></h5>
   </div>
