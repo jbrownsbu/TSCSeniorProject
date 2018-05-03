@@ -5,7 +5,11 @@ This html displays a list containing assignment information along with button li
 <div class="container">
   <h1 *ngIf="isConsultantView">Assignments - {{consultantName}}</h1>
   <h1 *ngIf="isProjectView">Assignments - {{projectName}}</h1>
-  <h1 *ngIf="isAllView">Assignments - All</h1>
+  <h1 *ngIf="isAllView && searchTermsAssigned">Assignments - Unassigned</h1>
+  <h1 *ngIf="isAllView && !searchTermsAssigned">Assignments - All</h1>
+  <div>
+    <h5 *ngIf="!isConsultantView">Unassigned Only: <input type="checkbox" [(ngModel)]="searchTermsAssigned"></h5>
+  </div>
   <table class="table">
     <thead>
     <th *ngIf="!isConsultantView">Consultant Name</th>
@@ -18,7 +22,7 @@ This html displays a list containing assignment information along with button li
     <th>End Date</th>
     </thead>
     <tbody>
-    <tr *ngFor="let assignment of assignments">
+    <tr *ngFor="let assignment of assignments | filterAssigned: searchTermsAssigned">
       <td *ngIf="!isConsultantView">{{ assignment.consultantName }}</td>
       <td *ngIf="!isProjectView">{{ assignment.projectName }}</td>
       <td *ngIf="!isProjectView">{{ assignment.language }}</td>
@@ -28,7 +32,7 @@ This html displays a list containing assignment information along with button li
       <td>{{ assignment.startDate }}</td>
       <td>{{ assignment.endDate }}</td>
       <td> <button [routerLink]="['/assignment-edit', assignment._id]" type="button">Edit</button></td>
-      <td *ngIf="assignment.consultantId=='Unassigned'"> <button [routerLink]="['/assign-consultant', assignment._id]" type="button">Assign Consultant</button></td>
+      <td *ngIf="assignment.consultantId=='Unassigned'"> <button [routerLink]="['/assign-consultant', assignment._id]" type="button">Assign</button></td>
     </tr>
     </tbody>
   </table>

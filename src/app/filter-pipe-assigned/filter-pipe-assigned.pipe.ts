@@ -14,7 +14,7 @@ export class FilterPipeAssignedPipe implements PipeTransform {
       return items;
     }
 
-    const result = items.filter(item => (!item.hasConsultantAssigned));
+    const result = items.filter(item => (item.consultantId.indexOf('Unassigned') !== -1));
 
     return result;
   }

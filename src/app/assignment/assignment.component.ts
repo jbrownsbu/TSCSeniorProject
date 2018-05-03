@@ -21,6 +21,7 @@ export class AssignmentComponent implements OnInit {
   isProjectView: boolean;
   projectName: string;
   isAllView: boolean;
+  searchTermsAssigned: boolean; // Variable for the value of the unassigned only filter.
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
@@ -28,15 +29,18 @@ export class AssignmentComponent implements OnInit {
     if (this.route.snapshot.url.length > 2) {
       if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'consultant') {
         this.isConsultantView = true;
+        this.searchTermsAssigned = false;
         this.getConsultantNameByConsultantId(this.route.snapshot.params['consultantId']);
         this.getAssignmentsByConsultantId(this.route.snapshot.params['consultantId']);
       } else if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'project') {
         this.isProjectView = true;
+        this.searchTermsAssigned = false;
         this.getProjectNameByProjectId(this.route.snapshot.params['projectId']);
         this.getAssignmentsByProjectId(this.route.snapshot.params['projectId']);
       }
     } else {
       this.isAllView = true;
+      this.searchTermsAssigned = true;
       this.getAllAssignments();
     }
   }
