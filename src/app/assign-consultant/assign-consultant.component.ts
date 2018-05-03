@@ -28,6 +28,15 @@ export class AssignConsultantComponent implements OnInit {
   setClickedRow: Function;
   selectedRow: number;
 
+  order = 'score';
+  reverse = true;
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+    this.order = value;
+  }
+
   constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
     this.setClickedRow = function(index) {
       this.selectedRow = index;
