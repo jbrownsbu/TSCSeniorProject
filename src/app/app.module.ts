@@ -12,6 +12,7 @@ import { OrderModule } from './order-pipe/ngx-order.module';
 import { ConsultantComponent } from './consultant/consultant.component';
 import { ConsultantEditComponent } from './consultant-edit/consultant-edit.component';
 import { FilterPipeConsultantNameModule } from './filter-pipe-consultantName/filter-pipe-consultantName.module';
+import { FilterPipeProjectNameModule } from './filter-pipe-projectName/filter-pipe-projectName.module';
 import { FilterPipeRegionModule} from './filter-pipe-region/filter-pipe-region.module';
 import { FilterPipeAssignedModule } from './filter-pipe-assigned/filter-pipe-assigned.module';
 import { AssignmentComponent } from './assignment/assignment.component';
@@ -90,6 +91,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     FilterPipeConsultantNameModule,
+    FilterPipeProjectNameModule,
     FilterPipeRegionModule,
     FilterPipeAssignedModule,
     RouterModule.forRoot(

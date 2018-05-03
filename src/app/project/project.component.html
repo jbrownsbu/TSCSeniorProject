@@ -6,6 +6,9 @@ Project data is not editable within consultant tracker because projects are mana
 
 <div class="container">
   <h1>Projects</h1>
+  <div>
+    <h5>Filter: <input type="text" placeholder="Project Name" [(ngModel)]="searchTermsProjectName"> <input type="text" placeholder="Project Region" [(ngModel)]="searchTermsRegion"></h5>
+  </div>
   <table class="table">
     <thead>
     <th [class.active]="order === 'projectName'"
@@ -26,7 +29,7 @@ Project data is not editable within consultant tracker because projects are mana
     <th>Actions</th>
     </thead>
     <tbody>
-    <tr *ngFor="let project of projects | orderBy: order:reverse:'case-insensitive'">
+    <tr *ngFor="let project of projects | orderBy: order:reverse:'case-insensitive' | filterProjectName: searchTermsProjectName | filterRegion: searchTermsRegion">
       <td>{{ project.projectName }}</td>
       <td>{{ project.language}}</td>
       <td>{{ project.translationRegion}}</td>
