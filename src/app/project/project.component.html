@@ -6,15 +6,34 @@ Project data is not editable within consultant tracker because projects are mana
 
 <div class="container">
   <h1>Projects</h1>
+  <div>
+    <h5>Filter:
+      <input type="text" placeholder="Project Name" [(ngModel)]="searchTermsProjectName">
+      <input type="text" placeholder="Project Region" [(ngModel)]="searchTermsRegion">
+      <input type="text" placeholder="Project Language" [(ngModel)]="searchTermsLanguage">
+    </h5>
+  </div>
   <table class="table">
     <thead>
-    <th>Project Name</th>
-    <th>Language</th>
-    <th>Region</th>
+    <th [class.active]="order === 'projectName'"
+        (click)="setOrder('projectName')"
+        class="mdl-data-table__cell--non-numeric">
+      Project Name <span [hidden]="reverse || (order != 'projectName')">▼</span><span [hidden]="!reverse || (order != 'projectName')">▲</span>
+    </th>
+    <th [class.active]="order === 'language'"
+        (click)="setOrder('language')"
+        class="mdl-data-table__cell--non-numeric">
+      Language <span [hidden]="reverse || (order != 'language')">▼</span><span [hidden]="!reverse || (order != 'language')">▲</span>
+    </th>
+    <th [class.active]="order === 'translationRegion'"
+        (click)="setOrder('translationRegion')"
+        class="mdl-data-table__cell--non-numeric">
+      Region <span [hidden]="reverse || (order != 'translationRegion')">▼</span><span [hidden]="!reverse || (order != 'translationRegion')">▲</span>
+    </th>
     <th>Actions</th>
     </thead>
     <tbody>
-    <tr *ngFor="let project of projects">
+    <tr *ngFor="let project of projects | orderBy: order:reverse:'case-insensitive' | filterProjectName: searchTermsProjectName | filterRegion: searchTermsRegion | filterLanguage: searchTermsLanguage">
       <td>{{ project.projectName }}</td>
       <td>{{ project.language}}</td>
       <td>{{ project.translationRegion}}</td>

@@ -12,17 +12,49 @@ This html displays a list containing assignment information along with button li
   </div>
   <table class="table">
     <thead>
-    <th *ngIf="!isConsultantView">Consultant Name</th>
-    <th *ngIf="!isProjectView">Project Name</th>
-    <th *ngIf="!isProjectView">Language</th>
-    <th *ngIf="!isProjectView">Region</th>
-    <th>Media</th>
-    <th>Type</th>
-    <th>Start Date</th>
-    <th>End Date</th>
+    <th *ngIf="!isConsultantView" [class.active]="order === 'consultantName'"
+        (click)="setOrder('consultantName')"
+        class="mdl-data-table__cell--non-numeric">
+      Consultant <span [hidden]="reverse || (order != 'consultantName')">▼</span><span [hidden]="!reverse || (order != 'consultantName')">▲</span>
+    </th>
+    <th *ngIf="!isProjectView" [class.active]="order === 'projectName'"
+        (click)="setOrder('projectName')"
+        class="mdl-data-table__cell--non-numeric">
+      Project <span [hidden]="reverse || (order != 'projectName')">▼</span><span [hidden]="!reverse || (order != 'projectName')">▲</span>
+    </th>
+    <th *ngIf="!isProjectView" [class.active]="order === 'language'"
+        (click)="setOrder('language')"
+        class="mdl-data-table__cell--non-numeric">
+      Language <span [hidden]="reverse || (order != 'language')">▼</span><span [hidden]="!reverse || (order != 'language')">▲</span>
+    </th>
+    <th *ngIf="!isProjectView" [class.active]="order === 'translationRegion'"
+        (click)="setOrder('translationRegion')"
+        class="mdl-data-table__cell--non-numeric">
+      Region <span [hidden]="reverse || (order != 'translationRegion')">▼</span><span [hidden]="!reverse || (order != 'translationRegion')">▲</span>
+    </th>
+    <th [class.active]="order === 'media'"
+        (click)="setOrder('media')"
+        class="mdl-data-table__cell--non-numeric">
+      Media <span [hidden]="reverse || (order != 'media')">▼</span><span [hidden]="!reverse || (order != 'media')">▲</span>
+    </th>
+    <th [class.active]="order === 'assignmentType'"
+        (click)="setOrder('assignmentType')"
+        class="mdl-data-table__cell--non-numeric">
+      Type <span [hidden]="reverse || (order != 'assignmentType')">▼</span><span [hidden]="!reverse || (order != 'assignmentType')">▲</span>
+    </th>
+    <th [class.active]="order === 'startDate'"
+        (click)="setOrder('startDate')"
+        class="mdl-data-table__cell--non-numeric">
+      Start Date <span [hidden]="reverse || (order != 'startDate')">▼</span><span [hidden]="!reverse || (order != 'startDate')">▲</span>
+    </th>
+    <th [class.active]="order === 'endDate'"
+        (click)="setOrder('endDate')"
+        class="mdl-data-table__cell--non-numeric">
+      End Date <span [hidden]="reverse || (order != 'endDate')">▼</span><span [hidden]="!reverse || (order != 'endDate')">▲</span>
+    </th>
     </thead>
     <tbody>
-    <tr *ngFor="let assignment of assignments | filterAssigned: searchTermsAssigned">
+    <tr *ngFor="let assignment of assignments | orderBy: order:reverse:'case-insensitive'| filterAssigned: searchTermsAssigned">
       <td *ngIf="!isConsultantView">{{ assignment.consultantName }}</td>
       <td *ngIf="!isProjectView">{{ assignment.projectName }}</td>
       <td *ngIf="!isProjectView">{{ assignment.language }}</td>

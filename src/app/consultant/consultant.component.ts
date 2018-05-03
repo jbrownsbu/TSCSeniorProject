@@ -16,18 +16,18 @@ import { HttpClient } from '@angular/common/http';
 export class ConsultantComponent implements OnInit {
 
   consultants: any;
-  searchTermsName: string;
+  searchTermsConsultantName: string;
   searchTermsRegion: string;
 
-  order: string = 'info.name';
-  reverse: boolean = false;
+  order = 'lastName';
+  reverse = false;
   setOrder(value: string) {
     if (this.order === value) {
       this.reverse = !this.reverse;
     }
-
     this.order = value;
   }
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {

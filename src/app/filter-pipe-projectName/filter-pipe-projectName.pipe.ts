@@ -5,17 +5,16 @@ This pipe is used with a textbox on the consultants listing page to filter by th
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filterName'
+  name: 'filterProjectName'
 })
-export class FilterPipeNamePipe implements PipeTransform {
+export class FilterPipeProjectNamePipe implements PipeTransform {
 
   transform(items: any[], filter: string): any {
     if (!items || !filter) {
       return items;
     }
 
-    const result = items.filter(item => ((item.firstName.toLowerCase().indexOf(filter.toLowerCase()) !== -1) ||
-                                                  (item.lastName.toLowerCase().indexOf(filter.toLowerCase()) !== -1)));
+    const result = items.filter(item => (item.projectName.toLowerCase().indexOf(filter.toLowerCase()) !== -1));
 
     return result;
   }

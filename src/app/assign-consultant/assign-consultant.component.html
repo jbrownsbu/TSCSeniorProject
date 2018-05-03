@@ -34,17 +34,29 @@ assignment's assigned consultant.
 
         <div>
           <br><h3>Top Consultant Matches</h3>
-          <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsName"></h5>
+          <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsConsultantName"></h5>
 
           <table class="table">
             <thead style="display: block; width: 100%">
-            <th>Match Score</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th [class.active]="order === 'score'"
+                (click)="setOrder('score')"
+                class="mdl-data-table__cell--non-numeric">
+              Match Score <span [hidden]="reverse || (order != 'score')">▼</span><span [hidden]="!reverse || (order != 'score')">▲</span>
+            </th>
+            <th [class.active]="order === 'firstName'"
+                (click)="setOrder('firstName')"
+                class="mdl-data-table__cell--non-numeric">
+              First Name <span [hidden]="reverse || (order != 'firstName')">▼</span><span [hidden]="!reverse || (order != 'firstName')">▲</span>
+            </th>
+            <th [class.active]="order === 'lastName'"
+                (click)="setOrder('lastName')"
+                class="mdl-data-table__cell--non-numeric">
+              Last Name <span [hidden]="reverse || (order != 'lastName')">▼</span><span [hidden]="!reverse || (order != 'lastName')">▲</span>
+            </th>
             <th>Actions</th>
             </thead>
             <tbody style="display: block; width: 100%; height: 215px; overflow-y: scroll">
-            <tr *ngFor="let consultant of consultants | filterName: searchTermsName; let i = index" (click)="this.getConsultant(consultant._id); this.setClickedRow(i)" [class.active]="i == selectedRow" style="cursor: pointer">
+            <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'| filterConsultantName: searchTermsConsultantName; let i = index" (click)="this.getConsultant(consultant._id); this.setClickedRow(i)" [class.active]="i == selectedRow" style="cursor: pointer">
               <td>{{ consultant.score }}</td>
               <td>{{ consultant.firstName }}</td>
               <td>{{ consultant.lastName }}</td>

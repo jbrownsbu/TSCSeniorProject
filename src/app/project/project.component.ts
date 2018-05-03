@@ -14,6 +14,18 @@ import { HttpClient } from '@angular/common/http';
 export class ProjectComponent implements OnInit {
 
   projects: any; // Holds project data after retrieved from database.
+  searchTermsProjectName: string;
+  searchTermsRegion: string;
+  searchTermsLanguage: string;
+
+  order = 'projectName';
+  reverse = false;
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+    this.order = value;
+  }
 
   constructor(private http: HttpClient) {}
 
