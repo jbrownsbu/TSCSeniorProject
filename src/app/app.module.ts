@@ -14,6 +14,7 @@ import { ConsultantEditComponent } from './consultant-edit/consultant-edit.compo
 import { FilterPipeConsultantNameModule } from './filter-pipe-consultantName/filter-pipe-consultantName.module';
 import { FilterPipeProjectNameModule } from './filter-pipe-projectName/filter-pipe-projectName.module';
 import { FilterPipeRegionModule} from './filter-pipe-region/filter-pipe-region.module';
+import {FilterPipeLanguageModule} from './filter-pipe-language/filter-pipe-language.module';
 import { FilterPipeAssignedModule } from './filter-pipe-assigned/filter-pipe-assigned.module';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { AssignmentEditComponent } from './assignment-edit/assignment-edit.component';
@@ -93,6 +94,7 @@ const appRoutes: Routes = [
     FilterPipeConsultantNameModule,
     FilterPipeProjectNameModule,
     FilterPipeRegionModule,
+    FilterPipeLanguageModule,
     FilterPipeAssignedModule,
     RouterModule.forRoot(
       appRoutes,

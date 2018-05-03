@@ -16,6 +16,7 @@ export class ProjectComponent implements OnInit {
   projects: any; // Holds project data after retrieved from database.
   searchTermsProjectName: string;
   searchTermsRegion: string;
+  searchTermsLanguage: string;
 
   order = 'projectName';
   reverse = false;
