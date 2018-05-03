@@ -35,6 +35,12 @@ export class AssignmentEditComponent implements OnInit {
     });
   }
 
+  removeConsultant() {
+    this.assignment['consultantId'] = 'Unassigned';
+    this.assignment['consultantName'] = '';
+    this.isAssigned = false;
+  }
+
   updateAssignment(id) {
     this.http.put('/assignment/' + id, this.assignment)
       .subscribe(res => {
