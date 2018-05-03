@@ -23,6 +23,15 @@ export class AssignmentComponent implements OnInit {
   isAllView: boolean;
   searchTermsAssigned: boolean; // Variable for the value of the unassigned only filter.
 
+  order = 'startDate';
+  reverse = false;
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+    this.order = value;
+  }
+
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {

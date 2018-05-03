@@ -16,7 +16,7 @@ button:hover{
 }
 
 /* Cursor changes to pointer finger when hovering over ordering arrows. */
-span{
+th{
   cursor: pointer;
 }
 

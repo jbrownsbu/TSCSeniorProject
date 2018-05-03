@@ -12,19 +12,35 @@ The list is sortable by the consultant's last name and region.
   </div>
     <table class="table">
       <thead>
-        <th>First Name</th>
+      <th [class.active]="order === 'firstName'"
+          (click)="setOrder('firstName')"
+          class="mdl-data-table__cell--non-numeric">
+        First Name <span [hidden]="reverse || (order != 'firstName')">▼</span><span [hidden]="!reverse || (order != 'firstName')">▲</span>
+      </th>
         <th [class.active]="order === 'lastName'"
             (click)="setOrder('lastName')"
             class="mdl-data-table__cell--non-numeric">
-          Last Name <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+          Last Name <span [hidden]="reverse || (order != 'lastName')">▼</span><span [hidden]="!reverse || (order != 'lastName')">▲</span>
         </th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Address</th>
+      <th [class.active]="order === 'phone'"
+          (click)="setOrder('phone')"
+          class="mdl-data-table__cell--non-numeric">
+        Phone <span [hidden]="reverse || (order != 'phone')">▼</span><span [hidden]="!reverse || (order != 'phone')">▲</span>
+      </th>
+      <th [class.active]="order === 'email'"
+          (click)="setOrder('email')"
+          class="mdl-data-table__cell--non-numeric">
+        Email <span [hidden]="reverse || (order != 'email')">▼</span><span [hidden]="!reverse || (order != 'email')">▲</span>
+      </th>
+      <th [class.active]="order === 'address'"
+          (click)="setOrder('address')"
+          class="mdl-data-table__cell--non-numeric">
+        Address <span [hidden]="reverse || (order != 'address')">▼</span><span [hidden]="!reverse || (order != 'address')">▲</span>
+      </th>
         <th [class.active]="order === 'translationRegion'"
             (click)="setOrder('translationRegion')"
             class="mdl-data-table__cell--non-numeric">
-          Region <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+          Region <span [hidden]="reverse || (order != 'translationRegion')">▼</span><span [hidden]="!reverse || (order != 'translationRegion')">▲</span>
         </th>
         <th>Actions</th>
       </thead>
