@@ -15,6 +15,15 @@ export class ProjectComponent implements OnInit {
 
   projects: any; // Holds project data after retrieved from database.
 
+  order = 'projectName';
+  reverse = false;
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
+    this.order = value;
+  }
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {

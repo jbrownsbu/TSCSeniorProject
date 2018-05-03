@@ -14,3 +14,8 @@ button{
 button:hover{
   opacity: .5;
 }
+
+/* Cursor changes to pointer finger when hovering over ordering arrows. */
+th{
+  cursor: pointer;
+}
