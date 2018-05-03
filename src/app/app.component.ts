@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { FilterPipeNamePipe } from './filter-pipe-name/filter-pipe-name.pipe';
+import { FilterPipeConsultantNamePipe } from './filter-pipe-consultantName/filter-pipe-consultantName.pipe';
 import { FilterPipeRegionPipe } from './filter-pipe-region/filter-pipe-region.pipe';
 import { FilterPipeAssignedPipe} from './filter-pipe-assigned/filter-pipe-assigned.pipe';
 

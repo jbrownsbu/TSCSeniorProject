@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 export class ConsultantComponent implements OnInit {
 
   consultants: any;
-  searchTermsName: string;
+  searchTermsConsultantName: string;
   searchTermsRegion: string;
 
   order = 'lastName';

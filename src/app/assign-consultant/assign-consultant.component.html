@@ -34,7 +34,7 @@ assignment's assigned consultant.
 
         <div>
           <br><h3>Top Consultant Matches</h3>
-          <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsName"></h5>
+          <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsConsultantName"></h5>
 
           <table class="table">
             <thead style="display: block; width: 100%">
@@ -44,7 +44,7 @@ assignment's assigned consultant.
             <th>Actions</th>
             </thead>
             <tbody style="display: block; width: 100%; height: 215px; overflow-y: scroll">
-            <tr *ngFor="let consultant of consultants | filterName: searchTermsName; let i = index" (click)="this.getConsultant(consultant._id); this.setClickedRow(i)" [class.active]="i == selectedRow" style="cursor: pointer">
+            <tr *ngFor="let consultant of consultants | filterConsultantName: searchTermsConsultantName; let i = index" (click)="this.getConsultant(consultant._id); this.setClickedRow(i)" [class.active]="i == selectedRow" style="cursor: pointer">
               <td>{{ consultant.score }}</td>
               <td>{{ consultant.firstName }}</td>
               <td>{{ consultant.lastName }}</td>

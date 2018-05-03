@@ -8,7 +8,7 @@ The list is sortable by the consultant's last name and region.
 <div class="container">
   <h1>Consultants</h1>
   <div>
-    <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsName"> <input type="text" placeholder="Consultant Region" [(ngModel)]="searchTermsRegion"></h5>
+    <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsConsultantName"> <input type="text" placeholder="Consultant Region" [(ngModel)]="searchTermsRegion"></h5>
   </div>
     <table class="table">
       <thead>
@@ -45,7 +45,7 @@ The list is sortable by the consultant's last name and region.
         <th>Actions</th>
       </thead>
       <tbody>
-      <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'| filterName: searchTermsName | filterRegion: searchTermsRegion">
+      <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'| filterConsultantName: searchTermsConsultantName | filterRegion: searchTermsRegion">
         <td>{{ consultant.firstName }}</td>
         <td>{{ consultant.lastName }}</td>
         <td>{{ consultant.phone }}</td>

@@ -5,9 +5,9 @@ This pipe is used with a textbox on the consultants listing page to filter by th
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filterName'
+  name: 'filterConsultantName'
 })
-export class FilterPipeNamePipe implements PipeTransform {
+export class FilterPipeConsultantNamePipe implements PipeTransform {
 
   transform(items: any[], filter: string): any {
     if (!items || !filter) {
