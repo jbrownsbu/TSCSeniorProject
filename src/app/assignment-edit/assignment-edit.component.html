@@ -7,9 +7,9 @@ back to the database to be stored.
 <div id="list" class="container">
   <div class="row">
     <div class="col-md-6">
+      <h1 *ngIf="isAssigned">{{ assignment.consultantName }} - {{ assignment.projectName }}</h1>
+      <h1 *ngIf="!isAssigned">Unassigned - {{ assignment.projectName }}</h1>
       <section>
-        <h1 *ngIf="isAssigned">{{ assignment.consultantName }} - {{ assignment.projectName }}</h1>
-        <h1 *ngIf="!isAssigned">Unassigned - {{ assignment.projectName }}</h1>
         <form (ngSubmit)="updateAssignment(assignment._id, assignment.consultantId)" #assignmentForm="ngForm">
 
           <div class="form-group">
@@ -24,20 +24,20 @@ back to the database to be stored.
             <label>Notes <input type="text" class="form-control" [(ngModel)]="assignment.notes" name="notes" required="false"></label>
           </div>
 
-          <h3>Dates</h3>
           <div class="form-group">
+            <h3>Dates</h3>
             <label>Start <input type="date" class="form-control" [(ngModel)]="assignment.startDate" name="startDate" required></label>
             <label>End <input type="date" class="form-control" [(ngModel)]="assignment.endDate" name="endDate" required></label>
           </div>
 
-          <h3>Testament</h3>
           <div class="form-group">
+            <h3>Testament</h3>
             <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="Old Testament"> Old Testament<br>
             <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="New Testament"> New Testament
           </div>
 
-          <h3>Media</h3>
           <div class="form-group">
+            <h3>Media</h3>
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Written"> Written<br>
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Audio"> Audio<br>
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Storytelling"> Storytelling
@@ -55,8 +55,8 @@ back to the database to be stored.
             <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Training Others" required> Training Others
           </div>
 
-          <h3>Roles Needed</h3>
           <div class="form-group">
+            <h3>Roles Needed</h3>
             <input type="checkbox" name="isAudioToAudioRole" [(ngModel)]="assignment.isAudioToAudioRole" value="Audio to Audio Translation Consultant"> Audio to Audio Translation Consultant<br>
             <input type="checkbox" name="isGuestScholarRole" [(ngModel)]="assignment.isGuestScholarRole" value="Guest Scholar (Exegetical, Linguistic, Bible)"> Guest Scholar (Exegetical, Linguistic, Bible)<br>
             <input type="checkbox" name="isLinguisticConsultantRole" [(ngModel)]="assignment.isLinguisticConsultantRole" value="Linguistic Consultant"> Linguistic Consultant<br>
@@ -66,8 +66,9 @@ back to the database to be stored.
             <input type="checkbox" name="isTranslationConsultantRole" [(ngModel)]="assignment.isTranslationConsultantRole" value="Translation Consultant"> Translation Consultant
           </div>
 
-          <h3>Consultant Assigned</h3>
+
           <div class="form-group">
+            <h3>Consultant Assigned</h3>
             <label>Consultant Name
               <input type="text" class="form-control" [(ngModel)]="assignment.consultantName" name="consultantName" value="{{ assignment.consultantName }}" disabled required="false">
             </label>

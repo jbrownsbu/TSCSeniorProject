@@ -7,6 +7,7 @@ back to the database to be stored.
 <div id= "list" class="container">
   <div class="row">
     <div class="col-md-6">
+      <h1>Create Consultant</h1>
       <section>
         <form (ngSubmit)="createConsultant(consultant)" #consultantForm="ngForm">
           <div class="form-group">
@@ -29,8 +30,8 @@ back to the database to be stored.
             </label>
           </div>
 
-          <h2>Supervisor</h2>
           <div class="form-group">
+            <h2>Supervisor</h2>
             <label>First Name</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.supervisorFirstName" name="supervisorFirstName" required><br>
             <label>Last Name</label>
@@ -47,21 +48,21 @@ back to the database to be stored.
           <h3>Language Proficiencies</h3>
           <p>You can add languages by editing consultant after consultant has been created.</p><br>
 
-          <h3>Consultant Notes</h3>
           <div class="form-group">
+            <h3>Consultant Notes</h3>
             <input type="text" class="form-control" [(ngModel)]="consultant.notes" name="notes" required>
           </div>
 
-          <h3>Testaments</h3>
           <div class="form-group">
+            <h3>Testaments</h3>
             <label class="checkbox-inline">
               <input type="checkbox" [(ngModel)]="consultant.isOldTestament" name="isOldTestament">Old Testament<br>
               <input type="checkbox" [(ngModel)]="consultant.isNewTestament" name="isNewTestament">New Testament
             </label>
           </div>
 
-          <h3>Region</h3>
           <div class="form-group">
+            <h3>Region</h3>
             <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Global"> Global<br>
             <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Africa"> Africa<br>
             <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Americas"> Americas<br>
@@ -73,8 +74,8 @@ back to the database to be stored.
             <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Pacific"> Pacific
           </div>
 
-          <h3>Media</h3>
           <div class="form-group">
+            <h3>Media</h3>
             <label class="checkbox-inline">
               <input type="checkbox" [(ngModel)]="consultant.isWrittenMedia" name="isWrittenMedia">Written<br>
               <input type="checkbox" [(ngModel)]="consultant.isAudioMedia" name="isAudioMedia">Audio<br>
@@ -82,8 +83,8 @@ back to the database to be stored.
             </label>
           </div>
 
-          <h3>Roles</h3>
           <div class="form-group">
+            <h3>Roles</h3>
             <label class="checkbox-inline">
               <input type="checkbox" [(ngModel)]="consultant.isAudioToAudioRole" name="isAudioToAudioRole">Audio to Audio Translation Consultant<br>
               <input type="checkbox" [(ngModel)]="consultant.isGuestScholarRole" name="isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br>
