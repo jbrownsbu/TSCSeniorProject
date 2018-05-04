@@ -17,7 +17,9 @@ nav{
   background-color: white;
   text-align: center;
   padding-top: 10px;
-  padding-bottom: 1px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin: 10px;
 }
 
@@ -61,3 +63,9 @@ nav li:hover{
     margin:5px 0;
   }
 }
+
+button{
+  background-color: #C1D82F;
+  border-radius: 10px;
+}
+

@@ -76,9 +76,10 @@ back to the database to be stored.
           </div>
 
           <div class="form-group">
-            <button type="submit" class="btn btn-success" [disabled]="!assignmentForm.form.valid">Update</button>
+            <button type="submit" [disabled]="!assignmentForm.form.valid">Update</button>
           </div>
         </form>
+        <button type="button" (click)="this._location.back();">Cancel</button>
       </section>
     </div>
   </div>

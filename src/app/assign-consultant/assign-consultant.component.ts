@@ -80,7 +80,7 @@ export class AssignConsultantComponent implements OnInit {
 
         // Add 20 points to consultant's score if they work within the required region
         if (this.consultants[i]['translationRegion'] === this.assignment['translationRegion']) {
-          this.consultants[i]['score'] = 20;
+          this.consultants[i]['score'] = 10;
         }
 
         // Add point to consultant's score for each role they match
