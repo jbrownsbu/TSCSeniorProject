@@ -23,6 +23,7 @@ export class ConsultantEditComponent implements OnInit {
   rankings = RANKING;
 
   consultant = {};
+  newLanguage = {};
 
   constructor(private _location: Location,
               private http: HttpClient,
