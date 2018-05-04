@@ -8,6 +8,7 @@ When 'save' button is clicked in the html, 'createAssignment' function is called
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-assignment-create',
@@ -20,7 +21,7 @@ export class AssignmentCreateComponent implements OnInit {
   project = {};
   assignment = {};
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getProject(this.route.snapshot.url[this.route.snapshot.url.length - 1]);

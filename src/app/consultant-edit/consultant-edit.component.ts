@@ -9,6 +9,7 @@ import { ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LANGUAGES } from '../languages';
 import { RANKING } from '../proficency-ranking';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-consultant-edit',
@@ -23,7 +24,8 @@ export class ConsultantEditComponent implements OnInit {
 
   consultant = {};
 
-  constructor(private http: HttpClient,
+  constructor(private _location: Location,
+              private http: HttpClient,
               private router: Router,
               private route: ActivatedRoute) {
     // override the route reuse strategy
