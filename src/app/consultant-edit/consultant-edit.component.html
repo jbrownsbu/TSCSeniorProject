@@ -9,57 +9,74 @@ back to the database to be stored.
     <div class="col-md-6">
       <h1>{{ consultant.firstName }} {{ consultant.lastName }}</h1>
       <section>
+        <!-- Form to update a consultant -->
         <form (ngSubmit)="updateConsultant(consultant._id, consultant)" #consultantForm="ngForm">
           <div class="form-group">
+
+            <!-- Consultant personal information -->
             <label>First Name</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.firstName" name="firstName" required><br>
+
             <label>Last Name</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.lastName" name="lastName" required><br>
+
             <label>Phone</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.phone" name="phone" required><br>
+
             <label>Email</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.email" name="email" required><br>
+
             <label>Address</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.address" name="address" required><br>
+
             <label>Biography</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.biography" name="biography" required><br>
+
             <label>Company</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.companyName" name="companyName" required><br>
+
             <label class="checkbox-inline">
               <input type="checkbox" [(ngModel)]="consultant.isActive" name="isActive">Active Status
             </label>
           </div>
 
+          <!-- Consultant supervisor information-->
           <div class="form-group">
             <h2>Supervisor</h2>
+
             <label>First Name</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.supervisorFirstName" name="supervisorFirstName" required><br>
+
             <label>Last Name</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.supervisorLastName" name="supervisorLastName" required><br>
+
             <label>Email</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.supervisorEmail" name="supervisorEmail" required><br>
+
             <label>Phone</label>
             <input type="text" class="form-control" [(ngModel)]="consultant.supervisorPhone" name="supervisorPhone" required><br>
           </div>
 
-
+          <!-- Consultant language proficiencies -->
           <div>
-          <h2>Translation Proficiencies</h2>
-          <h3>Language Proficiencies</h3>
-          <table class="table" id="languageTable">
-            <thead>
-            <th>Language</th>
-            <th>Speaking</th>
-            <th>Listening</th>
-            <th>Writing</th>
-            <th>Reading</th>
-            </thead>
-            <tr *ngFor="let proficiency of consultant.proficiencies">
-              <td>{{ proficiency.language }}</td>
-              <td>{{ proficiency.speaking }}</td>
-              <td>{{ proficiency.listening }}</td>
-              <td>{{ proficiency.writing }}</td>
-              <td>{{ proficiency.reading }}</td>
+            <h2>Translation Proficiencies</h2>
+            <h3>Language Proficiencies</h3>
+
+            <table class="table" id="languageTable">
+              <thead>
+              <th>Language</th>
+              <th>Speaking</th>
+              <th>Listening</th>
+              <th>Writing</th>
+              <th>Reading</th>
+              </thead>
+
+              <tr *ngFor="let proficiency of consultant.proficiencies">
+                <td>{{ proficiency.language }}</td>
+                <td>{{ proficiency.speaking }}</td>
+                <td>{{ proficiency.listening }}</td>
+                <td>{{ proficiency.writing }}</td>
+                <td>{{ proficiency.reading }}</td>
               <!--
               <td style="word-break:break-all;">
                 <select id="language" required [(ngModel)]="proficiency.language" name="language">
@@ -90,79 +107,87 @@ back to the database to be stored.
                         [value]="ranking.value">{{ proficiency.reading }}</option>
               </select></td>
               -->
-              <td><button [routerLink]="['/consultant-edit', consultant._id]" (click)="removeProficiency(consultant._id, proficiency._id)" type="button">Remove</button></td>
-            </tr>
+                <td><button [routerLink]="['/consultant-edit', consultant._id]" (click)="removeProficiency(consultant._id, proficiency._id)" type="button">Remove</button></td>
+              </tr>
+            </table>
 
-          </table>
+            <!-- Adding a New Proficiency  -->
+            <select id="language" required [(ngModel)]="newLanguage.language" name="language">
+              <option *ngFor="let language of languages" [value]="language" >{{ language }}</option>
+            </select>
 
-              <select id="language" required [(ngModel)]="newLanguage.language" name="language">
-                <option *ngFor="let language of languages" [value]="language" >{{ language }}</option>
-              </select>
-              <select id="speaking" required [(ngModel)]="newLanguage.speaking" name="speaking">
-                <option *ngFor="let ranking of rankings" [value]="ranking.value">{{ ranking.level }}</option>
-              </select>
+            <select id="speaking" required [(ngModel)]="newLanguage.speaking" name="speaking">
+              <option *ngFor="let ranking of rankings" [value]="ranking.value">{{ ranking.level }}</option>
+            </select>
+
             <select id="listening" required [(ngModel)]="newLanguage.listening" name="listening">
               <option *ngFor="let ranking of rankings" [value]="ranking.value">{{ ranking.level }}</option>
             </select>
+
             <select id="writing" required [(ngModel)]="newLanguage.writing" name="writing">
               <option *ngFor="let ranking of rankings" [value]="ranking.value">{{ ranking.level }}</option>
             </select>
+
             <select id="reading" required [(ngModel)]="newLanguage.reading" name="reading">
               <option *ngFor="let ranking of rankings" [value]="ranking.value">{{ ranking.level }}</option>
             </select>
 
             <button type="button" (click)="consultant.proficiencies.push(newLanguage)">Add Language</button>
-          <!--
+          <!-- this routes the page back to itself so that it updates the information.
           <button [routerLink]="['/consultant-edit', consultant._id]" (click)="pushLanguage(consultant._id)" type="button">Add Language</button>
           -->
+            <!-- Extra information about consultants -->
+            <div class="form-group">
+              <label>Consultant Notes</label>
+              <input type="text" class="form-control" [(ngModel)]="consultant.notes" name="notes" required>
+            </div>
 
-          <div class="form-group">
-            <label>Consultant Notes</label>
-            <input type="text" class="form-control" [(ngModel)]="consultant.notes" name="notes" required>
-          </div>
+            <!-- Consultant Proficiencies -->
+            <div class="form-group">
+              <h3>Testaments</h3>
+              <label class="checkbox-inline">
+                <input type="checkbox" [(ngModel)]="consultant.isOldTestament" name="isOldTestament">Old Testament<br>
+                <input type="checkbox" [(ngModel)]="consultant.isNewTestament" name="isNewTestament">New Testament
+              </label>
+            </div>
 
-          <div class="form-group">
-            <h3>Testaments</h3>
-            <label class="checkbox-inline">
-              <input type="checkbox" [(ngModel)]="consultant.isOldTestament" name="isOldTestament">Old Testament<br>
-              <input type="checkbox" [(ngModel)]="consultant.isNewTestament" name="isNewTestament">New Testament
-            </label>
-          </div>
+            <!-- Consultant Region Selection-->
+            <div class="form-group">
+              <h3>Region</h3>
+              <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Global"> Global<br>
+              <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Africa"> Africa<br>
+              <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Americas"> Americas<br>
+              <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia"> Asia<br>
+              <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia - Mainland"> Asia - Mainland<br>
+              <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia - South"> Asia - South<br>
+              <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Eurasia"> Eurasia<br>
+              <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Europe"> Europe<br>
+              <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Pacific"> Pacific
+            </div>
 
-          <div class="form-group">
-            <h3>Region</h3>
-            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Global"> Global<br>
-            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Africa"> Africa<br>
-            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Americas"> Americas<br>
-            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia"> Asia<br>
-            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia - Mainland"> Asia - Mainland<br>
-            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Asia - South"> Asia - South<br>
-            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Eurasia"> Eurasia<br>
-            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Europe"> Europe<br>
-            <input type="radio" name="region" [(ngModel)]="consultant.translationRegion" value="Pacific"> Pacific
-          </div>
+            <!-- Consultant Media Selection -->
+            <div class="form-group">
+              <h3>Media</h3>
+              <label class="checkbox-inline">
+                <input type="checkbox" [(ngModel)]="consultant.isWrittenMedia" name="isWrittenMedia">Written<br>
+                <input type="checkbox" [(ngModel)]="consultant.isAudioMedia" name="isAudioMedia">Audio<br>
+                <input type="checkbox" [(ngModel)]="consultant.isStorytellingMedia" name="isStorytellingMedia">Storytelling
+              </label>
+            </div>
 
-          <div class="form-group">
-            <h3>Media</h3>
-            <label class="checkbox-inline">
-              <input type="checkbox" [(ngModel)]="consultant.isWrittenMedia" name="isWrittenMedia">Written<br>
-              <input type="checkbox" [(ngModel)]="consultant.isAudioMedia" name="isAudioMedia">Audio<br>
-              <input type="checkbox" [(ngModel)]="consultant.isStorytellingMedia" name="isStorytellingMedia">Storytelling
-            </label>
-          </div>
-
-          <div class="form-group">
+            <!-- Consultant Role Selection-->
+            <div class="form-group">
             <h3>Roles</h3>
-            <label class="checkbox-inline">
-              <input type="checkbox" [(ngModel)]="consultant.isAudioToAudioRole" name="isAudioToAudioRole">Audio to Audio Translation Consultant<br>
-              <input type="checkbox" [(ngModel)]="consultant.isGuestScholarRole" name="isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br>
-              <input type="checkbox" [(ngModel)]="consultant.isLinguisticConsultantRole" name="isLinguisticConsultantRole">Linguistic Consultant<br>
-              <input type="checkbox" [(ngModel)]="consultant.isManagerRole" name="isManagerRole">Manager - Translation Consultant<br>
-              <input type="checkbox" [(ngModel)]="consultant.isStoryCheckerRole" name="isStoryCheckerRole">Story Checker<br>
-              <input type="checkbox" [(ngModel)]="consultant.isTranslationConsultantInTrainingRole" name="isTranslationConsultantInTrainingRole">Translation CiT<br>
-              <input type="checkbox" [(ngModel)]="consultant.isTranslationConsultantRole" name="isTranslationConsultantRole">Translation Consultant
-            </label>
-          </div>
+              <label class="checkbox-inline">
+                <input type="checkbox" [(ngModel)]="consultant.isAudioToAudioRole" name="isAudioToAudioRole">Audio to Audio Translation Consultant<br>
+                <input type="checkbox" [(ngModel)]="consultant.isGuestScholarRole" name="isGuestScholarRole">Guest Scholar (Exegetical, Linguistic, Bible)<br>
+                <input type="checkbox" [(ngModel)]="consultant.isLinguisticConsultantRole" name="isLinguisticConsultantRole">Linguistic Consultant<br>
+                <input type="checkbox" [(ngModel)]="consultant.isManagerRole" name="isManagerRole">Manager - Translation Consultant<br>
+                <input type="checkbox" [(ngModel)]="consultant.isStoryCheckerRole" name="isStoryCheckerRole">Story Checker<br>
+                <input type="checkbox" [(ngModel)]="consultant.isTranslationConsultantInTrainingRole" name="isTranslationConsultantInTrainingRole">Translation CiT<br>
+                <input type="checkbox" [(ngModel)]="consultant.isTranslationConsultantRole" name="isTranslationConsultantRole">Translation Consultant
+              </label>
+            </div>
           </div>
 
           <div class="form-group">

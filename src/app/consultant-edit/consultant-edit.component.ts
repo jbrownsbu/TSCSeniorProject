@@ -46,15 +46,16 @@ export class ConsultantEditComponent implements OnInit {
 
   ngOnInit() {
     this.getConsultant(this.route.snapshot.params['id']);
-
   }
 
+  // Getting one consultant by Id
   getConsultant(id) {
     this.http.get('/consultant/' + id).subscribe(data => {
       this.consultant = data;
     });
   }
 
+  // Updating one consultant
   updateConsultant(id, consultant) {
     this.http.put('/consultant/' + id, this.consultant)
       .subscribe(res => {
@@ -66,6 +67,8 @@ export class ConsultantEditComponent implements OnInit {
       );
   }
 
+  // Pushing a language to Consultant proficiency list
+  /* Currently not in use
   pushLanguage(id, consultant) {
     this.http.patch('/consultant/' + id, this.consultant)
       .subscribe(res => {
@@ -75,8 +78,9 @@ export class ConsultantEditComponent implements OnInit {
         console.log(err);
       }
       );
-  }
+  }*/
 
+  // Remove a Proficiency from a consultant
   removeProficiency(consultantId, proficiencyId) {
     this.http.delete('/consultant/' + consultantId + '/proficiencies/' + proficiencyId, this.consultant)
     .subscribe(res => {
