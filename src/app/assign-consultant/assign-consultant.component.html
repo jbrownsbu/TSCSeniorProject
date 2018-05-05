@@ -71,6 +71,8 @@ assignment's assigned consultant.
           <h3>Selected Consultant: {{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</h3>
           <p><b>Region: </b>{{ selectedConsultant.translationRegion }}</p>
           <p><b>Language: </b>{{ selectedConsultantLanguage.language }}</p>
+
+          <!-- Set of if statements to use words to show fluency levels instead of the number values assigned. -->
           <p *ngIf="selectedConsultantLanguage.reading == 1" style="text-indent: 10px"><b>Reading: </b>Beginner</p>
           <p *ngIf="selectedConsultantLanguage.reading == 2" style="text-indent: 10px"><b>Reading: </b>Novice</p>
           <p *ngIf="selectedConsultantLanguage.reading == 3" style="text-indent: 10px"><b>Reading: </b>Adept</p>
