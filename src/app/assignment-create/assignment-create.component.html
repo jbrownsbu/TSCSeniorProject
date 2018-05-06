@@ -69,8 +69,8 @@ When 'save' button is clicked, information is sent to the database to be stored 
             <button type="submit" [disabled]="!assignmentForm.form.valid">Save</button>
           </div>
         </form>
+        <button type="button" (click)="this._location.back();">Cancel</button>
       </section>
-      <button type="button" (click)="this._location.back();">Cancel</button>
     </div>
   </div>
 </div>
