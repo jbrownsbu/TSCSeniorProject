@@ -45,7 +45,7 @@ back to the database to be stored.
 
           <div>
           <h2>Translation Proficiencies</h2>
-
+          <br>
           <h3>Add/Update Language</h3>
           <select id="language" required [(ngModel)]="currentLanguage.language" name="language">
             <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
@@ -63,7 +63,7 @@ back to the database to be stored.
             <option *ngFor="let ranking of rankings" [value]="ranking.value">{{ ranking.level }}</option>
           </select>
           <button type="button" (click)="addLanguage(currentLanguage)">Add/Update</button>
-
+          <br><br>
           <h3>Languages</h3>
           <table class="table" id="languageTable">
             <thead>
