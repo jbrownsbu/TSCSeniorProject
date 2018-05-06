@@ -7,10 +7,16 @@ This html displays a list containing assignment information along with button li
   <h1 *ngIf="isProjectView">Assignments - {{projectName}}</h1>
   <h1 *ngIf="isAllView && searchTermsAssigned">Assignments - Unassigned</h1>
   <h1 *ngIf="isAllView && !searchTermsAssigned">Assignments - All</h1>
+
+  <!-- Toggle to show Assignments without consultants -->
   <div>
     <h5 *ngIf="!isConsultantView">Unassigned Only: <input type="checkbox" [(ngModel)]="searchTermsAssigned"></h5>
   </div>
+
+  <!-- Table for Assignment information -->
   <table class="table">
+
+    <!-- Table headers have ordering capabilities -->
     <thead>
     <th *ngIf="!isConsultantView" [class.active]="order === 'consultantName'"
         (click)="setOrder('consultantName')"
@@ -54,6 +60,8 @@ This html displays a list containing assignment information along with button li
     </th>
     <th>Actions</th>
     </thead>
+
+    <!-- Table body for assignment information-->
     <tbody>
     <tr *ngFor="let assignment of assignments | orderBy: order:reverse:'case-insensitive'| filterAssigned: searchTermsAssigned">
       <td *ngIf="!isConsultantView">{{ assignment.consultantName }}</td>

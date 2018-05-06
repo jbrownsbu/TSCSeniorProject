@@ -53,12 +53,14 @@ export class ConsultantEditComponent implements OnInit {
     this.currentLanguage['writing'] = 1;
   }
 
+  // Getting one consultant by Id
   getConsultant(id) {
     this.http.get('/consultant/' + id).subscribe(data => {
       this.consultant = data;
     });
   }
 
+  // Updating one consultant
   updateConsultant(id, consultant) {
     this.http.put('/consultant/' + id, this.consultant)
       .subscribe(res => {
@@ -69,6 +71,19 @@ export class ConsultantEditComponent implements OnInit {
         }
       );
   }
+
+  // Pushing a language to Consultant proficiency list
+  /* Currently not in use
+  pushLanguage(id, consultant) {
+    this.http.patch('/consultant/' + id, this.consultant)
+      .subscribe(res => {
+        const id = res['_id'];
+        this.router.navigate(['/consultant-edit/' + id]);
+      }, (err) => {
+        console.log(err);
+      }
+      );
+  }*/
 
   addLanguage(newLanguage) {
     let isNew = true;
