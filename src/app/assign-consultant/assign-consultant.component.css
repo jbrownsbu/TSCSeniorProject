@@ -10,3 +10,59 @@
   width: 10%;
 }
 
+.spanpage {
+  margin: auto;
+  width: 1140px;
+  border: 3px solid #73AD21;
+
+  padding-left: 250px;
+  padding-right: 250px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  align-content: center;
+  align-items: center;
+  text-align-all: center;
+
+
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+  -webkit-column-width: 300px; /* Chrome, Safari, Opera */
+  -moz-column-width: 300px; /* Firefox */
+  column-width: 300px;
+
+  font-size: large;
+}
+
+.break-after{
+  break-after: inherit;
+  -moz-column-break-after: always;
+  -webkit-column-break-after: always;
+
+}
+
+h3{
+  -webkit-column-span: all; /* Chrome, Safari, Opera */
+  column-span: all;
+  text-align: center;
+}
+
+
+.layout-l{
+  margin: 10px;
+  border: 3px solid #73AD21;
+  align-items: left;
+  align-content: left;
+
+}
+
+
+.layout-r{
+  margin: 10px;
+  border: 3px solid #73AD21;
+  align-items: right;
+  align-content: right;
+
+}
+
