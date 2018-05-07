@@ -29,11 +29,11 @@ export class ConsultantCreateComponent implements OnInit {
   // On initialization, currentLanguage is set to display top option in each select list
   ngOnInit() {
     this.consultant['proficiencies'] = new Array;
-    this.currentLanguage['language'] = 'Amharic';
-    this.currentLanguage['speaking'] = 1;
-    this.currentLanguage['listening'] = 1;
-    this.currentLanguage['reading'] = 1;
-    this.currentLanguage['writing'] = 1;
+    this.currentLanguage['language'] = 'Language';
+    this.currentLanguage['speaking'] = 'Speaking';
+    this.currentLanguage['listening'] = 'Listening';
+    this.currentLanguage['reading'] = 'Reading';
+    this.currentLanguage['writing'] = 'Writing';
   }
 
   // Send form data to database to create new consultant
@@ -47,21 +47,30 @@ export class ConsultantCreateComponent implements OnInit {
     this.router.navigate( ['/consultants']);
   }
 
+  // Check if a consultant's proficiencies array already contains a specified language
+  // If true, return index of language, if false, return -1
+  hasLanguage(lang) {
+    let index = -1;
+    let i;
+    for (i = 0; i < this.consultant['proficiencies'].length; i++) {
+      if ((this.consultant['proficiencies'][i.toString()]['language']) === lang['language']) {
+        index = i;
+      }
+    }
+
+    return index;
+  }
+
   // Add language to consultant's proficiencies array
   // If language is already in consultant's proficiencies array, update skills values
   addLanguage(newLanguage) {
-    let isNew = true;
-    let i;
-    for (i = 0; i < this.consultant['proficiencies'].length; i++) {
-      if ((this.consultant['proficiencies'][i.toString()]['language']) === newLanguage['language']) {
-        isNew = false;
-        this.consultant['proficiencies'][i.toString()]['speaking'] = newLanguage['speaking'];
-        this.consultant['proficiencies'][i.toString()]['listening'] = newLanguage['listening'];
-        this.consultant['proficiencies'][i.toString()]['writing'] = newLanguage['writing'];
-        this.consultant['proficiencies'][i.toString()]['reading'] = newLanguage['reading'];
-      }
-    }
-    if (isNew) {
+    const index = this.hasLanguage(newLanguage);
+    if (index >= 0) {
+      this.consultant['proficiencies'][index]['speaking'] = newLanguage['speaking'];
+      this.consultant['proficiencies'][index]['listening'] = newLanguage['listening'];
+      this.consultant['proficiencies'][index]['writing'] = newLanguage['writing'];
+      this.consultant['proficiencies'][index]['reading'] = newLanguage['reading'];
+    } else {
       const lang = {};
       lang['language'] = newLanguage['language'];
       lang['speaking'] = newLanguage['speaking'];

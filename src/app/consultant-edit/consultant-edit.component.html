@@ -86,8 +86,16 @@ back to the database to be stored.
                          currentLanguage.speaking != 'Speaking' &&
                          currentLanguage.listening != 'Listening' &&
                          currentLanguage.reading != 'Reading' &&
-                         currentLanguage.writing != 'Writing'
-                        " type="button" (click)="addLanguage(currentLanguage)">Add/Update</button>
+                         currentLanguage.writing != 'Writing' &&
+                         this.hasLanguage(currentLanguage) >= 0
+                        " type="button" (click)="addLanguage(currentLanguage)">Update</button>
+            <button *ngIf="currentLanguage.language != 'Language' &&
+                         currentLanguage.speaking != 'Speaking' &&
+                         currentLanguage.listening != 'Listening' &&
+                         currentLanguage.reading != 'Reading' &&
+                         currentLanguage.writing != 'Writing' &&
+                         this.hasLanguage(currentLanguage) < 0
+                        " type="button" (click)="addLanguage(currentLanguage)">Add</button>
           <br><br>
           <h3>Languages</h3>
           <table class="table" id="languageTable">

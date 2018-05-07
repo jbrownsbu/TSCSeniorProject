@@ -62,25 +62,43 @@ Clicking the create button will insert a new consultant with the details specifi
           <!-- Can't add in a new proficiency due to the fact that the consultant hasn't been created yet
           Our current addProficiency function requires a consultantId -->
           <div>
-          <h2>Translation Proficiencies</h2>
+            <h2>Translation Proficiencies</h2>
             <br>
             <h3>Add/Update Language</h3>
             <select id="language" required [(ngModel)]="currentLanguage.language" name="language">
+              <option [selected]="selected">Language</option>
               <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
             </select>
             <select id="speaking" required [(ngModel)]="currentLanguage.speaking" name="speaking">
+              <option [selected]="selected">Speaking</option>
               <option *ngFor="let ranking of rankings" [value]="ranking.value">{{ ranking.level }}</option>
             </select>
             <select id="listening" required [(ngModel)]="currentLanguage.listening" name="listening">
+              <option [selected]="selected">Listening</option>
               <option *ngFor="let ranking of rankings" [value]="ranking.value">{{ ranking.level }}</option>
             </select>
             <select id="writing" required [(ngModel)]="currentLanguage.writing" name="writing">
+              <option [selected]="selected">Writing</option>
               <option *ngFor="let ranking of rankings" [value]="ranking.value">{{ ranking.level }}</option>
             </select>
             <select id="reading" required [(ngModel)]="currentLanguage.reading" name="reading">
+              <option [selected]="selected">Reading</option>
               <option *ngFor="let ranking of rankings" [value]="ranking.value">{{ ranking.level }}</option>
             </select>
-            <button type="button" (click)="addLanguage(currentLanguage)">Add/Update</button>
+            <button *ngIf="currentLanguage.language != 'Language' &&
+                         currentLanguage.speaking != 'Speaking' &&
+                         currentLanguage.listening != 'Listening' &&
+                         currentLanguage.reading != 'Reading' &&
+                         currentLanguage.writing != 'Writing' &&
+                         this.hasLanguage(currentLanguage) >= 0
+                        " type="button" (click)="addLanguage(currentLanguage)">Update</button>
+            <button *ngIf="currentLanguage.language != 'Language' &&
+                         currentLanguage.speaking != 'Speaking' &&
+                         currentLanguage.listening != 'Listening' &&
+                         currentLanguage.reading != 'Reading' &&
+                         currentLanguage.writing != 'Writing' &&
+                         this.hasLanguage(currentLanguage) < 0
+                        " type="button" (click)="addLanguage(currentLanguage)">Add</button>
             <br><br>
             <h3>Languages</h3>
             <table class="table" id="languageTable">
@@ -91,7 +109,7 @@ Clicking the create button will insert a new consultant with the details specifi
               <th>Writing</th>
               <th>Reading</th>
               </thead>
-              <tr *ngFor="let proficiency of consultant.proficiencies" (click)="setCurrentLanguage(proficiency)">
+              <tr *ngFor="let proficiency of consultant.proficiencies">
                 <td>{{ proficiency.language }}</td>
                 <td *ngIf="proficiency.speaking == 1">Beginner</td>
                 <td *ngIf="proficiency.speaking == 2">Novice</td>

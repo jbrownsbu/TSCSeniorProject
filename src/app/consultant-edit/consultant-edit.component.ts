@@ -71,21 +71,30 @@ export class ConsultantEditComponent implements OnInit {
       );
   }
 
+  // Check if a consultant's proficiencies array already contains a specified language
+  // If true, return index of language, if false, return -1
+  hasLanguage(lang) {
+    let index = -1;
+    let i;
+    for (i = 0; i < this.consultant['proficiencies'].length; i++) {
+      if ((this.consultant['proficiencies'][i.toString()]['language']) === lang['language']) {
+        index = i;
+      }
+    }
+
+    return index;
+  }
+
   // Add language to consultant's proficiencies array
   // If language is already in consultant's proficiencies array, update skills values
   addLanguage(newLanguage) {
-    let isNew = true;
-    let i;
-    for (i = 0; i < this.consultant['proficiencies'].length; i++) {
-      if ((this.consultant['proficiencies'][i.toString()]['language']) === newLanguage['language']) {
-        isNew = false;
-        this.consultant['proficiencies'][i.toString()]['speaking'] = newLanguage['speaking'];
-        this.consultant['proficiencies'][i.toString()]['listening'] = newLanguage['listening'];
-        this.consultant['proficiencies'][i.toString()]['writing'] = newLanguage['writing'];
-        this.consultant['proficiencies'][i.toString()]['reading'] = newLanguage['reading'];
-      }
-    }
-    if (isNew) {
+    const index = this.hasLanguage(newLanguage);
+    if (index >= 0) {
+        this.consultant['proficiencies'][index]['speaking'] = newLanguage['speaking'];
+        this.consultant['proficiencies'][index]['listening'] = newLanguage['listening'];
+        this.consultant['proficiencies'][index]['writing'] = newLanguage['writing'];
+        this.consultant['proficiencies'][index]['reading'] = newLanguage['reading'];
+    } else {
       const lang = {};
       lang['language'] = newLanguage['language'];
       lang['speaking'] = newLanguage['speaking'];
