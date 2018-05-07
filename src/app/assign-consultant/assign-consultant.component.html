@@ -71,10 +71,28 @@ assignment's assigned consultant.
           <h3>Selected Consultant: {{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</h3>
           <p><b>Region: </b>{{ selectedConsultant.translationRegion }}</p>
           <p><b>Language: </b>{{ selectedConsultantLanguage.language }}</p>
-          <p style="text-indent: 10px"><b>Reading: </b>{{ selectedConsultantLanguage.reading }}</p>
-          <p style="text-indent: 10px"><b>Writing: </b>{{ selectedConsultantLanguage.writing }}</p>
-          <p style="text-indent: 10px"><b>Speaking: </b>{{ selectedConsultantLanguage.speaking }}</p>
-          <p style="text-indent: 10px"><b>Listening: </b>{{ selectedConsultantLanguage.listening }}</p>
+
+          <!-- May be able to be abstracted into function -->
+          <p *ngIf="selectedConsultantLanguage.reading == 1" style="text-indent: 10px"><b>Reading: </b>Beginner</p>
+          <p *ngIf="selectedConsultantLanguage.reading == 2" style="text-indent: 10px"><b>Reading: </b>Novice</p>
+          <p *ngIf="selectedConsultantLanguage.reading == 3" style="text-indent: 10px"><b>Reading: </b>Adept</p>
+          <p *ngIf="selectedConsultantLanguage.reading == 4" style="text-indent: 10px"><b>Reading: </b>Fluent</p>
+
+          <p *ngIf="selectedConsultantLanguage.writing == 1" style="text-indent: 10px"><b>Writing: </b>Beginner</p>
+          <p *ngIf="selectedConsultantLanguage.writing == 2" style="text-indent: 10px"><b>Writing: </b>Novice</p>
+          <p *ngIf="selectedConsultantLanguage.writing == 3" style="text-indent: 10px"><b>Writing: </b>Adept</p>
+          <p *ngIf="selectedConsultantLanguage.writing == 4" style="text-indent: 10px"><b>Writing: </b>Fluent</p>
+
+          <p *ngIf="selectedConsultantLanguage.speaking == 1" style="text-indent: 10px"><b>Speaking: </b>Beginner</p>
+          <p *ngIf="selectedConsultantLanguage.speaking == 2" style="text-indent: 10px"><b>Speaking: </b>Novice</p>
+          <p *ngIf="selectedConsultantLanguage.speaking == 3" style="text-indent: 10px"><b>Speaking: </b>Adept</p>
+          <p *ngIf="selectedConsultantLanguage.speaking == 4" style="text-indent: 10px"><b>Speaking: </b>Fluent</p>
+
+          <p *ngIf="selectedConsultantLanguage.listening == 1" style="text-indent: 10px"><b>Listening: </b>Beginner</p>
+          <p *ngIf="selectedConsultantLanguage.listening == 2" style="text-indent: 10px"><b>Listening: </b>Novice</p>
+          <p *ngIf="selectedConsultantLanguage.listening == 3" style="text-indent: 10px"><b>Listening: </b>Adept</p>
+          <p *ngIf="selectedConsultantLanguage.listening == 4" style="text-indent: 10px"><b>Listening: </b>Fluent</p>
+
           <p><b>Matched Testament: </b>{{ selectedConsultantTestament }}</p>
           <p><b>Matched Media: </b>{{ selectedConsultantMedia }}</p>
           <b>Matched Roles: </b>
