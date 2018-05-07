@@ -46,11 +46,11 @@ export class ConsultantEditComponent implements OnInit {
 
   ngOnInit() {
     this.getConsultant(this.route.snapshot.params['id']);
-    this.currentLanguage['language'] = 'Amharic';
-    this.currentLanguage['speaking'] = 1;
-    this.currentLanguage['listening'] = 1;
-    this.currentLanguage['reading'] = 1;
-    this.currentLanguage['writing'] = 1;
+    this.currentLanguage['language'] = 'Language';
+    this.currentLanguage['speaking'] = 'Speaking';
+    this.currentLanguage['listening'] = 'Listening';
+    this.currentLanguage['reading'] = 'Reading';
+    this.currentLanguage['writing'] = 'Writing';
   }
 
   // Getting one consultant by Id
