@@ -7,11 +7,13 @@ back to the database to be stored.
 <div id="list" class="container">
   <div class="row">
     <div class="col-md-6">
+      <!-- Specifies if someone is assigned to the project or not. -->
       <h1 *ngIf="isAssigned">{{ assignment.consultantName }} - {{ assignment.projectName }}</h1>
       <h1 *ngIf="!isAssigned">Unassigned - {{ assignment.projectName }}</h1>
       <section>
         <form (ngSubmit)="updateAssignment(assignment._id, assignment.consultantId)" #assignmentForm="ngForm">
 
+          <!-- Non-Editable fields from project-->
           <div class="form-group">
             <label>Project <input type="text" class="form-control" [(ngModel)]="assignment.projectName" name="projectName" value="{{ assignment.projectName }}" disabled required="false"></label><br>
             <br>
@@ -20,22 +22,26 @@ back to the database to be stored.
             <label>Region <input type="text" class="form-control" [(ngModel)]="assignment.translationRegion" name="translationRegion" value="{{ assignment.translationRegion }}" disabled required="false"></label>
           </div>
 
+          <!-- Notes for assignment descriptor -->
           <div class="form-group">
             <label>Notes <input type="text" class="form-control" [(ngModel)]="assignment.notes" name="notes" required="false"></label>
           </div>
 
+          <!-- Date Range for the assignment -->
           <div class="form-group">
             <h3>Dates</h3>
             <label>Start <input type="date" class="form-control" [(ngModel)]="assignment.startDate" name="startDate" required></label>
             <label>End <input type="date" class="form-control" [(ngModel)]="assignment.endDate" name="endDate" required></label>
           </div>
 
+          <!-- Testament needed for the assignment -->
           <div class="form-group">
             <h3>Testament</h3>
             <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="Old Testament"> Old Testament<br>
             <input type="radio" name="testament" [(ngModel)]="assignment.testament" value="New Testament"> New Testament
           </div>
 
+          <!-- Media required by assignment -->
           <div class="form-group">
             <h3>Media</h3>
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Written"> Written<br>
@@ -43,6 +49,7 @@ back to the database to be stored.
             <input type="radio" name="media" [(ngModel)]="assignment.media" value="Storytelling"> Storytelling
           </div>
 
+          <!-- Assignment Type -->
           <div class="form-group">
             <h3>Assignment Type</h3>
             <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Administration (Supervisors Only)" required> Administration (Supervisors Only)<br>
@@ -55,6 +62,7 @@ back to the database to be stored.
             <input type="radio" name="assignmentType" [(ngModel)]="assignment.assignmentType" value="Training Others" required> Training Others
           </div>
 
+          <!-- Roles needed by Assignment -->
           <div class="form-group">
             <h3>Roles Needed</h3>
             <input type="checkbox" name="isAudioToAudioRole" [(ngModel)]="assignment.isAudioToAudioRole" value="Audio to Audio Translation Consultant"> Audio to Audio Translation Consultant<br>
@@ -66,7 +74,7 @@ back to the database to be stored.
             <input type="checkbox" name="isTranslationConsultantRole" [(ngModel)]="assignment.isTranslationConsultantRole" value="Translation Consultant"> Translation Consultant
           </div>
 
-
+          <!-- Shows consultant if assigned and allows for them to be removed -->
           <div class="form-group">
             <h3>Consultant Assigned</h3>
             <label>Consultant Name

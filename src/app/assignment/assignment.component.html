@@ -1,16 +1,23 @@
 <!--
-Assignment component loads list of assignments for a specific consultant from database.
+Assignment component loads list of assignments for a specific consultant, project, or all assignments from database.
 This html displays a list containing assignment information along with button links to edit that assignments's details.
+If assignment does not have a consultant assigned to it, button is shown to assign consultant.
 -->
 <div class="container">
   <h1 *ngIf="isConsultantView">Assignments - {{consultantName}}</h1>
   <h1 *ngIf="isProjectView">Assignments - {{projectName}}</h1>
   <h1 *ngIf="isAllView && searchTermsAssigned">Assignments - Unassigned</h1>
   <h1 *ngIf="isAllView && !searchTermsAssigned">Assignments - All</h1>
+
+  <!-- Toggle to show Assignments without consultants -->
   <div>
     <h5 *ngIf="!isConsultantView">Unassigned Only: <input type="checkbox" [(ngModel)]="searchTermsAssigned"></h5>
   </div>
+
+  <!-- Table for Assignment information -->
   <table class="table">
+
+    <!-- Table headers have ordering capabilities -->
     <thead>
     <th *ngIf="!isConsultantView" [class.active]="order === 'consultantName'"
         (click)="setOrder('consultantName')"
@@ -54,6 +61,8 @@ This html displays a list containing assignment information along with button li
     </th>
     <th>Actions</th>
     </thead>
+
+    <!-- Table body for assignment information-->
     <tbody>
     <tr *ngFor="let assignment of assignments | orderBy: order:reverse:'case-insensitive'| filterAssigned: searchTermsAssigned">
       <td *ngIf="!isConsultantView">{{ assignment.consultantName }}</td>
