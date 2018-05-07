@@ -1,9 +1,8 @@
 /*
-assignment-create component loads some project details from the database,
-and uses those details with new assignment details to create an assignment.
-This code loads a new assignment's project information based on the project's key.
-That information is displayed in assignment-create.component.html and the user can specify new assignment information there too.
-When 'save' button is clicked in the html, 'createAssignment' function is called to insert new assignment data into the database.
+assignment-create component loads some project details from the database, and uses those details with new assignment details to create
+an assignment. This code loads a new assignment's project information based on the project's key. That information is displayed in
+assignment-create.component.html and the user can specify new assignment information there too. When 'save' button is clicked in the html,
+'createAssignment' function is called to insert new assignment data into the database.
 */
 
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
@@ -24,10 +23,12 @@ export class AssignmentCreateComponent implements OnInit {
 
   constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
+  // On initialization, project data is pulled from database
   ngOnInit() {
     this.getProject(this.route.snapshot.url[this.route.snapshot.url.length - 1]);
   }
 
+  // Get relevant project data from database
   getProject(id) {
     this.http.get('/project/' + id).subscribe(data => {
       this.project = data;
@@ -39,6 +40,7 @@ export class AssignmentCreateComponent implements OnInit {
     });
   }
 
+  // Create assignment using project information and data specified in create form
   createAssignment(projectId, project) {
     this.http.post('assignment/project/' + projectId, this.assignment)
       .subscribe(res => {

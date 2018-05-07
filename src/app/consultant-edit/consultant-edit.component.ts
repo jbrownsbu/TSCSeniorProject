@@ -1,6 +1,5 @@
 /*
 consultant-edit component loads details of a consultant from database.
-On initialization, this file calls http GET to retrieve the consultant data.
 On update, this file calls http PUT to send updated consultant data back to database and navigates back to consultants list.
 */
 
@@ -19,16 +18,14 @@ import { Location } from '@angular/common';
 })
 export class ConsultantEditComponent implements OnInit {
 
+  // For working with languages, reference language files
   languages = LANGUAGES;
   rankings = RANKING;
 
   consultant = {};
   currentLanguage = {};
 
-  constructor(private _location: Location,
-              private http: HttpClient,
-              private router: Router,
-              private route: ActivatedRoute) {
+  constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
     // override the route reuse strategy
     this.router.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
@@ -44,6 +41,8 @@ export class ConsultantEditComponent implements OnInit {
     });
   }
 
+  // On initialization, retrieve the consultant data.
+  // On initialization, currentLanguage is set to display top option in each select list
   ngOnInit() {
     this.getConsultant(this.route.snapshot.params['id']);
     this.currentLanguage['language'] = 'Language';
@@ -72,19 +71,8 @@ export class ConsultantEditComponent implements OnInit {
       );
   }
 
-  // Pushing a language to Consultant proficiency list
-  /* Currently not in use
-  pushLanguage(id, consultant) {
-    this.http.patch('/consultant/' + id, this.consultant)
-      .subscribe(res => {
-        const id = res['_id'];
-        this.router.navigate(['/consultant-edit/' + id]);
-      }, (err) => {
-        console.log(err);
-      }
-      );
-  }*/
-
+  // Add language to consultant's proficiencies array
+  // If language is already in consultant's proficiencies array, update skills values
   addLanguage(newLanguage) {
     let isNew = true;
     let i;
@@ -108,6 +96,7 @@ export class ConsultantEditComponent implements OnInit {
     }
   }
 
+  // Remove language from consultant's proficiencies array
   removeLanguage(lang) {
     let i;
     for (i = 0; i < this.consultant['proficiencies'].length; i++) {

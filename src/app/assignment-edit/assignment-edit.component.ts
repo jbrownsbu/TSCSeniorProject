@@ -22,10 +22,12 @@ export class AssignmentEditComponent implements OnInit {
 
   constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
+  // On initialization, assignment data is pulled from database
   ngOnInit() {
     this.getAssignment(this.route.snapshot.params['id']);
   }
 
+  // Retrieve assignment data from database
   getAssignment(id) {
     this.http.get('/assignment/' + id).subscribe(data => {
       this.assignment = data;
@@ -35,12 +37,14 @@ export class AssignmentEditComponent implements OnInit {
     });
   }
 
+  // Remove consultant sets consultantId and consultant name back to values when unassigned
   removeConsultant() {
     this.assignment['consultantId'] = 'Unassigned';
     this.assignment['consultantName'] = '';
     this.isAssigned = false;
   }
 
+  // Send changed data back to database to be stored
   updateAssignment(id) {
     this.http.put('/assignment/' + id, this.assignment)
       .subscribe(res => {

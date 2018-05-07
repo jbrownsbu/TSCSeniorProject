@@ -1,6 +1,5 @@
 /*
 project component loads list of projects from database.
-On initialization, this file calls http GET to retrieve the project data.
 */
 
 import { Component, OnInit } from '@angular/core';
@@ -18,6 +17,7 @@ export class ProjectComponent implements OnInit {
   searchTermsRegion: string;
   searchTermsLanguage: string;
 
+  // Projects are automatically sorted by projectName, but can be sorted by all columns
   order = 'projectName';
   reverse = false;
   setOrder(value: string) {
@@ -29,6 +29,7 @@ export class ProjectComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
+  // On initialization, retrieve all project data.
   ngOnInit() {
     this.http.get('/project').subscribe(data => {
       this.projects = data;
