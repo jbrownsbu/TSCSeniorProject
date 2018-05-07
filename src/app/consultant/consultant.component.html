@@ -8,56 +8,67 @@ The list is sortable by the consultant's last name and region.
 <div class="container">
   <h1>Consultants </h1>
   <button [routerLink]="['/consultant/create']" type="button">Add New Consultant</button>
+
+  <!-- Filter for table -->
   <div>
     <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsConsultantName"> <input type="text" placeholder="Consultant Region" [(ngModel)]="searchTermsRegion"></h5>
   </div>
-    <table class="table">
-      <thead>
-      <th [class.active]="order === 'firstName'"
-          (click)="setOrder('firstName')"
-          class="mdl-data-table__cell--non-numeric">
-        First Name <span [hidden]="reverse || (order != 'firstName')">▼</span><span [hidden]="!reverse || (order != 'firstName')">▲</span>
-      </th>
-        <th [class.active]="order === 'lastName'"
-            (click)="setOrder('lastName')"
-            class="mdl-data-table__cell--non-numeric">
-          Last Name <span [hidden]="reverse || (order != 'lastName')">▼</span><span [hidden]="!reverse || (order != 'lastName')">▲</span>
-        </th>
-      <th [class.active]="order === 'phone'"
-          (click)="setOrder('phone')"
-          class="mdl-data-table__cell--non-numeric">
-        Phone <span [hidden]="reverse || (order != 'phone')">▼</span><span [hidden]="!reverse || (order != 'phone')">▲</span>
-      </th>
-      <th [class.active]="order === 'email'"
-          (click)="setOrder('email')"
-          class="mdl-data-table__cell--non-numeric">
-        Email <span [hidden]="reverse || (order != 'email')">▼</span><span [hidden]="!reverse || (order != 'email')">▲</span>
-      </th>
-      <th [class.active]="order === 'address'"
-          (click)="setOrder('address')"
-          class="mdl-data-table__cell--non-numeric">
-        Address <span [hidden]="reverse || (order != 'address')">▼</span><span [hidden]="!reverse || (order != 'address')">▲</span>
-      </th>
-        <th [class.active]="order === 'translationRegion'"
-            (click)="setOrder('translationRegion')"
-            class="mdl-data-table__cell--non-numeric">
-          Region <span [hidden]="reverse || (order != 'translationRegion')">▼</span><span [hidden]="!reverse || (order != 'translationRegion')">▲</span>
-        </th>
-        <th>Actions</th>
-      </thead>
-      <tbody>
-      <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'| filterConsultantName: searchTermsConsultantName | filterRegion: searchTermsRegion">
-        <td>{{ consultant.firstName }}</td>
-        <td>{{ consultant.lastName }}</td>
-        <td>{{ consultant.phone }}</td>
-        <td>{{ consultant.email}}</td>
-        <td>{{ consultant.address}}</td>
-        <td>{{ consultant.translationRegion}}</td>
-        <td>
-          <button [routerLink]="['/assignment/consultant', consultant._id]" type="button">Assignments</button>
-          <button [routerLink]="['/consultant-edit', consultant._id]" type="button">Edit</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+
+  <!-- Consultant Results Table -->
+  <table class="table">
+
+    <!-- Table Headers with Ordering Capabilities -->
+    <thead>
+    <th [class.active]="order === 'firstName'"
+        (click)="setOrder('firstName')"
+        class="mdl-data-table__cell--non-numeric">
+      First Name <span [hidden]="reverse || (order != 'firstName')">▼</span><span [hidden]="!reverse || (order != 'firstName')">▲</span>
+    </th>
+    <th [class.active]="order === 'lastName'"
+        (click)="setOrder('lastName')"
+        class="mdl-data-table__cell--non-numeric">
+      Last Name <span [hidden]="reverse || (order != 'lastName')">▼</span><span [hidden]="!reverse || (order != 'lastName')">▲</span>
+    </th>
+    <th [class.active]="order === 'phone'"
+        (click)="setOrder('phone')"
+        class="mdl-data-table__cell--non-numeric">
+      Phone <span [hidden]="reverse || (order != 'phone')">▼</span><span [hidden]="!reverse || (order != 'phone')">▲</span>
+    </th>
+    <th [class.active]="order === 'email'"
+        (click)="setOrder('email')"
+        class="mdl-data-table__cell--non-numeric">
+      Email <span [hidden]="reverse || (order != 'email')">▼</span><span [hidden]="!reverse || (order != 'email')">▲</span>
+    </th>
+    <th [class.active]="order === 'address'"
+        (click)="setOrder('address')"
+        class="mdl-data-table__cell--non-numeric">
+      Address <span [hidden]="reverse || (order != 'address')">▼</span><span [hidden]="!reverse || (order != 'address')">▲</span>
+    </th>
+    <th [class.active]="order === 'translationRegion'"
+        (click)="setOrder('translationRegion')"
+        class="mdl-data-table__cell--non-numeric">
+      Region <span [hidden]="reverse || (order != 'translationRegion')">▼</span><span [hidden]="!reverse || (order != 'translationRegion')">▲</span>
+    </th>
+    <th>Actions</th>
+    </thead>
+
+    <!-- Table information -->
+    <tbody>
+    <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'| filterConsultantName: searchTermsConsultantName | filterRegion: searchTermsRegion">
+      <td>{{ consultant.firstName }}</td>
+      <td>{{ consultant.lastName }}</td>
+      <td>{{ consultant.phone }}</td>
+      <td>{{ consultant.email}}</td>
+      <td>{{ consultant.address}}</td>
+      <td>{{ consultant.translationRegion}}</td>
+      <td>
+
+        <!-- Navigation buttons for specific consultants -->
+        <button [routerLink]="['/assignment/consultant', consultant._id]" type="button">Assignments</button>
+        <button [routerLink]="['/consultant-edit', consultant._id]" type="button">Edit</button>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>

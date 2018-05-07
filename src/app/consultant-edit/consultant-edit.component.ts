@@ -23,7 +23,7 @@ export class ConsultantEditComponent implements OnInit {
   rankings = RANKING;
 
   consultant = {};
-  newLanguage = {};
+  currentLanguage = {};
 
   constructor(private _location: Location,
               private http: HttpClient,
@@ -46,15 +46,21 @@ export class ConsultantEditComponent implements OnInit {
 
   ngOnInit() {
     this.getConsultant(this.route.snapshot.params['id']);
-
+    this.currentLanguage['language'] = 'Language';
+    this.currentLanguage['speaking'] = 'Speaking';
+    this.currentLanguage['listening'] = 'Listening';
+    this.currentLanguage['reading'] = 'Reading';
+    this.currentLanguage['writing'] = 'Writing';
   }
 
+  // Getting one consultant by Id
   getConsultant(id) {
     this.http.get('/consultant/' + id).subscribe(data => {
       this.consultant = data;
     });
   }
 
+  // Updating one consultant
   updateConsultant(id, consultant) {
     this.http.put('/consultant/' + id, this.consultant)
       .subscribe(res => {
@@ -66,6 +72,8 @@ export class ConsultantEditComponent implements OnInit {
       );
   }
 
+  // Pushing a language to Consultant proficiency list
+  /* Currently not in use
   pushLanguage(id, consultant) {
     this.http.patch('/consultant/' + id, this.consultant)
       .subscribe(res => {
@@ -75,15 +83,37 @@ export class ConsultantEditComponent implements OnInit {
         console.log(err);
       }
       );
+  }*/
+
+  addLanguage(newLanguage) {
+    let isNew = true;
+    let i;
+    for (i = 0; i < this.consultant['proficiencies'].length; i++) {
+      if ((this.consultant['proficiencies'][i.toString()]['language']) === newLanguage['language']) {
+        isNew = false;
+        this.consultant['proficiencies'][i.toString()]['speaking'] = newLanguage['speaking'];
+        this.consultant['proficiencies'][i.toString()]['listening'] = newLanguage['listening'];
+        this.consultant['proficiencies'][i.toString()]['writing'] = newLanguage['writing'];
+        this.consultant['proficiencies'][i.toString()]['reading'] = newLanguage['reading'];
+      }
+    }
+    if (isNew) {
+      const lang = {};
+      lang['language'] = newLanguage['language'];
+      lang['speaking'] = newLanguage['speaking'];
+      lang['listening'] = newLanguage['listening'];
+      lang['writing'] = newLanguage['writing'];
+      lang['reading'] = newLanguage['reading'];
+      this.consultant['proficiencies'].push(lang);
+    }
   }
 
-  removeProficiency(consultantId, proficiencyId) {
-    this.http.delete('/consultant/' + consultantId + '/proficiencies/' + proficiencyId, this.consultant)
-    .subscribe(res => {
-      const id = res['_id'];
-      this.router.navigate(['/consultant-edit/' + id]);
-    }, (err) => {
-      console.log(err);
-    });
+  removeLanguage(lang) {
+    let i;
+    for (i = 0; i < this.consultant['proficiencies'].length; i++) {
+      if ((this.consultant['proficiencies'][i.toString()]['language']) === lang) {
+        this.consultant['proficiencies'].splice(i, 1);
+      }
+    }
   }
 }
