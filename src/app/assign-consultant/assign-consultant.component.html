@@ -9,15 +9,14 @@ assignment's assigned consultant.
     <div class="col-md-6">
       <h1>Assign Consultant</h1>
 
-
-      <section>
         <div class="spanpage">
-          <h3>Assignment Information</h3>
+          <h2>Assignment Information</h2>
 
           <p><b>Project: </b>{{ assignment.projectName }}</p>
           <p><b>Start Date: </b>{{ assignment.startDate }}</p>
           <p><b>End Date: </b>{{ assignment.endDate }}</p>
           <p><b>Language: </b>{{ assignment.language }}</p>
+          <p><b>Notes: </b>{{ assignment.notes }}</p>
           <p class="break-after"><b>Testament: </b>{{ assignment.testament }}</p>
 
           <p><b>Region: </b>{{ assignment.translationRegion }}</p>
@@ -32,16 +31,16 @@ assignment's assigned consultant.
           <p style="text-indent: 10px" *ngIf="assignment.isStoryCheckerRole">Story Checker<br></p>
           <p style="text-indent: 10px" *ngIf="assignment.isTranslationConsultantInTrainingRole">Translation CiT<br></p>
           <p style="text-indent: 10px" *ngIf="assignment.isTranslationConsultantRole">Translation Consultant<br></p>
-
-          <p><b>Notes: </b>{{ assignment.notes }}</p>
         </div>
 
-
-
+      <section>
+        <div>
+          <br>
         <div class="layout-l">
-          <br><h3>Top Consultant Matches</h3>
+          <h3>Top Consultant Matches</h3>
+          <br>
           <h5>Filter: <input type="text" placeholder="Consultant Name" [(ngModel)]="searchTermsConsultantName"></h5>
-
+          <br>
           <table class="table">
             <thead style="display: block; width: 100%">
             <th [class.active]="order === 'score'"
@@ -61,7 +60,7 @@ assignment's assigned consultant.
             </th>
             <th>Actions</th>
             </thead>
-            <tbody style="display: block; width: 100%; height: 215px; overflow-y: scroll">
+            <tbody style="display: block; width: 100%; height: 315px; overflow-y: scroll">
             <tr *ngFor="let consultant of consultants | orderBy: order:reverse:'case-insensitive'| filterConsultantName: searchTermsConsultantName; let i = index" (click)="this.getConsultant(consultant._id); this.setClickedRow(i)" [class.active]="i == selectedRow" style="cursor: pointer">
               <td>{{ consultant.score }}</td>
               <td>{{ consultant.firstName }}</td>
@@ -73,7 +72,9 @@ assignment's assigned consultant.
             </tbody>
           </table>
         </div>
-
+        </div>
+        <div>
+          <br>
         <div class="layout-r">
           <h3>Selected Consultant: {{ selectedConsultant.firstName }} {{ selectedConsultant.lastName }}</h3>
           <p><b>Region: </b>{{ selectedConsultant.translationRegion }}</p>
@@ -85,17 +86,16 @@ assignment's assigned consultant.
           <p><b>Matched Testament: </b>{{ selectedConsultantTestament }}</p>
           <p><b>Matched Media: </b>{{ selectedConsultantMedia }}</p>
           <b>Matched Roles: </b>
-          <div *ngIf="selectedConsultantRoles.length > 0"><p style="text-indent: 10px" *ngFor="let role of selectedConsultantRoles">{{ role }}<br></p></div>
-          <p *ngIf="selectedConsultantRoles.length === 0" style="text-indent: 10px">none</p>
+          <p style="text-indent: 10px" *ngFor="let role of selectedConsultantRoles">{{ role }}<br></p>
           <p *ngIf="selectedConsultantAssignments.length === 0"><b>Previous Assignments on this Project: </b> none </p>
           <b *ngIf="selectedConsultantAssignments.length > 0">Previous Assignments on this Project: </b>
-          <table *ngIf="selectedConsultantAssignments.length > 0" class="table">
-            <thead>
+          <table class="table">
+            <thead style="display: block; width: 100%">
               <th>Start Date</th>
               <th>End Date</th>
               <th>Type</th>
             </thead>
-            <tbody>
+            <tbody style="display: block; width: 100%; height: 129px; overflow-y: scroll">
             <tr *ngFor="let assignment of selectedConsultantAssignments">
               <td>{{ assignment.startDate }}</td>
               <td>{{ assignment.endDate }}</td>
@@ -103,6 +103,7 @@ assignment's assigned consultant.
             </tr>
             </tbody>
           </table>
+        </div>
         </div>
       </section>
       <button type="button" (click)="this._location.back();">Cancel</button>

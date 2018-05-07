@@ -1,3 +1,15 @@
+/* Background of edit fields is white with rounded corners. */
+.row{
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+button{
+  background-color: #C1D82F;
+  border-radius: 10px;
+}
+
 .table tr.active td {
   font-weight: bold;
 }
@@ -12,12 +24,11 @@
 
 .spanpage {
   margin: auto;
-  width: 1140px;
+  width: 200%;
+  /*width: 1100px;*/
   border: 3px solid #73AD21;
 
-  padding-left: 250px;
-  padding-right: 250px;
-  padding-top: 10px;
+  padding-left: 200px;
   padding-bottom: 10px;
 
   align-content: center;
@@ -32,7 +43,6 @@
   -moz-column-width: 300px; /* Firefox */
   column-width: 300px;
 
-  font-size: large;
 }
 
 .break-after{
@@ -42,27 +52,77 @@
 
 }
 
-h3{
+h2{
   -webkit-column-span: all; /* Chrome, Safari, Opera */
   column-span: all;
   text-align: center;
+  padding-right: 250px
 }
 
 
 .layout-l{
-  margin: 10px;
   border: 3px solid #73AD21;
   align-items: left;
   align-content: left;
-
+  padding: 3px;
 }
 
 
 .layout-r{
-  margin: 10px;
   border: 3px solid #73AD21;
   align-items: right;
   align-content: right;
-
+  padding: 3px;
 }
 
+/* Edit fields are shown in two columns. */
+#columns{
+  -webkit-column-count: 2; /* Chrome, Safari, Opera */
+  -moz-column-count: 2; /* Firefox */
+  column-count: 2;
+  -webkit-column-width: 150px; /* Chrome, Safari, Opera */
+  -moz-column-width: 150px; /* Firefox */
+  column-width: 150px;
+}
+
+section {
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  columns: 2;
+  width: 200%;
+}
+section * {
+  margin: 0;
+}
+section div {
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+@media screen and (max-width: 1300px) {
+  .row {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+
+  }
+
+  /* Edit fields are shown in two columns. */
+  #columns {
+    -webkit-column-count: 1; /* Chrome, Safari, Opera */
+    -moz-column-count: 1; /* Firefox */
+    column-count: 1;
+    -webkit-column-width: 150px; /* Chrome, Safari, Opera */
+    -moz-column-width: 150px; /* Firefox */
+    column-width: 150px;
+  }
+
+  section {
+    -webkit-columns: 1;
+    -moz-columns: 1;
+    columns: 1;
+    width: 200%;
+
+  }
+}

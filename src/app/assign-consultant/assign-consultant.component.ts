@@ -275,24 +275,38 @@ export class AssignConsultantComponent implements OnInit {
       this.selectedConsultantRoles = new Array(0);
       if (this.assignment['isAudioToAudioRole'] === true && data['isAudioToAudioRole'] === true) {
         this.selectedConsultantRoles.push('Audio to Audio Translation Consultant');
+      } else if (this.assignment['isAudioToAudioRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isGuestScholarRole'] === true && data['isGuestScholarRole'] === true) {
         this.selectedConsultantRoles.push('Guest Scholar (Exegetical, Linguistic, Bible)');
+      } else if (this.assignment['isGuestScholarRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isLinguisticConsultantRole'] === true && data['isLinguisticConsultantRole'] === true) {
         this.selectedConsultantRoles.push('Linguistic Consultant');
+      } else if (this.assignment['isLinguisticConsultantRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isManagerRole'] === true && data['isManagerRole'] === true) {
         this.selectedConsultantRoles.push('Manager - Translation Consultant');
+      } else if (this.assignment['isManagerRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isStoryCheckerRole'] === true && data['isStoryCheckerRole'] === true) {
         this.selectedConsultantRoles.push('Story Checker');
+      } else if (this.assignment['isStoryCheckerRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isTranslationConsultantInTrainingRole'] === true && data['isTranslationConsultantInTrainingRole'] === true) {
         this.selectedConsultantRoles.push('Translation CiT');
+      } else if (this.assignment['isTranslationConsultantInTrainingRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isTranslationConsultantRole'] === true && data['isTranslationConsultantRole'] === true) {
         this.selectedConsultantRoles.push('Translation Consultant');
+      } else if (this.assignment['isTranslationConsultantRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
 
       // Capture consultant testament required by assignment
