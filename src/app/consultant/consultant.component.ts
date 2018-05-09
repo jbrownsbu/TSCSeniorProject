@@ -56,7 +56,7 @@ export class ConsultantComponent implements OnInit {
     });
   }
 
-  // Updating one consultant
+  // Deleting one consultant. Takes in first and last names for dialog confirmation
   deleteConsultant(id, firstName, lastName) {
     // Confirm() returns boolean value from a dialog box containing the string.
     const deleted = confirm('Are you sure that you want to delete ' + firstName + ' ' + lastName + '?');
