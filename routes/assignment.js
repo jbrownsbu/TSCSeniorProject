@@ -57,4 +57,12 @@ router.post('/project/:projectId', function(req, res, next) {
   });
 });
 
+
+/* DELETE ASSIGNMENT */
+router.delete('/:id', function(req, res, next) {
+  Assignment.deleteOne({ _id: req.params.id }, function (err, assignment) {
+    if (err) return next(err);
+    res.json(assignment);
+  });
+})
 module.exports = router;

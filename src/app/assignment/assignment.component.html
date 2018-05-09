@@ -73,8 +73,12 @@ If assignment does not have a consultant assigned to it, button is shown to assi
       <td>{{ assignment.assignmentType }}</td>
       <td>{{ assignment.startDate }}</td>
       <td>{{ assignment.endDate }}</td>
-      <td> <button [routerLink]="['/assignment-edit', assignment._id]" type="button">Edit</button></td>
-      <td *ngIf="assignment.consultantId=='Unassigned'"> <button [routerLink]="['/assign-consultant', assignment._id]" type="button">Assign</button></td>
+      <td>
+        <button *ngIf="assignment.consultantId=='Unassigned'" [routerLink]="['/assign-consultant', assignment._id]" type="button">Assign</button>
+        <button [routerLink]="['/assignment-edit', assignment._id]" type="button">Edit</button>
+        <button (click)="removeAssignment(assignment._id, assignment.projectName, assignment.startDate, assignment.endDate)" type="button">Remove</button>
+      </td>
+
     </tr>
     </tbody>
   </table>

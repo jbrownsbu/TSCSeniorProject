@@ -4,8 +4,9 @@ On initialization, this file calls http GET to retrieve the assignment data.
 */
 
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-assignment',
@@ -37,8 +38,21 @@ export class AssignmentComponent implements OnInit {
     this.order = value;
   }
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
+  constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+    // override the route reuse strategy
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
 
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        // trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+        // if you need to scroll back to top, here is the right place
+        window.scrollTo(0, 0);
+      }
+    });
+  }
   // On initialization, consultant, project, or all view is determined, and appropriate data is retrieved to be displayed
   // Only on 'all' view, unassigned filter is set to 'true'
   ngOnInit() {
@@ -96,4 +110,17 @@ export class AssignmentComponent implements OnInit {
     });
   }
 
+  // Remove one assignment
+  removeAssignment(assignmentId, projectName, startDate, endDate) {
+    const deleted = confirm('Are you sure that you want to delete the assignment on the '
+      + projectName + ' project from ' + startDate + ' to ' + endDate);
+    if (deleted) {
+      this.http.delete('/assignment/' + assignmentId)
+        .subscribe(res => {
+          this.router.navigate(['/assignments']);
+          }, (err) => {
+          console.log(err);
+        });
+    }
+  }
 }
