@@ -163,9 +163,11 @@ export class AssignConsultantComponent implements OnInit {
         // If assignment media is not 'Written', weight 'speaking' and 'listening' proficiencies
         if (hasLanguage) {
           if (this.assignment['media'] === 'Written') {
-            this.consultants[i]['score'] += (language['speaking'] + language['listening'] + 2 * language['reading'] + 2 * language['writing']);
-          } else {
-            this.consultants[i]['score'] += (2 * language['speaking'] + 2 * language['listening'] + language['reading'] + language['writing']);
+            this.consultants[i]['score'] += (language['speaking'] + language['listening']
+              + 2 * language['reading'] + 2 * language['writing']);
+          } else { // If not 'Written', weight 'speaking' and 'listening' proficiencies
+            this.consultants[i]['score'] += (2 * language['speaking'] + 2 * language['listening']
+              + language['reading'] + language['writing']);
           }
         }
 
