@@ -1,3 +1,9 @@
+/*
+Assign-consultant component is used to calculate how well each consultant matches up with the skills required by a selected assignment.
+This script loads the selected assignment's data, loads all consultant data, and then calculates a 'score' for how well each consultant
+matches up to the assignment. The consultants are then sorted by their scores and the sorted consultants are sent to the view.
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +16,7 @@ import { Location } from '@angular/common';
 })
 export class AssignConsultantComponent implements OnInit {
 
+  // Variable used by consultant name filter
   searchTermsConsultantName: string;
 
   // These variables are used by the getTopConsultantMatches method
@@ -25,9 +32,11 @@ export class AssignConsultantComponent implements OnInit {
   selectedConsultantMedia: string;
   selectedConsultantAssignments = new Array(0);
 
+  // Clicking on a consultant row in the UI displays that consultant's data. These variable are used for that feature
   setClickedRow: Function;
   selectedRow: number;
 
+  // Consultants are automatically sorted by score, but can be sorted by name as well
   order = 'score';
   reverse = true;
   setOrder(value: string) {
@@ -38,12 +47,14 @@ export class AssignConsultantComponent implements OnInit {
   }
 
   constructor(private _location: Location, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+    // This function is used by click consultant row feature
     this.setClickedRow = function(index) {
       this.selectedRow = index;
     };
   }
 
   ngOnInit() {
+    // On initialization, load assignment and consultant data
     this.getAllAssignments();
     this.getAssignment(this.route.snapshot.params['assignmentId']);
     this.getTopConsultantMatches();
@@ -78,7 +89,7 @@ export class AssignConsultantComponent implements OnInit {
       // Iterate through consultants array, calculating and assigning score for each consultant
       for (let i = 0; i < this.consultants.length; i++) {
 
-        // Add 20 points to consultant's score if they work within the required region
+        // Add 10 points to consultant's score if they work within the required region
         if (this.consultants[i]['translationRegion'] === this.assignment['translationRegion']) {
           this.consultants[i]['score'] = 10;
         }
@@ -149,6 +160,7 @@ export class AssignConsultantComponent implements OnInit {
           }
         }
         // If assignment media is 'Written', weight 'reading' and 'writing' proficiencies
+        // If assignment media is not 'Written', weight 'speaking' and 'listening' proficiencies
         if (hasLanguage) {
           if (this.assignment['media'] === 'Written') {
             this.consultants[i]['score'] += (language['speaking'] + language['listening']
@@ -181,27 +193,27 @@ export class AssignConsultantComponent implements OnInit {
   }
 
   // mergeSort is called by getTopConsultantMatches to sort top consultants by their match score
-  // scores and consultants arrays are passed in along with the left and right indexes of the portion of those arrays to be sorted
+  // consultants array is passed in along with the left and right indexes of the portion of the array to be sorted
   mergeSort(arrCons, leftEnd , rightEnd) {
-    // If the length of the arrays passed in is greater than 1
+    // If the length of the array passed in is greater than 1
     if (leftEnd < rightEnd) {
-      // Calculate the middle position of the arrays
+      // Calculate the middle position of the array
       const middle = Math.floor((leftEnd + rightEnd) / 2);
-      // Pass first half and second half of arrays into recursive call of mergeSort
+      // Pass first half and second half of array into recursive call of mergeSort
       this.mergeSort(arrCons, leftEnd, middle);
       this.mergeSort(arrCons, middle + 1, rightEnd);
-      // After arrays are broken down to single elements, call merge to reassemble arrays in sorted order
+      // After array is broken down to single elements, call merge to reassemble array in sorted order
       this.merge(arrCons, leftEnd, middle, rightEnd);
     }
   }
 
-  // merge is called by mergeSort to sort and reassemble broken down arrays
-  // scores and consultants arrays are passed in along with the left, middle, and right indexes of the portion of those arrays to be sorted
+  // merge is called by mergeSort to sort and reassemble broken down array
+  // consultants array is passed in along with the left, middle, and right indexes of the portion of the array to be sorted
   merge(arrCons, leftEnd, middle, rightEnd) {
     // Instantiate loop control variables (lcv) for use in method
     let lcv1, lcv2, lcv3;
 
-    // Calculate lengths of left and right portions of arrays to be merged
+    // Calculate lengths of left and right portions of array to be merged
     const leftLength = middle - leftEnd + 1;
     const rightLength = rightEnd - middle;
 
@@ -209,7 +221,7 @@ export class AssignConsultantComponent implements OnInit {
     const arrLeftCons = new Array(leftLength);
     const arrRightCons = new Array(rightLength);
 
-    // Fill left and right temporary arrays with data from actual consultant and score arrays
+    // Fill left and right temporary arrays with data from actual consultants array
     for (lcv1 = 0; lcv1 < leftLength; lcv1++) {
       arrLeftCons[lcv1] = arrCons[leftEnd + lcv1];
     }
@@ -223,7 +235,7 @@ export class AssignConsultantComponent implements OnInit {
     lcv2 = 0;
     lcv3 = leftEnd;
 
-    // Merge partial arrays by comparing elements from both arrays and storing them back in original consultants and scores arrays
+    // Merge partial arrays by comparing elements from both arrays and storing them back in original consultants array
     while (lcv1 < leftLength && lcv2 < rightLength) {
       if (arrLeftCons[lcv1]['score'] >= arrRightCons[lcv2]['score']) {
         arrCons[lcv3] = arrLeftCons[lcv1];
@@ -235,7 +247,7 @@ export class AssignConsultantComponent implements OnInit {
       lcv3++;
     }
 
-    // If not all elements were placed back in original consultants and scores arrays, place them in here
+    // If not all elements were placed back in original consultants array, place them in here
     while (lcv1 < leftLength) {
       arrCons[lcv3] = arrLeftCons[lcv1];
       lcv1++;
@@ -274,27 +286,42 @@ export class AssignConsultantComponent implements OnInit {
       }
 
       // Capture consultant roles required by assignment
+      // If role is required by assignment, but not met by consultant, add an empty string for UI consistency
       this.selectedConsultantRoles = new Array(0);
       if (this.assignment['isAudioToAudioRole'] === true && data['isAudioToAudioRole'] === true) {
         this.selectedConsultantRoles.push('Audio to Audio Translation Consultant');
+      } else if (this.assignment['isAudioToAudioRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isGuestScholarRole'] === true && data['isGuestScholarRole'] === true) {
         this.selectedConsultantRoles.push('Guest Scholar (Exegetical, Linguistic, Bible)');
+      } else if (this.assignment['isGuestScholarRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isLinguisticConsultantRole'] === true && data['isLinguisticConsultantRole'] === true) {
         this.selectedConsultantRoles.push('Linguistic Consultant');
+      } else if (this.assignment['isLinguisticConsultantRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isManagerRole'] === true && data['isManagerRole'] === true) {
         this.selectedConsultantRoles.push('Manager - Translation Consultant');
+      } else if (this.assignment['isManagerRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isStoryCheckerRole'] === true && data['isStoryCheckerRole'] === true) {
         this.selectedConsultantRoles.push('Story Checker');
+      } else if (this.assignment['isStoryCheckerRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isTranslationConsultantInTrainingRole'] === true && data['isTranslationConsultantInTrainingRole'] === true) {
         this.selectedConsultantRoles.push('Translation CiT');
+      } else if (this.assignment['isTranslationConsultantInTrainingRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
       if (this.assignment['isTranslationConsultantRole'] === true && data['isTranslationConsultantRole'] === true) {
         this.selectedConsultantRoles.push('Translation Consultant');
+      } else if (this.assignment['isTranslationConsultantRole'] === true) {
+        this.selectedConsultantRoles.push('');
       }
 
       // Capture consultant testament required by assignment

@@ -1,5 +1,5 @@
 /*
-assignment component loads list of assignments from database for a specific consultant.
+Assignment component loads list of assignments from database for a specific consultant.
 On initialization, this file calls http GET to retrieve the assignment data.
 */
 
@@ -16,13 +16,18 @@ import { HttpClient } from '@angular/common/http';
 export class AssignmentComponent implements OnInit {
 
   assignments: any;
+
+  // UI differs depending on how Assignments is accessed, for specific consultant, specific project, or all assignments
   isConsultantView: boolean;
   consultantName: string;
   isProjectView: boolean;
   projectName: string;
   isAllView: boolean;
-  searchTermsAssigned: boolean; // Variable for the value of the unassigned only filter.
 
+  // Variable for the value of the unassigned only filter.
+  searchTermsAssigned: boolean;
+
+  // Assignments are automatically sorted by startDate, but can be sorted by name as well
   order = 'startDate';
   reverse = false;
   setOrder(value: string) {
@@ -34,6 +39,8 @@ export class AssignmentComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) { }
 
+  // On initialization, consultant, project, or all view is determined, and appropriate data is retrieved to be displayed
+  // Only on 'all' view, unassigned filter is set to 'true'
   ngOnInit() {
     if (this.route.snapshot.url.length > 2) {
       if (this.route.snapshot.url[this.route.snapshot.url.length - 2].toString() === 'consultant') {
@@ -54,33 +61,39 @@ export class AssignmentComponent implements OnInit {
     }
   }
 
+  // For consultant view, get all assignments for that consultant
   getAssignmentsByConsultantId(consultantId) {
     this.http.get('/assignment/consultant/' + consultantId).subscribe(data => {
       this.assignments = data;
     });
   }
 
-  getAssignmentsByProjectId(projectId) {
-    this.http.get('/assignment/project/' + projectId).subscribe(data => {
-      this.assignments = data;
-    });
-  }
-
-  getAllAssignments() {
-    this.http.get('/assignment').subscribe(data => {
-      this.assignments = data;
-    });
-  }
-
+  // For consultant view, get consultant's name
   getConsultantNameByConsultantId(consultantId) {
     this.http.get('/consultant/' + consultantId).subscribe(data => {
       this.consultantName = data['firstName'] + ' ' + data['lastName'];
     });
   }
 
+  // For project view, get all assignments for that project
+  getAssignmentsByProjectId(projectId) {
+    this.http.get('/assignment/project/' + projectId).subscribe(data => {
+      this.assignments = data;
+    });
+  }
+
+  // For project view, get project's name
   getProjectNameByProjectId(projectId) {
     this.http.get('/project/' + projectId).subscribe(data => {
       this.projectName = data['projectName'];
     });
   }
+
+  // For all view, get all assignments
+  getAllAssignments() {
+    this.http.get('/assignment').subscribe(data => {
+      this.assignments = data;
+    });
+  }
+
 }

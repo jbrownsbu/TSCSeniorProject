@@ -5,6 +5,11 @@
   border-radius: 5px;
 }
 
+button{
+  background-color: #C1D82F;
+  border-radius: 10px;
+}
+
 /* Edit fields are shown in two columns. */
 #columns{
   -webkit-column-count: 2; /* Chrome, Safari, Opera */
@@ -40,10 +45,6 @@ table {
 td{
   width: 75px;
   hight: auto;
-}
-select{
-  hight: 100px;
-  width: 75px;
 }
 
 thead{

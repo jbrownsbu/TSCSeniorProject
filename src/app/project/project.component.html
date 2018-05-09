@@ -1,6 +1,7 @@
 <!--
 Project component loads list of projects from database.
 This html displays a list containing project information along with button link to create an assignment for that project.
+There is also a button link to view all assignments for that project.
 Project data is not editable within consultant tracker because projects are managed in another system.
 -->
 
@@ -9,11 +10,13 @@ Project data is not editable within consultant tracker because projects are mana
   <div>
     <h5>Filter:
       <input type="text" placeholder="Project Name" [(ngModel)]="searchTermsProjectName">
-      <input type="text" placeholder="Project Region" [(ngModel)]="searchTermsRegion">
       <input type="text" placeholder="Project Language" [(ngModel)]="searchTermsLanguage">
+      <input type="text" placeholder="Project Region" [(ngModel)]="searchTermsRegion">
     </h5>
   </div>
+
   <table class="table">
+    <!-- Table headers have order Capabilities -->
     <thead>
     <th [class.active]="order === 'projectName'"
         (click)="setOrder('projectName')"
