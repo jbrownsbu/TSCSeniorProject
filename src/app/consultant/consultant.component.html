@@ -64,9 +64,9 @@ The list is sortable by all columns in consultant table
       <td>
 
         <!-- Navigation buttons for specific consultants -->
-        <button [routerLink]="['/assignment/consultant', consultant._id]" type="button">Assignments</button>
         <button [routerLink]="['/consultant-edit', consultant._id]" type="button">Edit</button>
-        <button type="button" (click)="deleteConsultant(consultant._id, consultant.firstName, consultant.lastName)">Remove</button>
+        <button type="button" (click)="deleteConsultant(consultant._id, consultant.firstName, consultant.lastName)">Delete</button>
+        <button [routerLink]="['/assignment/consultant', consultant._id]" type="button">Assignments</button>
 
       </td>
     </tr>
