@@ -110,10 +110,12 @@ export class AssignmentComponent implements OnInit {
     });
   }
 
-  // Remove one assignment
+  // Remove one assignment, takes in project name and start and end dates for confirmation dialog box.
   removeAssignment(assignmentId, projectName, startDate, endDate) {
+    // confirm() returns boolean value from a popup dialog box.
     const deleted = confirm('Are you sure that you want to delete the assignment on the '
       + projectName + ' project from ' + startDate + ' to ' + endDate);
+    // if confirm was pressed on dialog box, then delete the assignment
     if (deleted) {
       this.http.delete('/assignment/' + assignmentId)
         .subscribe(res => {
